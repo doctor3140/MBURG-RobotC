@@ -16,7 +16,7 @@ int array2[3] = {0, 0, 0};
 
 task main(){
 	if(equals(array1, array2)){
-		playSound(Blip);
+		playSound(soundBlip);
 	}
 	else{
 		sleep(10000);
