@@ -1,35 +1,18 @@
-/*
-bool equals(int *arr1, int *arr2, int size){
-	int equal = 0;
-	for(int i = 0; i<size; i++){
-		if(arr1[i]==arr2[i]){
-			equal++;
-		}
-	}
-	if(equal==size){
-		return true;
-	}
-	else{
-		return false;
-	}
-}
-//compares arrays of any size
-*/
+// use set to change the base varible for movement
+// may also have to add #define in main program for movement to work. Requires testing
 
-bool equals(int *arr1, int *arr2) //compares arrays of size three
-{
-	if((arr1[0]==arr2[0])&&(arr1[1]==arr2[1])&&(arr1[2]==arr2[2])){
-		return true;
-	}
-	else{
-		return false;
-	}
-}
+int m = 1; // for motor direction
 
-//bool equals(string str1, string str2){
-//	StringFind(str1, str2>=0)
-//} //review for acuracy
+float fSpeed = 4.5*m; //10 old //7.5 OG
 
-//void calculate(int *arr1, int *arr2, int size){
-//		for
-//}
+float leanSpeed = 6; //for leaning (Ussually 20 for Bot1) //20 old
+float ltSpeed =3; //for Line Tracking
+
+float searchTime = 4000; //Time for SLT & SRT (was 1k)Ft
+int tapeThreashold = 120; //Width of Green tape (how far it needs to move forward to detect the line in lilup //OG is 40 //60
+int uTurnValue = m*680; //for uturns when two greens are detected //OG 185 //newscrap 155
+
+int face = m*-320; // for faceLeft & faceRight //OG is m*190 (-320 total for big) //newscrap 160
+int point = m*-700; // for leftPointTurn & rightPointTurn //OG is m*320 (-760 for big)
+
+/
