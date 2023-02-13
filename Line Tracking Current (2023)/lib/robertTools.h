@@ -6,6 +6,7 @@
 
 int m = 1; // for motor direction
 float wheelDiameter = 2.5; //diameter of wheel in cm
+int a = 1; //for arm direction
 
 float speed = 20;
 float leanSpeed = 6;
@@ -30,14 +31,6 @@ setMotorDirection(char direction){
 		displayBigTextLine(2, "X setMotorDirection");
 	}
 }//'f' for foward 'b' for backward. This is used if you have a gear ratio that inverts the diection of the motors
-
-float cmConvertToMotorEncoder(float CM){
-	return cm/17.59291886*360;
-}
-
-float motorEncoderConvertToCM(float motorEncoder){
-	return motorEncoder/360*17.59291886;
-}
 
 setWheelDiameterCM(float diameter){
 	wheelDiameter=diameter;
@@ -71,6 +64,11 @@ setTapeThreasholdCM(float CM){
 	tapeThreasholdCM=CM;
 }
 
+setArmSpeed(int arm){
+	armSpeed=arm;
+}
+
+//getter functions
 float getWheelDiameterCM(){
 	return wheelDiameter;
 }
@@ -87,10 +85,6 @@ float getSpeed(){
 	return speed;
 }
 
-float getLeanSpeed(){
-	return leanSpeed;
-}
-
 float getLTSpeed(){
 	return ltSpeed;
 }
@@ -103,7 +97,70 @@ float getTapeThreasholdCM(){
 	return tapeThreasholdCM;
 }
 
+int getArmSpeed(){
+	return armSpeed;
+}
+
+float cmConvertToMotorEncoder(float CM){
+	return cm/17.59291886*360;
+}
+
+float motorEncoderConvertToCM(float motorEncoder){
+	return motorEncoder/360*17.59291886;
+}
+
+
+//default functions
+void STP(){
+	motor[leftMotor]=0;
+	motor[rightMotor]=0;
+}
+
 void moveFoward(){
-motor[leftMotor] = (speed*m);
-motor[rightMotor] = (speed*m);
+	motor[leftMotor] = (speed*m);
+	motor[rightMotor] = (speed*m);
+}
+
+void moveBackward(){
+	motor[leftMotor] = (-speed*m);
+	motor[rightMotor] = (-speed*m);
+}
+
+void motorLeftMove(){
+		motor[leftMotor]=(-ltSpeed*m);
+		motor[rightMotor]=(ltSpeed*m);
+}
+
+void motorRightMove(){
+		motor[leftMotor]=(ltSpeed*m);
+		motor[rightMotor]=(-ltSpeed*m);
+}
+
+void armUp(){
+	motor[armMotor]=(armSpeed*a);
+}
+
+void armDown(){
+	motor[armMotor]=(-armSpeed*a);
+}
+
+//functions with variables
+void moveFoward(int d){
+	motor[leftMotor] = (speed*m*d);
+	motor[rightMotor] = (speed*m*d);
+}
+
+void moveBackward(int d){
+	motor[leftMotor] = (-speed*m*d);
+	motor[rightMotor] = (-speed*m*d);
+}
+
+void motorLeftMove(int d){
+		motor[leftMotor]=(-ltSpeed*m*d);
+		motor[rightMotor]=(ltSpeed*m*d);
+}
+
+void motorRightMove(int d){
+		motor[leftMotor]=(ltSpeed*m*d);
+		motor[rightMotor]=(-ltSpeed*m*d);
 }
