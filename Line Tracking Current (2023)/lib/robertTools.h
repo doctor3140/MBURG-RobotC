@@ -31,6 +31,14 @@ setMotorDirection(char direction){
 	}
 }//'f' for foward 'b' for backward. This is used if you have a gear ratio that inverts the diection of the motors
 
+float cmConvertToMotorEncoder(float CM){
+	return cm/17.59291886*360;
+}
+
+float motorEncoderConvertToCM(float motorEncoder){
+	return motorEncoder/360*17.59291886;
+}
+
 setWheelDiameterCM(float diameter){
 	wheelDiameter=diameter;
 }
@@ -56,10 +64,43 @@ setLTSpeed(float spd){
 }
 
 setSearchTime(int time){
-	searchTime = time;
+	searchTime=time;
 }
-setTapeThreasholdCM(float CM){
 
+setTapeThreasholdCM(float CM){
+	tapeThreasholdCM=CM;
+}
+
+float getWheelDiameterCM(){
+	return wheelDiameter;
+}
+
+int getUTURN(){
+	return uTurnValue;
+}
+
+int getPoint(){
+	return point;
+}
+
+float getSpeed(){
+	return speed;
+}
+
+float getLeanSpeed(){
+	return leanSpeed;
+}
+
+float getLTSpeed(){
+	return ltSpeed;
+}
+
+int getSearchTime(){
+	return searchTime;
+}
+
+float getTapeThreasholdCM(){
+	return tapeThreasholdCM;
 }
 
 void moveFoward(){
