@@ -1,4 +1,4 @@
-// This is a library made for robotc to quickstart development on basic tasks. 
+// This is a library made for robotc to quickstart development on basic tasks.
 // Developed by Robert Sellery
 // may also have to add #define in main program for movement to work. Requires testing
 
@@ -31,6 +31,14 @@ setMotorDirection(char direction){
 	}
 }//'f' for foward 'b' for backward. This is used if you have a gear ratio that inverts the diection of the motors
 
+float cmConvertToMotorEncoder(float CM){
+	return cm/17.59291886*360;
+}
+
+float motorEncoderConvertToCM(float motorEncoder){
+	return motorEncoder/360*17.59291886;
+}
+
 setWheelDiameterCM(float diameter){
 	wheelDiameter=diameter;
 }
@@ -52,12 +60,45 @@ setLeanSpeed(float spd){
 }
 
 setLTSpeed(float spd){
-	ltSpeed=spd;	
+	ltSpeed=spd;
 }
 
 setSearchTime(int time){
-	searchTime = time;
+	searchTime=time;
 }
-setTapeThreasholdCM(float CM){
 
+setTapeThreasholdCM(float CM){
+	tapeThreasholdCM=CM;
+}
+
+float getWheelDiameterCM(){
+	return wheelDiameter;
+}
+
+int getUTURN(){
+	return uTurnValue;
+}
+
+int getPoint(){
+	return point;
+}
+
+float getSpeed(){
+	return speed;
+}
+
+float getLeanSpeed(){
+	return leanSpeed;
+}
+
+float getLTSpeed(){
+	return ltSpeed;
+}
+
+int getSearchTime(){
+	return searchTime;
+}
+
+float getTapeThreasholdCM(){
+	return tapeThreasholdCM;
 }
