@@ -1,4 +1,4 @@
-// This is a library made for robotc to quickstart development on basic tasks. 
+// This is a library made for robotc to quickstart development on basic tasks.
 // Developed by Robert Sellery
 // may also have to add #define in main program for movement to work. Requires testing
 
@@ -52,7 +52,7 @@ setLeanSpeed(float spd){
 }
 
 setLTSpeed(float spd){
-	ltSpeed=spd;	
+	ltSpeed=spd;
 }
 
 setSearchTime(int time){
@@ -60,4 +60,9 @@ setSearchTime(int time){
 }
 setTapeThreasholdCM(float CM){
 
+}
+
+void moveFoward(){
+motor[leftMotor] = (speed*m);
+motor[rightMotor] = (speed*m);
 }
