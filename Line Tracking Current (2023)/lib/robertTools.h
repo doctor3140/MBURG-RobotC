@@ -126,12 +126,22 @@ void moveBackward(){
 	motor[rightMotor] = (-speed*m);
 }
 
-void motorLeftMove(){
+void motorPointLeftMove(){
 		motor[leftMotor]=(-ltSpeed*m);
 		motor[rightMotor]=(ltSpeed*m);
 }
 
-void motorRightMove(){
+void motorPointRightMove(){
+		motor[leftMotor]=(ltSpeed*m);
+		motor[rightMotor]=(-ltSpeed*m);
+}
+
+void motorPointLeftMove(){
+		motor[leftMotor]=(-ltSpeed*m);
+		motor[rightMotor]=(ltSpeed*m);
+}
+
+void motorPointRightMove(){
 		motor[leftMotor]=(ltSpeed*m);
 		motor[rightMotor]=(-ltSpeed*m);
 }
@@ -155,12 +165,12 @@ void moveBackward(int d){
 	motor[rightMotor] = (-speed*m*d);
 }
 
-void motorLeftMove(int d){
+void motorPointLeftMove(int d){
 		motor[leftMotor]=(-ltSpeed*m*d);
 		motor[rightMotor]=(ltSpeed*m*d);
 }
 
-void motorRightMove(int d){
+void motorPointRightMove(int d){
 		motor[leftMotor]=(ltSpeed*m*d);
 		motor[rightMotor]=(-ltSpeed*m*d);
 }

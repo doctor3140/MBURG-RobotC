@@ -9,8 +9,8 @@ float wheelDiameter = 2.5; //diameter of wheel in cm
 int a = 1; //for arm direction
 
 float speed = 20;
-float leanSpeed = 6;
-float ltSpeed = 3;
+float ltSpeed = 6; //the speed for line tracking
+float searchSpeed = 3; //the search speed for when the black line is lost
 
 int searchTime = 1000*4; //Time for SLT & SRT (was 1k)Ft
 float tapeThreashold = 120; //Width of Green tape (how far it needs to move forward to detect the black line in lilup. Consider making an array with a low and high distance as well as making a blackTape var.
@@ -48,12 +48,12 @@ setSpeed(float spd){
 	speed=spd;
 }
 
-setLeanSpeed(float spd){
-	leanSpeed=spd;
-}
-
 setLTSpeed(float spd){
 	ltSpeed=spd;
+}
+
+setSearchSpeed(float spd){
+	SearchSpeed=spd;
 }
 
 setSearchTime(int time){
@@ -67,6 +67,8 @@ setTapeThreasholdCM(float CM){
 setArmSpeed(int arm){
 	armSpeed=arm;
 }
+
+
 
 //getter functions
 float getWheelDiameterCM(){
@@ -87,6 +89,10 @@ float getSpeed(){
 
 float getLTSpeed(){
 	return ltSpeed;
+}
+
+float getSearchSpeed(){
+	return searchSpeed;
 }
 
 int getSearchTime(){
@@ -110,7 +116,8 @@ float motorEncoderConvertToCM(float motorEncoder){
 }
 
 
-//default functions
+
+//functions
 void STP(){
 	motor[leftMotor]=0;
 	motor[rightMotor]=0;
@@ -121,19 +128,62 @@ void moveFoward(){
 	motor[rightMotor] = (speed*m);
 }
 
+void moveFoward(float spd){
+	motor[leftMotor] = (spd*m);
+	motor[rightMotor] = (spd*m);
+}
+
 void moveBackward(){
 	motor[leftMotor] = (-speed*m);
 	motor[rightMotor] = (-speed*m);
 }
 
-void motorLeftMove(){
+void moveBackward(float spd){
+	motor[leftMotor] = (-spd*m);
+	motor[rightMotor] = (-spd*m);
+}
+
+
+
+void motorLTLeft(){
 		motor[leftMotor]=(-ltSpeed*m);
 		motor[rightMotor]=(ltSpeed*m);
 }
 
-void motorRightMove(){
+void motorLTLeft(float spd){
+		motor[leftMotor]=(-spd*m);
+		motor[rightMotor]=(spd*m);
+}
+
+void motorLTRight(){
 		motor[leftMotor]=(ltSpeed*m);
 		motor[rightMotor]=(-ltSpeed*m);
+}
+
+void motorLTRight(float spd){
+		motor[leftMotor]=(spd*m);
+		motor[rightMotor]=(-spd*m);
+}
+
+
+void motorSearchLeft(){
+		motor[leftMotor]=(-searchSpeed*m);
+		motor[rightMotor]=(searchSpeed*m);
+}
+
+void motorSearchLeft(float spd){
+		motor[leftMotor]=(-spd*m);
+		motor[rightMotor]=(spd*m);
+}
+
+void motorSearchRight(){
+		motor[leftMotor]=(searchSpeed*m);
+		motor[rightMotor]=(-searchSpeed*m);
+}
+
+void motorSearchRight(float spd){
+		motor[leftMotor]=(spd*m);
+		motor[rightMotor]=(-spd*m);
 }
 
 void armUp(){
@@ -142,25 +192,4 @@ void armUp(){
 
 void armDown(){
 	motor[armMotor]=(-armSpeed*a);
-}
-
-//functions with variables
-void moveFoward(int d){
-	motor[leftMotor] = (speed*m*d);
-	motor[rightMotor] = (speed*m*d);
-}
-
-void moveBackward(int d){
-	motor[leftMotor] = (-speed*m*d);
-	motor[rightMotor] = (-speed*m*d);
-}
-
-void motorLeftMove(int d){
-		motor[leftMotor]=(-ltSpeed*m*d);
-		motor[rightMotor]=(ltSpeed*m*d);
-}
-
-void motorRightMove(int d){
-		motor[leftMotor]=(ltSpeed*m*d);
-		motor[rightMotor]=(-ltSpeed*m*d);
 }
