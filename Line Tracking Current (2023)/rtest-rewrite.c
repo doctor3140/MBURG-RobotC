@@ -43,7 +43,6 @@ int searchTime = 1000*4; //Time for SLT & SRT (was 1k)Ft
 int tapeThreashold = 120; //Width of Green tape (how far it needs to move forward to detect the black line in lilup //OG is 40 //60
 int uTurnValue = 680; //for uturns when two greens are detected //OG 185 //newscrap 155
 
-int face = 320; // for faceLeft & faceRight //OG is m*190 (-320 total for big) //newscrap 160
 int point = 700; // for leftPointTurn & rightPointTurn //OG is m*320 (-760 for big)
 
 //variables for obstacle
@@ -158,21 +157,21 @@ void lilBack(int d)
 
 
 // 230 is for new robot; 198/ 184 is for old robot; 375 is for point turn
-void faceLeft()
+void pointLeft()
 {
 	resetMotorEncoder(leftMotor);
 	resetMotorEncoder(rightMotor);
-	setMotorTarget(leftMotor, face, 25);
-	setMotorTarget(rightMotor, -face, 25);
+	setMotorTarget(leftMotor, point, 25);
+	setMotorTarget(rightMotor, -point, 25);
 	waitUntilMotorStop(rightMotor);
 	sleep(1000);
 }
-void faceRight()
+void pointRight()
 {
 	resetMotorEncoder(leftMotor);
 	resetMotorEncoder(rightMotor);
-	setMotorTarget(leftMotor, -face, 25);
-	setMotorTarget(rightMotor, face, 25);
+	setMotorTarget(leftMotor, -point, 25);
+	setMotorTarget(rightMotor, point, 25);
 	waitUntilMotorStop(rightMotor);
 	sleep(1000);
 }
@@ -254,7 +253,7 @@ void leftTurn()
 	if (getColorName(leftS)==colorBlack) //was leftS, but since leftS is Right then it should be rightS nvm???
 	{
 		lilUp(40);
-		faceLeft();
+		pointLeft();
 		if(checkTurnFurther && (getColorName(leftS)==colorWhite)){
 		LTLeft();
 		}
@@ -274,7 +273,7 @@ void rightTurn()
 	if (getColorName(rightS)==colorBlack) //was rightS, but since rightS is Left then it should be leftS nvm???
 	{
 		lilUp(40);
-		faceRight();
+		pointRight();
 		if(checkTurnFurther && (getColorName(rightS)==colorWhite)){
 		LTRight();
 		}
