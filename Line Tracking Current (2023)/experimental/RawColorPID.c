@@ -13,16 +13,19 @@
 	int current[3] = {1, 1, 1}; //current values of Sensors
 	int diff[3];
 	float baseSpeed = -20;
+	/*
 	float Kp = 1.2; //weight of new data //1.2
 	float Ki = 0.005; //makes it follow straight line more //.005
 	float Turn;
 	float Kd = .01; //weight of change //.01
+	*/
+
 	//float Kd = .01; //weight of change //.01
 
 
 	//Other
-	float errorOld = 0;
-	float errorNew;
+	//float errorOld = 0;
+	//float errorNew;
 	float derivative;
 	float integral;
 
@@ -119,6 +122,12 @@ repeat(forever){
 void linchP(string sensor){
 	string rightSensor = "rightS";
 	string leftSensor = "leftS";
+	float Kp = 1.2; //weight of new data //1.2
+	float Ki = 0.005; //makes it follow straight line more //.005
+	float Turn;
+	float Kd = .01; //weight of change //.01
+	float errorOld = 0;
+	float errorNew;
 repeat(forever){
 		getColorRawRGB(rightS, current[0], current[1], current[2]);
 		startTask(display);
