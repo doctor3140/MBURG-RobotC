@@ -43,7 +43,7 @@ int searchTime = 1000*4; //Time for SLT & SRT (was 1k)Ft
 int tapeThreashold = 120; //Width of Green tape (how far it needs to move forward to detect the black line in lilup //OG is 40 //60
 int uTurnValue = 680; //for uturns when two greens are detected //OG 185 //newscrap 155
 
-int point = 700; // for leftPointTurn & rightPointTurn //OG is m*320 (-760 for big)
+int point = 332; // for leftPointTurn & rightPointTurn //OG is m*320 (-760 for big) confirmed
 
 //variables for obstacle
 bool hasObstacle = false;

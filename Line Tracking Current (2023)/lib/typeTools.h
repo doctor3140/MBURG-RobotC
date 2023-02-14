@@ -34,17 +34,6 @@ bool equals(int *arr1, int *arr2) //compares arrays of size three
 	}
 }
 
-/*
-bool equals() //compares sensor to target
-{
-	if((target[0]==current[0])&&(target[1]==current[1])&&(target[2]==current[2])){
-		return true;
-	}
-	else{
-		return false;
-	}
-}
-*/
 
 bool equals(string str1, string str2){
 	return (stringFind(str1, str2)>=0);
