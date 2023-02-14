@@ -13,16 +13,19 @@
 	int current[3] = {1, 1, 1}; //current values of Sensors
 	int diff[3];
 	float baseSpeed = -20;
+	/*
 	float Kp = 1.2; //weight of new data //1.2
 	float Ki = 0.005; //makes it follow straight line more //.005
 	float Turn;
 	float Kd = .01; //weight of change //.01
+	*/
+
 	//float Kd = .01; //weight of change //.01
 
 
 	//Other
-	float errorOld = 0;
-	float errorNew;
+	//float errorOld = 0;
+	//float errorNew;
 	float derivative;
 	float integral;
 
@@ -36,7 +39,15 @@ task display(){
 	displayBigTextLine(6, "NE: %d", errorNew);
 }
 
-
+bool equals() //compares sensor to target
+{
+	if((target[0]==current[0])&&(target[1]==current[1])&&(target[2]==current[2])){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
 
 float calculate(){
 	float res;
@@ -65,6 +76,7 @@ void calibrate(){
 	}
 }
 
+
 void PID(){
 	Kp = 8;
 repeat(forever){
@@ -84,8 +96,38 @@ repeat(forever){
 	}
 }
 
-void linchP(string sensor, float Kp, int baseSpeed){
+void linchP(string sensor, float kp, int baseSpeed){
 	string rightSensor = "rightS";
+repeat(forever){
+		getColorRawRGB(rightS, current[0], current[1], current[2]);
+		startTask(display);
+		if(!equals()){
+			errorNew = calculate();
+			Turn = (kp*(errorNew));
+			if(equals(sensor, rightSensor)){
+				motor[motorB] = (baseSpeed+Turn);
+				motor[motorC] = (baseSpeed-Turn);
+			}
+			else{
+				motor[motorB] = (baseSpeed-Turn);
+				motor[motorC] = (baseSpeed+Turn);
+			}
+			errorOld = errorNew;
+			}
+		motor[motorB] = baseSpeed;
+		motor[motorC] = baseSpeed;
+	}
+}
+
+void linchP(string sensor){
+	string rightSensor = "rightS";
+	string leftSensor = "leftS";
+	float Kp = 1.2; //weight of new data //1.2
+	float Ki = 0.005; //makes it follow straight line more //.005
+	float Turn;
+	float Kd = .01; //weight of change //.01
+	float errorOld = 0;
+	float errorNew;
 repeat(forever){
 		getColorRawRGB(rightS, current[0], current[1], current[2]);
 		startTask(display);
@@ -95,6 +137,10 @@ repeat(forever){
 			if(equals(sensor, rightSensor)){
 				motor[motorB] = (baseSpeed+Turn);
 				motor[motorC] = (baseSpeed-Turn);
+			}
+			else if(equals(sensor, leftSensor)){
+				motor[motorB] = (baseSpeed-Turn);
+				motor[motorC] = (baseSpeed+Turn);
 			}
 			else{
 				motor[motorB] = (baseSpeed-Turn);
@@ -124,15 +170,19 @@ repeat(forever){
 	}
 }
 
-void twoSensors(){
-	repeat(forever){
 
-	}
+task sensorLeft(){
+	linchP("leftS");
 }
+
+task sensorRight(){
+	linchP("rightS");
+}
+
 
 
 task main()
 {
-	setArrays(current, target);
-	linchP();
+	startTask(sensorLeft);
+	startTask(sensorRight);
 }
