@@ -180,43 +180,79 @@ void encoderBackward(float CM){
 }
 
 void motorLTLeft(){
-		motor[leftMotor]=(-ltSpeed*m);
-		motor[rightMotor]=(ltSpeed*m);
+	motor[leftMotor]=(-ltSpeed*m);
+	motor[rightMotor]=(ltSpeed*m);
 }
 
 void motorLTLeft(float spd){
-		motor[leftMotor]=(-spd*m);
-		motor[rightMotor]=(spd*m);
+	motor[leftMotor]=(-spd*m);
+	motor[rightMotor]=(spd*m);
 }
 
 void motorLTRight(){
-		motor[leftMotor]=(ltSpeed*m);
-		motor[rightMotor]=(-ltSpeed*m);
+	motor[leftMotor]=(ltSpeed*m);
+	motor[rightMotor]=(-ltSpeed*m);
 }
 
 void motorLTRight(float spd){
-		motor[leftMotor]=(spd*m);
-		motor[rightMotor]=(-spd*m);
+	motor[leftMotor]=(spd*m);
+	motor[rightMotor]=(-spd*m);
 }
 
 void motorSearchLeft(){
-		motor[leftMotor]=(-searchSpeed*m);
-		motor[rightMotor]=(searchSpeed*m);
+	motor[leftMotor]=(-searchSpeed*m);
+	motor[rightMotor]=(searchSpeed*m);
 }
 
 void motorSearchLeft(float spd){
-		motor[leftMotor]=(-spd*m);
-		motor[rightMotor]=(spd*m);
+	motor[leftMotor]=(-spd*m);
+	motor[rightMotor]=(spd*m);
 }
 
 void motorSearchRight(){
-		motor[leftMotor]=(searchSpeed*m);
-		motor[rightMotor]=(-searchSpeed*m);
+	motor[leftMotor]=(searchSpeed*m);
+	motor[rightMotor]=(-searchSpeed*m);
 }
 
 void motorSearchRight(float spd){
-		motor[leftMotor]=(spd*m);
-		motor[rightMotor]=(-spd*m);
+	motor[leftMotor]=(spd*m);
+	motor[rightMotor]=(-spd*m);
+}
+
+void encoderPointLeft(){
+	resetMotorEncoder(leftMotor);
+	resetMotorEncoder(rightMotor);
+	setMotorTarget(leftMotor, -40*m, speed);
+	setMotorTarget(rightMotor, 40*m, speed);
+	waitUntilMotorStop(rightMotor);
+	sleep(1000);
+}
+
+void encoderPointLeft(float spd){
+	resetMotorEncoder(leftMotor);
+	resetMotorEncoder(rightMotor);
+	setMotorTarget(leftMotor, -cmConvertToMotorEncoder(CM)*m, speed);
+	setMotorTarget(rightMotor, cmConvertToMotorEncoder(CM)*m, speed);
+	waitUntilMotorStop(rightMotor);
+	sleep(1000);
+}
+
+void encoderPointRight(){
+	resetMotorEncoder(leftMotor);
+	resetMotorEncoder(rightMotor);
+	setMotorTarget(leftMotor, 40*m, speed);
+	setMotorTarget(rightMotor, -40*m, speed);
+	waitUntilMotorStop(rightMotor);
+	sleep(1000);
+}
+
+void encoderPointRight(float spd){
+	resetMotorEncoder(leftMotor);
+	resetMotorEncoder(rightMotor);
+	setMotorTarget(leftMotor, cmConvertToMotorEncoder(CM)*m, speed);
+	setMotorTarget(rightMotor, -cmConvertToMotorEncoder(CM)*m, speed);
+	waitUntilMotorStop(rightMotor);
+	sleep(1000);
 }
 
 void armUp(){
