@@ -108,11 +108,11 @@ int getArmSpeed(){
 }
 
 float cmConvertToMotorEncoder(float CM){
-	return cm/17.59291886*360;
+	return cm/(PI*wheelDiameter)*360;
 }
 
 float motorEncoderConvertToCM(float motorEncoder){
-	return motorEncoder/360*17.59291886;
+	return motorEncoder/360*PI*wheelDiameter;
 }
 
 
@@ -123,27 +123,61 @@ void STP(){
 	motor[rightMotor]=0;
 }
 
-void moveFoward(){
+void motorFoward(){
 	motor[leftMotor] = (speed*m);
 	motor[rightMotor] = (speed*m);
 }
 
-void moveFoward(float spd){
+void motorFoward(float spd){
 	motor[leftMotor] = (spd*m);
 	motor[rightMotor] = (spd*m);
 }
 
-void moveBackward(){
+void encoderFoward(){
+	resetMotorEncoder(leftMotor);
+	resetMotorEncoder(rightMotor);
+	setMotorTarget(leftMotor, 40*m, speed);
+	setMotorTarget(rightMotor, 40*m, speed);
+	waitUntilMotorStop(rightMotor);
+	sleep(1000);
+}
+
+void encoderFoward(float CM){
+	resetMotorEncoder(leftMotor);
+	resetMotorEncoder(rightMotor);
+	setMotorTarget(leftMotor, cmConvertToMotorEncoder(CM)*m, speed);
+	setMotorTarget(rightMotor, cmConvertToMotorEncoder(CM)*m, speed);
+	waitUntilMotorStop(rightMotor);
+	sleep(1000);
+}
+
+void motorBackward(){
 	motor[leftMotor] = (-speed*m);
 	motor[rightMotor] = (-speed*m);
 }
 
-void moveBackward(float spd){
+void motorBackward(float spd){
 	motor[leftMotor] = (-spd*m);
 	motor[rightMotor] = (-spd*m);
 }
 
+void encoderBackward(){
+	resetMotorEncoder(leftMotor);
+	resetMotorEncoder(rightMotor);
+	setMotorTarget(leftMotor, -40*m, speed);
+	setMotorTarget(rightMotor, -40*m, speed);
+	waitUntilMotorStop(rightMotor);
+	sleep(1000);
+}
 
+void encoderBackward(float CM){
+	resetMotorEncoder(leftMotor);
+	resetMotorEncoder(rightMotor);
+	setMotorTarget(leftMotor, -cmConvertToMotorEncoder(CM)*m, speed);
+	setMotorTarget(rightMotor, -cmConvertToMotorEncoder(CM)*m, speed);
+	waitUntilMotorStop(rightMotor);
+	sleep(1000);
+}
 
 void motorLTLeft(){
 		motor[leftMotor]=(-ltSpeed*m);
@@ -164,7 +198,6 @@ void motorLTRight(float spd){
 		motor[leftMotor]=(spd*m);
 		motor[rightMotor]=(-spd*m);
 }
-
 
 void motorSearchLeft(){
 		motor[leftMotor]=(-searchSpeed*m);
