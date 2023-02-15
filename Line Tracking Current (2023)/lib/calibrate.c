@@ -138,6 +138,6 @@ task main(){
 		sleep(300);
 	}
 }
-//Result 332
-
+//Result LeftTurn 332 degrees
+//uTurn 660 degrees
 //if(getButtonPress(buttonUp))
