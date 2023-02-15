@@ -20,7 +20,7 @@ int point = 700; // for leftPointTurn & rightPointTurn //OG is m*320 (-760 for b
 
 // Setter methods should be called at the beggining of your main proram in order to set values of variables used in other functions.
 
-setMotorDirection(char direction){
+void setMotorDirection(char direction){
 	if(direction=='f'){
 	m = 1;
 	}
@@ -114,8 +114,6 @@ float cmConvertToMotorEncoder(float CM){
 float motorEncoderConvertToCM(float motorEncoder){
 	return motorEncoder/360*PI*wheelDiameter;
 }
-
-
 
 //functions
 void STP(){
