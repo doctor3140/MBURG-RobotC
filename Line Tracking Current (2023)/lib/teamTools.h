@@ -5,18 +5,20 @@
 /* NOTICE: It is not recommended to change the variables directly. Please use getter and setter methods/functions! */
 
 int m = 1; // for motor direction
-float wheelDiameter = 2.5; //diameter of wheel in cm
+float wheelDiameter = 5; //diameter of wheel in cm
 int a = 1; //for arm direction
 
 float speed = 20;
-float ltSpeed = 6; //the speed for line tracking
+float armSpeed = 20;
+float leanSpeed = 6; //the speed for double sensor lean line tracking
 float searchSpeed = 3; //the search speed for when the black line is lost
 
-int searchTime = 1000*4; //Time for SLT & SRT (was 1k)Ft
-float tapeThreashold = 120; //Width of Green tape (how far it needs to move forward to detect the black line in lilup. Consider making an array with a low and high distance as well as making a blackTape var.
+int searchTime = 4000; //Time for SLT & SRT (was 1k)Ft
+float tapeThreasholdCM = 2.5; //Width of Green tape (how far it needs to move forward to detect the black line in lilup. Consider making an array with a low and high distance as well as making a blackTape var.
 int uTurnValue = 680; //for uturns when two greens are detected //OG 185 //newscrap 155
+float dist  = 2.5;
 
-int point = 700; // for leftPointTurn & rightPointTurn //OG is m*320 (-760 for big)
+int point = 323; // for leftPointTurn & rightPointTurn //OG is m*320 (-760 for big)
 
 // Setter methods should be called at the beggining of your main proram in order to set values of variables used in other functions.
 
@@ -48,8 +50,8 @@ void setSpeed(float spd){
 	speed=spd;
 }
 
-void setLTSpeed(float spd){
-	ltSpeed=spd;
+void setLeanSpeed(float spd){
+	leanSpeed=spd;
 }
 
 void setSearchSpeed(float spd){
@@ -68,6 +70,9 @@ void setArmSpeed(int arm){
 	armSpeed=arm;
 }
 
+void setDist(float d){
+	dist=d;
+}
 
 
 //getter functions
@@ -87,8 +92,8 @@ float getSpeed(){
 	return speed;
 }
 
-float getLTSpeed(){
-	return ltSpeed;
+float getLeanSpeed(){
+	return leanSpeed;
 }
 
 float getSearchSpeed(){
@@ -134,8 +139,8 @@ void motorFoward(float spd){
 void encoderFoward(){
 	resetMotorEncoder(leftMotor);
 	resetMotorEncoder(rightMotor);
-	setMotorTarget(leftMotor, 40*m, speed);
-	setMotorTarget(rightMotor, 40*m, speed);
+	setMotorTarget(leftMotor, cmConvertToMotorEncoder(dist)*m, speed);
+	setMotorTarget(rightMotor, cmConvertToMotorEncoder(dist)*m, speed);
 	waitUntilMotorStop(rightMotor);
 	sleep(1000);
 }
@@ -162,8 +167,8 @@ void motorBackward(float spd){
 void encoderBackward(){
 	resetMotorEncoder(leftMotor);
 	resetMotorEncoder(rightMotor);
-	setMotorTarget(leftMotor, -40*m, speed);
-	setMotorTarget(rightMotor, -40*m, speed);
+	setMotorTarget(leftMotor, -cmConvertToMotorEncoder(dist)*m, speed);
+	setMotorTarget(rightMotor, -cmConvertToMotorEncoder(dist)*m, speed);
 	waitUntilMotorStop(rightMotor);
 	sleep(1000);
 }
@@ -177,22 +182,22 @@ void encoderBackward(float CM){
 	sleep(1000);
 }
 
-void motorLTLeft(){
-	motor[leftMotor]=(-ltSpeed*m);
-	motor[rightMotor]=(ltSpeed*m);
+void motorLeanLeft(){
+	motor[leftMotor]=(-leanSpeed*m);
+	motor[rightMotor]=(leanSpeed*m);
 }
 
-void motorLTLeft(float spd){
+void motorLeanLeft(float spd){
 	motor[leftMotor]=(-spd*m);
 	motor[rightMotor]=(spd*m);
 }
 
-void motorLTRight(){
-	motor[leftMotor]=(ltSpeed*m);
-	motor[rightMotor]=(-ltSpeed*m);
+void motorLeanRight(){
+	motor[leftMotor]=(leanSpeed*m);
+	motor[rightMotor]=(-leanSpeed*m);
 }
 
-void motorLTRight(float spd){
+void motorLeanRight(float spd){
 	motor[leftMotor]=(spd*m);
 	motor[rightMotor]=(-spd*m);
 }
@@ -220,13 +225,13 @@ void motorSearchRight(float spd){
 void encoderPointLeft(){
 	resetMotorEncoder(leftMotor);
 	resetMotorEncoder(rightMotor);
-	setMotorTarget(leftMotor, -40*m, speed);
-	setMotorTarget(rightMotor, 40*m, speed);
+	setMotorTarget(leftMotor, -point*m, speed);
+	setMotorTarget(rightMotor, point*m, speed);
 	waitUntilMotorStop(rightMotor);
 	sleep(1000);
 }
 
-void encoderPointLeft(float spd){
+void encoderPointLeft(float CM){
 	resetMotorEncoder(leftMotor);
 	resetMotorEncoder(rightMotor);
 	setMotorTarget(leftMotor, -cmConvertToMotorEncoder(CM)*m, speed);
@@ -238,13 +243,13 @@ void encoderPointLeft(float spd){
 void encoderPointRight(){
 	resetMotorEncoder(leftMotor);
 	resetMotorEncoder(rightMotor);
-	setMotorTarget(leftMotor, 40*m, speed);
-	setMotorTarget(rightMotor, -40*m, speed);
+	setMotorTarget(leftMotor, point*m, speed);
+	setMotorTarget(rightMotor, -point*m, speed);
 	waitUntilMotorStop(rightMotor);
 	sleep(1000);
 }
-
-void encoderPointRight(float spd){
+//don't really get the point of these. Make into function of arc length??
+void encoderPointRight(float CM){
 	resetMotorEncoder(leftMotor);
 	resetMotorEncoder(rightMotor);
 	setMotorTarget(leftMotor, cmConvertToMotorEncoder(CM)*m, speed);
@@ -253,10 +258,40 @@ void encoderPointRight(float spd){
 	sleep(1000);
 }
 
-void armUp(){
+void uTurn()
+{
+	STP();
+	sleep(500);
+	resetMotorEncoder(leftMotor);
+	resetMotorEncoder(rightMotor);
+	setMotorTarget(leftMotor, -uTurnValue, speed);
+	setMotorTarget(rightMotor, uTurnValue, speed);
+	waitUntilMotorStop(rightMotor);
+	sleep(1000);
+}
+
+void motorArmUp(){
 	motor[armMotor]=(armSpeed*a);
 }
 
-void armDown(){
+void motorArmDown(){
 	motor[armMotor]=(-armSpeed*a);
 }
+
+void encoderArmDown()
+{
+	resetMotorEncoder(armMotor);
+	setMotorTarget(armMotor, -70, speed);
+	waitUntilMotorStop(armMotor);
+	sleep(500);
+}
+void encoderArmUp()
+{
+	resetMotorEncoder(armMotor);
+	setMotorTarget(armMotor, 70, speed);
+	waitUntilMotorStop(armMotor);
+	sleep(500);
+}
+
+
+//make above encoder functions work better
