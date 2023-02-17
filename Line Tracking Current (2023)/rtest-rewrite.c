@@ -73,8 +73,10 @@ task display() //Display for Error Log
 void findLineLeft()
 {
 	clearTimer(T1);
+	playSound(soundBlip);
 	while (time1[T1] < getSearchTime()) //need to find better timing method/boot-out. Consult WindSprints for better bootout
 	{
+		playTone(3600, 10);
 		if ((getColorName(rightS)==colorWhite)) //was right
 		{
 			motorSearchLeft();
@@ -101,6 +103,7 @@ void findLineRight()
 	clearTimer(T1);
 	while (time1[T1] < getSearchTime()) //need to find better timing method/boot-out. Consult WindSprints for better bootout
 	{
+		playTone(3600, 10);
 		if ((getColorName(leftS)==colorWhite)) //was left
 		{
 			motorSearchRight();
@@ -288,7 +291,8 @@ if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig 
 		if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig and Intersection for LT
 		{
 			encoderFoward(5);
-			findLineLeft();
+
+
 		}
 	}
 
@@ -331,9 +335,10 @@ task main()
 	startTask(display);
 	repeat(forever)
 	{
-		lineTracking();//basically the entire program
+		//lineTracking();//basically the entire program
 		//avoidObstacle();
 		//sweepRoom();
+		findLineLeft();
 	}
 
 }
