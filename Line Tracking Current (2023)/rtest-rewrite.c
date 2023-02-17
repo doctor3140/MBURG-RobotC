@@ -39,7 +39,7 @@ Rewrote #pragma code to syntax
 bool hasObstacle = false;
 
 //features
-bool checkGreen = true; //to enable/disable lilCheck function
+bool checkGreen = false; //to enable/disable lilCheck function
 bool checkTurnFurther = false; //to enable/disable turning further when line not found
 bool checkSonar = false; //to enable/disable checkObstacle function
 
@@ -73,7 +73,7 @@ task display() //Display for Error Log
 void findLineLeft()
 {
 	clearTimer(T1);
-	while (time1[T1] < searchTime) //need to find better timing method/boot-out. Consult WindSprints for better bootout
+	while (time1[T1] < getSearchTime()) //need to find better timing method/boot-out. Consult WindSprints for better bootout
 	{
 		if ((getColorName(rightS)==colorWhite)) //was right
 		{
@@ -99,7 +99,7 @@ void findLineRight()
 {
 	playSound(soundBlip);
 	clearTimer(T1);
-	while (time1[T1] < searchTime) //need to find better timing method/boot-out. Consult WindSprints for better bootout
+	while (time1[T1] < getSearchTime()) //need to find better timing method/boot-out. Consult WindSprints for better bootout
 	{
 		if ((getColorName(leftS)==colorWhite)) //was left
 		{
@@ -128,19 +128,19 @@ void leftTurn()
 {
 	STP();
 	sleep(200); //was 500
-	encoderFoward(tapeThreasholdCM);
+	encoderFoward(getTapeThreasholdCM());
 	if (getColorName(leftS)==colorBlack) //was leftS, but since leftS is Right then it should be rightS nvm???
 	{
-		encoderFoward(40);
+		encoderFoward(8);
 		encoderPointLeft();
 		if(checkTurnFurther && (getColorName(leftS)==colorWhite)){
 		findLineLeft();
 		}
-		encoderFoward(20);
+		encoderFoward();
 		sleep(20);
 	}
 	else{
-		encoderFoward(tapeThreasholdCM);
+		encoderFoward(getTapeThreasholdCM());
 	}
 }
 
@@ -148,19 +148,21 @@ void rightTurn()
 {
 	STP();
 	sleep(200);
-	encoderFoward(tapeThreasholdCM); //Turn off if momentum is too much
+	//playSound(soundBeepBeep);
+	encoderFoward(getTapeThreasholdCM()); //Turn off if momentum is too much
 	if (getColorName(rightS)==colorBlack) //was rightS, but since rightS is Left then it should be leftS nvm???
 	{
-		encoderFoward(40);
+		playSound(soundBeepBeep);
+		encoderFoward(8);
 		encoderPointRight();
 		if(checkTurnFurther && (getColorName(rightS)==colorWhite)){
 		findLineRight();
 		}
-		encoderFoward(20);
+		encoderFoward();
 		sleep(20);
 	}
 	else{
-		encoderFoward(tapeThreasholdCM);
+		encoderFoward(getTapeThreasholdCM());
 	}
 }
 
@@ -265,7 +267,7 @@ void lineTracking()
 if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig and Intersection //Adddition
 		{
 			playTone();
-			encoderFoward(130);//OG 70
+			encoderFoward(5);//OG 70
 			findLineRight();
 		}
 	else if (getColorName(rightS)==colorBlack) // lean left
@@ -274,7 +276,7 @@ if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig 
 
 		if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig and Intersection
 		{
-			encoderFoward(130);//OG 70
+			encoderFoward(5);//OG 70
 			findLineRight();
 		}
 	}
@@ -285,15 +287,14 @@ if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig 
 
 		if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig and Intersection for LT
 		{
-			encoderFoward(70);
+			encoderFoward(5);
 			findLineLeft();
 		}
 	}
 
 	else if ((getColorName(rightS)==colorWhite)&&(getColorName(leftS)==colorWhite)) //both white -> move in straight line
 	{
-		motor[leftMotor]= speed;
-		motor[rightMotor]= speed;
+		motorFoward();
 	}
 
 	else // problem/unkown -> error sign
@@ -315,7 +316,7 @@ void properties(){
 		setLeanSpeed(6);
 		setSearchSpeed(3);
 		setDist(2.5);
-		setTapeThreasholdCM(2.5);
+		setTapeThreasholdCM(5);
 		setSearchSpeed(3);
 		setSearchTime(4000);
 }
