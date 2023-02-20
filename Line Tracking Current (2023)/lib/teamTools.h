@@ -260,6 +260,7 @@ void encoderPointRight(float CM){
 
 void uTurn()
 {
+	playTone(3600, 5);
 	STP();
 	sleep(500);
 	resetMotorEncoder(leftMotor);
@@ -267,6 +268,7 @@ void uTurn()
 	setMotorTarget(leftMotor, -uTurnValue, speed);
 	setMotorTarget(rightMotor, uTurnValue, speed);
 	waitUntilMotorStop(rightMotor);
+	playTone(3600, 5);
 	sleep(1000);
 }
 

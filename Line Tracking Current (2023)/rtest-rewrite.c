@@ -39,7 +39,7 @@ Rewrote #pragma code to syntax
 bool hasObstacle = false;
 
 //features
-bool checkGreen = false; //to enable/disable lilCheck function
+bool checkGreen = true; //to enable/disable lilCheck function
 bool checkTurnFurther = false; //to enable/disable turning further when line not found
 bool checkSonar = false; //to enable/disable checkObstacle function
 
@@ -238,12 +238,12 @@ void lineTracking()
 		sleep(6000);
 	}
 
-	else if((getColorName(leftS)==colorGreen) || (getColorName(rightS)==colorGreen)) // find green -> identifyGreen -> make turn
+	if((getColorName(leftS)==colorGreen) || (getColorName(rightS)==colorGreen)) // find green -> identifyGreen -> make turn
 	{
-		//playSound(soundBlip);
 		STP();
 		if ((getColorName(rightS)==colorGreen)&&(getColorName(leftS)==colorGreen)) //both green -> Uturn
 		{
+			playSound(soundLowBuzzShort);
 			uTurn();
 		}
 		else if ((getColorName(leftS)==colorGreen) && (getColorName(rightS)!=colorGreen)) //left green -> turnLeft
@@ -277,7 +277,7 @@ if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig 
 		}
 	else if (getColorName(rightS)==colorBlack) // lean left
 	{
-		motorLeanLeft();
+		motorLeanRight();
 
 		if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig and Intersection
 		{
