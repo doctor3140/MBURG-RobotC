@@ -74,7 +74,8 @@ void findLineLeft()
 {
 	clearTimer(T1);
 	playSound(soundBlip);
-	while (time1[T1] < getSearchTime()) //need to find better timing method/boot-out. Consult WindSprints for better bootout
+	encoderFoward(2.5);
+	while (time1[T1] < searchTime) //need to find better timing method/boot-out. Consult WindSprints for better bootout
 	{
 		playTone(3600, 10);
 		if ((getColorName(rightS)==colorWhite)) //was right
@@ -101,7 +102,8 @@ void findLineRight()
 {
 	playSound(soundBlip);
 	clearTimer(T1);
-	while (time1[T1] < getSearchTime()) //need to find better timing method/boot-out. Consult WindSprints for better bootout
+	encoderFoward(2.5);
+	while (time1[T1] < searchTime) //need to find better timing method/boot-out. Consult WindSprints for better bootout
 	{
 		playTone(3600, 10);
 		if ((getColorName(leftS)==colorWhite)) //was left
@@ -321,7 +323,7 @@ void properties(){
 		setSearchSpeed(3);
 		setDist(2.5);
 		setTapeThreasholdCM(5);
-		setSearchSpeed(3);
+		setSearchSpeed(6);
 		setSearchTime(4000);
 }
 
@@ -335,10 +337,9 @@ task main()
 	startTask(display);
 	repeat(forever)
 	{
-		//lineTracking();//basically the entire program
+		lineTracking();//basically the entire program
 		//avoidObstacle();
 		//sweepRoom();
-		findLineLeft();
 	}
 
 }
