@@ -77,7 +77,7 @@ void findLineLeft()
 	encoderFoward(2.5);
 	while (time1[T1] < searchTime) //need to find better timing method/boot-out. Consult WindSprints for better bootout
 	{
-		playTone(3600, 10);
+		//playTone(3600, 10);
 		if ((getColorName(rightS)==colorWhite)) //was right
 		{
 			motorSearchLeft();
@@ -105,7 +105,7 @@ void findLineRight()
 	encoderFoward(2.5);
 	while (time1[T1] < searchTime) //need to find better timing method/boot-out. Consult WindSprints for better bootout
 	{
-		playTone(3600, 10);
+		//playTone(3600, 10);
 		if ((getColorName(leftS)==colorWhite)) //was left
 		{
 			motorSearchRight();
@@ -122,7 +122,7 @@ void findLineRight()
 	{
 		motorSearchLeft();
 		//startTask(display);
-		//playSound(soundBlip);
+		playSound(soundBlip);
 	}
 }
 
@@ -252,6 +252,7 @@ void lineTracking()
 			if (!checkGreen)
 			{
 				leftTurn();
+				playSound(soundBeepBeep);
 			}
 		}
 		else if ((getColorName(leftS)!=colorGreen) && (getColorName(rightS)==colorGreen)) //right green -> turnRight
@@ -266,17 +267,18 @@ void lineTracking()
 		{
 			//lineTracking();
 			//IDK whats going on here
-			playTone();
+			playTone(1600, 5);
 		}
 	}
 if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig and Intersection //Adddition
 		{
-			playTone();
+			//playTone(20, 5);
 			encoderFoward(5);//OG 70
 			findLineRight();
 		}
 	else if (getColorName(rightS)==colorBlack) // lean left
 	{
+		//playTone(soundBeepBeep);
 		motorLeanRight();
 
 		if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig and Intersection
@@ -330,6 +332,8 @@ void properties(){
 //TASK MAIN//
 task main()
 {
+	findLineRight();
+	//findLineLeft();
 	//armUp();
 	clearSounds();
 	clearTimer(T1);
@@ -337,7 +341,7 @@ task main()
 	startTask(display);
 	repeat(forever)
 	{
-		lineTracking();//basically the entire program
+		//lineTracking();//basically the entire program
 		//avoidObstacle();
 		//sweepRoom();
 	}
