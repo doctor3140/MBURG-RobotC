@@ -44,6 +44,15 @@ void lilUp()
 
 
 void lilUp(int d)
+{
+	resetMotorEncoder(motorB);
+	resetMotorEncoder(motorC);
+	setMotorTarget(motorB, m*d, 30);
+	setMotorTarget(motorC, m*d, 30);
+	waitUntilMotorStop(motorC);
+	sleep(1000);
+}
+
 void faceLeft()
 {
 	resetMotorEncoder(motorB);
