@@ -74,7 +74,7 @@ void findLineLeft()
 {
 	clearTimer(T1);
 	playSound(soundBlip);
-	encoderFoward(2.5);
+	encoderForward(2.5);
 	while (time1[T1] < searchTime) //need to find better timing method/boot-out. Consult WindSprints for better bootout
 	{
 		if ((getColorName(rightS)==colorWhite)) //was right
@@ -101,7 +101,7 @@ void findLineLeft()
 void findLineRight()
 {
 	clearTimer(T1);
-	encoderFoward(2.5);
+	encoderForward(2.5);
 	while (time1[T1] < searchTime) //need to find better timing method/boot-out. Consult WindSprints for better bootout
 	{
 		if ((getColorName(leftS)==colorWhite)) //was left
@@ -130,19 +130,19 @@ void leftTurn()
 {
 	STP();
 	sleep(200); //was 500
-	encoderFoward(getTapeThreasholdCM());
+	encoderForward(getTapeThreasholdCM());
 	if (getColorName(leftS)==colorBlack) //was leftS, but since leftS is Right then it should be rightS nvm???
 	{
-		encoderFoward(8);
+		encoderForward(8);
 		encoderPointLeft();
 		if(checkTurnFurther && (getColorName(leftS)==colorWhite)){
 		findLineLeft();
 		}
-		encoderFoward();
+		encoderForward();
 		sleep(20);
 	}
 	else{
-		encoderFoward(getTapeThreasholdCM());
+		encoderForward(getTapeThreasholdCM());
 	}
 }
 
@@ -151,19 +151,24 @@ void rightTurn()
 	STP();
 	sleep(200);
 	//playSound(soundBeepBeep);
-	encoderFoward(getTapeThreasholdCM()); //Turn off if momentum is too much
+	encoderForward(getTapeThreasholdCM()); //Turn off if momentum is too much
 	if (getColorName(rightS)==colorBlack) //was rightS, but since rightS is Left then it should be leftS nvm???
 	{
+<<<<<<< HEAD
 		encoderFoward(8);
+=======
+		playSound(soundBeepBeep);
+		encoderForward(8);
+>>>>>>> 661ba5a584248f0a3a4d6deadacd04db79c547bf
 		encoderPointRight();
 		if(checkTurnFurther && (getColorName(rightS)==colorWhite)){
 		findLineRight();
 		}
-		encoderFoward();
+		encoderForward();
 		sleep(20);
 	}
 	else{
-		encoderFoward(getTapeThreasholdCM());
+		encoderForward(getTapeThreasholdCM());
 	}
 }
 
@@ -265,7 +270,12 @@ void lineTracking()
 	}
 if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig and Intersection //Adddition
 		{
+<<<<<<< HEAD
 			encoderFoward(5);//OG 70
+=======
+			//playTone(20, 5);
+			encoderForward(5);//OG 70
+>>>>>>> 661ba5a584248f0a3a4d6deadacd04db79c547bf
 			findLineRight();
 		}
 	else if (getColorName(rightS)==colorBlack) // lean left
@@ -275,7 +285,7 @@ if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig 
 
 		if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig and Intersection
 		{
-			encoderFoward(5);//OG 70
+			encoderForward(5);//OG 70
 			findLineRight();
 		}
 	}
@@ -286,7 +296,7 @@ if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig 
 
 		if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig and Intersection for LT
 		{
-			encoderFoward(5);
+			encoderForward(5);
 
 
 		}
@@ -294,7 +304,7 @@ if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig 
 
 	else if ((getColorName(rightS)==colorWhite)&&(getColorName(leftS)==colorWhite)) //both white -> move in straight line
 	{
-		motorFoward();
+		motorForward();
 	}
 
 	else // problem/unkown -> error sign
