@@ -81,7 +81,7 @@ void avoidObstacle()
 		//segment 1 (left - move - right) (face forward)
 
 		encoderPointLeft();
-		encoderFoward(9);
+		encoderForward(9);
 		//lilUp(450);  // distance go left (to be determined depend on how big the obstacles are)
 		encoderPointRight();
 		checkObstacle(6);
@@ -89,7 +89,7 @@ void avoidObstacle()
 		while (hasObstacle == true) // double check
 		{
 			encoderPointLeft();
-			encoderFoward(5);
+			encoderForward(5);
 			//lilUp(100);  // distance go left
 			//rightPointTurn();
 			encoderPointRight();
@@ -108,7 +108,7 @@ void avoidObstacle()
 		{
 			do
 			{
-				motorFoward(15);
+				motorForward(15);
 				//motor[motorB]=15;
 				//motor[motorC]=15;
 			}	while ((getColorName(S1)!=colorBlack)&&(getColorName(S2)!=colorBlack));
@@ -121,7 +121,7 @@ void avoidObstacle()
 		sleep(500);
 		if ((getColorName(S1) == colorBlack && getColorName(S2) == colorBlack))
 		{
-			encoderFoward(5); //lilUp(100);
+			encoderForward(5); //lilUp(100);
 			encoderPointLeft();
 			return;
 		}
@@ -135,7 +135,7 @@ void avoidObstacle()
 		while (hasObstacle == true) //double check
 		{
 			encoderPointLeft();
-			encoderFoward(5); //lilUp(100);  // distance go left
+			encoderForward(5); //lilUp(100);  // distance go left
 			encoderPointRight();
 			checkObstacle(20);
 		}
@@ -148,7 +148,7 @@ void avoidObstacle()
 		{
 			do
 			{
-				motorFoward(15);
+				motorForward(15);
 				//motor[motorB]=15;
 				//motor[motorC]=15;
 			}	while ((getColorName(S1)!=colorBlack)&&(getColorName(S2)!=colorBlack));
@@ -165,7 +165,7 @@ void avoidObstacle()
 			encoderPointRight();
 			do
 			{
-				motorFoward(15);
+				motorForward(15);
 				//motor[motorB]=15;
 				//motor[motorC]=15;
 			}	while ((getColorName(S1)!=colorBlack)&&(getColorName(S2)!=colorBlack));
@@ -173,10 +173,10 @@ void avoidObstacle()
 
 			STP();
 			sleep(500);
-			encoderFoward(5); //lilUp(100);
+			encoderForward(5); //lilUp(100);
 			sleep(500);
 			encoderPointLeft();
-			encoderFoward(); //lilUp();
+			encoderForward(); //lilUp();
 	}
 }
 
@@ -198,7 +198,7 @@ task main()
 	properties();
 	repeat(forever)
 	{
-		encoderFoward(); //lilUp();
+		encoderForward(); //lilUp();
 		avoidObstacle();
 	}
 }
