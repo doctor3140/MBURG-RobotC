@@ -55,7 +55,7 @@ void setLeanSpeed(float spd){
 }
 
 void setSearchSpeed(float spd){
-	SearchSpeed=spd;
+	searchSpeed=spd;
 }
 
 void setSearchTime(int time){
