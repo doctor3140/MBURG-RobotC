@@ -77,7 +77,6 @@ void findLineLeft()
 	encoderFoward(2.5);
 	while (time1[T1] < searchTime) //need to find better timing method/boot-out. Consult WindSprints for better bootout
 	{
-		//playTone(3600, 10);
 		if ((getColorName(rightS)==colorWhite)) //was right
 		{
 			motorSearchLeft();
@@ -93,6 +92,7 @@ void findLineLeft()
 
 	while ((getColorName(leftS)!=colorBlack)) //change to ==white if no work (most likely redundent remove cmt after testing)
 	{
+		playSound(soundBeepBeep);
 		motorSearchRight();
 	}
 }
@@ -100,12 +100,10 @@ void findLineLeft()
 
 void findLineRight()
 {
-	playSound(soundBlip);
 	clearTimer(T1);
 	encoderFoward(2.5);
 	while (time1[T1] < searchTime) //need to find better timing method/boot-out. Consult WindSprints for better bootout
 	{
-		//playTone(3600, 10);
 		if ((getColorName(leftS)==colorWhite)) //was left
 		{
 			motorSearchRight();
@@ -113,7 +111,6 @@ void findLineRight()
 		}
 		else if (getColorName(leftS)==colorBlack)
 		{
-			//playSound(soundLowBuzzShort);
 			STP();
 			sleep(200);
 		}
