@@ -108,8 +108,9 @@ void avoidObstacle()
 		{
 			do
 			{
-				motor[motorB]=15;
-				motor[motorC]=15;
+				motorFoward(15);
+				//motor[motorB]=15;
+				//motor[motorC]=15;
 			}	while ((getColorName(S1)!=colorBlack)&&(getColorName(S2)!=colorBlack));
 			break;
 		}
@@ -147,8 +148,9 @@ void avoidObstacle()
 		{
 			do
 			{
-				motor[motorB]=15;
-				motor[motorC]=15;
+				motorFoward(15);
+				//motor[motorB]=15;
+				//motor[motorC]=15;
 			}	while ((getColorName(S1)!=colorBlack)&&(getColorName(S2)!=colorBlack));
 			break;
 		}
@@ -163,8 +165,9 @@ void avoidObstacle()
 			encoderPointRight();
 			do
 			{
-				motor[motorB]=15;
-				motor[motorC]=15;
+				motorFoward(15);
+				//motor[motorB]=15;
+				//motor[motorC]=15;
 			}	while ((getColorName(S1)!=colorBlack)&&(getColorName(S2)!=colorBlack));
 		}
 
