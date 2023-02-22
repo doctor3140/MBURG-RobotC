@@ -95,6 +95,7 @@ void findLineLeft()
 		playSound(soundBeepBeep);
 		motorSearchRight();
 	}
+	STP();
 }
 
 
@@ -121,6 +122,7 @@ void findLineRight()
 		//startTask(display);
 		playSound(soundBlip);
 	}
+	STP();
 }
 
 	//this is awful, please fix
@@ -319,28 +321,26 @@ void properties(){
 		setPoint(332);
 		setSpeed(10);
 		setLeanSpeed(6);
-		setSearchSpeed(3);
+		setSearchSpeed(6);
 		setDist(2.5);
 		setTapeThreasholdCM(5);
 		setSearchSpeed(6);
-		setSearchTime(4000);
+		setSearchTime(10000);
 }
 
 //TASK MAIN//
 task main()
 {
-	findLineRight();
-	//findLineLeft();
-	//armUp();
+	properties();
 	clearSounds();
 	clearTimer(T1);
-	properties();
 	startTask(display);
-	repeat(forever)
-	{
+	//repeat(forever)
+	//{
 		//lineTracking();//basically the entire program
 		//avoidObstacle();
 		//sweepRoom();
-	}
+	//}
+	findLineRight();
 
 }
