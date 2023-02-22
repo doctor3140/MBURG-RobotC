@@ -23,7 +23,7 @@ void checkObstacle(int x)
 	}
 }
 
-
+/*
 void lilUp()
 {
 	resetMotorEncoder(motorB);
@@ -62,7 +62,7 @@ void rightPointTurn()
 	waitUntilMotorStop(motorB);
 	sleep(1000);
 }
-
+*/
 void avoidObstacle()
 {
 
@@ -75,22 +75,24 @@ void avoidObstacle()
 	checkObstacle(8);
 	if (hasObstacle == true)
 	{
-		motor[motorB]=0;
-		motor[motorC]=0;
+		STP();
 		sleep(1000);
 
 		//segment 1 (left - move - right) (face forward)
 
 		encoderPointLeft();
-		lilUp(450);  // distance go left (to be determined depend on how big the obstacles are)
+		encoderFoward(9);
+		//lilUp(450);  // distance go left (to be determined depend on how big the obstacles are)
 		encoderPointRight();
 		checkObstacle(6);
 
 		while (hasObstacle == true) // double check
 		{
 			encoderPointLeft();
-			lilUp(100);  // distance go left
-			rightPointTurn();
+			encoderFoward(5);
+			//lilUp(100);  // distance go left
+			//rightPointTurn();
+			encoderPointRight();
 			checkObstacle(6);
 		}
 
@@ -118,7 +120,7 @@ void avoidObstacle()
 		sleep(500);
 		if ((getColorName(S1) == colorBlack && getColorName(S2) == colorBlack))
 		{
-			lilUp(100);
+			encoderFoward(5); //lilUp(100);
 			encoderPointLeft();
 			return;
 		}
@@ -126,12 +128,13 @@ void avoidObstacle()
 
 // go forward, when it see doule black, turn left, and return to lineTracking; if not, go for the set distance.
 
-		rightPointTurn();
+		encoderPointRight();
+	//rightPointTurn();
 
 		while (hasObstacle == true) //double check
 		{
 			encoderPointLeft();
-			lilUp(100);  // distance go left
+			encoderFoward(5); //lilUp(100);  // distance go left
 			encoderPointRight();
 			checkObstacle(20);
 		}
@@ -167,10 +170,10 @@ void avoidObstacle()
 
 			STP();
 			sleep(500);
-			lilUp(100);
+			encoderFoward(5); //lilUp(100);
 			sleep(500);
 			encoderPointLeft();
-			lilUp();
+			encoderFoward(); //lilUp();
 	}
 }
 
@@ -192,7 +195,7 @@ task main()
 	properties();
 	repeat(forever)
 	{
-		lilUp();
+		encoderFoward(); //lilUp();
 		avoidObstacle();
 	}
 }
