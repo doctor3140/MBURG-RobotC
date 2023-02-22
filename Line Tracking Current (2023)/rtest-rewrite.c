@@ -92,7 +92,6 @@ void findLineLeft()
 
 	while ((getColorName(leftS)!=colorBlack)) //change to ==white if no work (most likely redundent remove cmt after testing)
 	{
-		playSound(soundBeepBeep);
 		motorSearchRight();
 	}
 	STP();
@@ -120,7 +119,6 @@ void findLineRight()
 	{
 		motorSearchLeft();
 		//startTask(display);
-		playSound(soundBlip);
 	}
 	STP();
 }
@@ -156,7 +154,6 @@ void rightTurn()
 	encoderFoward(getTapeThreasholdCM()); //Turn off if momentum is too much
 	if (getColorName(rightS)==colorBlack) //was rightS, but since rightS is Left then it should be leftS nvm???
 	{
-		playSound(soundBeepBeep);
 		encoderFoward(8);
 		encoderPointRight();
 		if(checkTurnFurther && (getColorName(rightS)==colorWhite)){
@@ -242,7 +239,6 @@ void lineTracking()
 		STP();
 		if ((getColorName(rightS)==colorGreen)&&(getColorName(leftS)==colorGreen)) //both green -> Uturn
 		{
-			playSound(soundLowBuzzShort);
 			uTurn();
 		}
 		else if ((getColorName(leftS)==colorGreen) && (getColorName(rightS)!=colorGreen)) //left green -> turnLeft
@@ -251,7 +247,6 @@ void lineTracking()
 			if (!checkGreen)
 			{
 				leftTurn();
-				playSound(soundBeepBeep);
 			}
 		}
 		else if ((getColorName(leftS)!=colorGreen) && (getColorName(rightS)==colorGreen)) //right green -> turnRight
@@ -266,12 +261,10 @@ void lineTracking()
 		{
 			//lineTracking();
 			//IDK whats going on here
-			playTone(1600, 5);
 		}
 	}
 if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig and Intersection //Adddition
 		{
-			//playTone(20, 5);
 			encoderFoward(5);//OG 70
 			findLineRight();
 		}
@@ -319,13 +312,13 @@ void properties(){
 		setWheelDiameterCM(7.455);
 		setUTURN(660);
 		setPoint(332);
-		setSpeed(10);
+		setSpeed(8);
 		setLeanSpeed(6);
 		setSearchSpeed(6);
 		setDist(2.5);
 		setTapeThreasholdCM(5);
 		setSearchSpeed(6);
-		setSearchTime(10000);
+		setSearchTime(500);
 }
 
 //TASK MAIN//
@@ -335,12 +328,10 @@ task main()
 	clearSounds();
 	clearTimer(T1);
 	startTask(display);
-	//repeat(forever)
-	//{
-		//lineTracking();//basically the entire program
+	repeat(forever)
+	{
+		lineTracking();//basically the entire program
 		//avoidObstacle();
 		//sweepRoom();
-	//}
-	findLineRight();
-
+	}
 }
