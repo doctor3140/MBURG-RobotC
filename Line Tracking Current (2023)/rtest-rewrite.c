@@ -309,8 +309,8 @@ void properties(){
 		setWheelDiameterCM(7.455);
 		setUTURN(660);
 		setPoint(332);
-		setSpeed(8);
-		setLeanSpeed(6);
+		setSpeed(6);
+		setLeanSpeed(5);
 		setSearchSpeed(6);
 		setDist(2.5);
 		setTapeThreasholdCM(5);
