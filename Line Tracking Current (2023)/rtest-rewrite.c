@@ -320,15 +320,15 @@ void properties(){
 		setDist(2.5);
 		setTapeThreasholdCM(5);
 		setSearchSpeed(6);
-		setSearchTime(500);
+		setSearchTime(500); //was 500
 }
 
 //TASK MAIN//
 task main()
 {
-	properties();
 	clearSounds();
 	clearTimer(T1);
+	properties();
 	startTask(display);
 	repeat(forever)
 	{
