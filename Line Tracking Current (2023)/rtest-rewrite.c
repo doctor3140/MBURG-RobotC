@@ -22,9 +22,6 @@ Errors:
 3 - Error in leanDetect while change does not = 0
 */
 
-//drives backwards right now 1/23/2023
-
-
 
 /*
 
