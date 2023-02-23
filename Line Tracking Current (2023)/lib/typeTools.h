@@ -33,8 +33,18 @@ bool equals(int *arr1, int *arr2) //compares arrays of size three
 		return false;
 	}
 }
+/*
+bool inRange(int *arr1, int **arr2) //compares 2d arrays of size three
+{
+	if((arr1[0][0]==(arr2[0][0]||arr2[0][1]))&&((arr1[1]==(arr2[1][0]||arr2[1][1]))&&(arr1[2]==(arr2[2][0]||arr2[2][1])){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
 
-
+*/
 bool equals(string str1, string str2){
 	return (stringFind(str1, str2)>=0);
 }
