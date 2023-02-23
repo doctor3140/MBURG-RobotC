@@ -284,7 +284,7 @@ if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig 
 
 	else if (getColorName(leftS)==colorBlack) // lean right
 	{
-		motorLeanRight();
+		motorLeanLeft();
 
 		if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig and Intersection for LT
 		{
