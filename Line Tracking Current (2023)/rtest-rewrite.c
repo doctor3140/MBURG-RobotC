@@ -154,12 +154,8 @@ void rightTurn()
 	encoderForward(getTapeThreasholdCM()); //Turn off if momentum is too much
 	if (getColorName(rightS)==colorBlack) //was rightS, but since rightS is Left then it should be leftS nvm???
 	{
-<<<<<<< HEAD
-		encoderFoward(8);
-=======
 		playSound(soundBeepBeep);
 		encoderForward(8);
->>>>>>> 661ba5a584248f0a3a4d6deadacd04db79c547bf
 		encoderPointRight();
 		if(checkTurnFurther && (getColorName(rightS)==colorWhite)){
 		findLineRight();
@@ -270,12 +266,8 @@ void lineTracking()
 	}
 if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig and Intersection //Adddition
 		{
-<<<<<<< HEAD
-			encoderFoward(5);//OG 70
-=======
 			//playTone(20, 5);
 			encoderForward(5);//OG 70
->>>>>>> 661ba5a584248f0a3a4d6deadacd04db79c547bf
 			findLineRight();
 		}
 	else if (getColorName(rightS)==colorBlack) // lean left
