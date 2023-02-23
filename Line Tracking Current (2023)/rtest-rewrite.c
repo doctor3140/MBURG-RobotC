@@ -315,7 +315,7 @@ void properties(){
 		setDist(2.5);
 		setTapeThreasholdCM(5);
 		setSearchSpeed(6);
-		setSearchTime(15); //was 500
+		setSearchTime(6000); //was 500
 }
 
 //TASK MAIN//
