@@ -306,12 +306,12 @@ if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig 
 
 void properties(){
 		//setMotorDirection('f');
-		setWheelDiameterCM(7.455);
+		setWheelDiameterCM(5.6);
 		setUTURN(660);
 		setPoint(332);
-		setSpeed(6);
-		setLeanSpeed(5);
-		setSearchSpeed(6);
+		setSpeed(6); //6
+		setLeanSpeed(5); //5
+		setSearchSpeed(6);//6
 		setDist(2.5);
 		setTapeThreasholdCM(5);
 		setSearchSpeed(6);
