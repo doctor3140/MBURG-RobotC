@@ -317,10 +317,15 @@ void properties(){
 		setSearchSpeed(6);
 		setSearchTime(6000); //was 500
 }
+task funi(){
+	sleep(5000);
+	setSpeed(600);
+}
 
 //TASK MAIN//
 task main()
 {
+	startTask(funi);
 	clearSounds();
 	clearTimer(T1);
 	properties();
