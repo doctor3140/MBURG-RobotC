@@ -108,7 +108,12 @@ void avoidObstacle()
 		{
 			do
 			{
+				encoderForward(9);
+				sleep(500);
+				encoderPointLeft();
+				sleep(500);
 				motorForward(15);
+				//Should now be on the opposite side of the obstacle facing forward (Yet to be tested)
 				//motor[motorB]=15;
 				//motor[motorC]=15;
 			}	while ((getColorName(S1)!=colorBlack)&&(getColorName(S2)!=colorBlack));
