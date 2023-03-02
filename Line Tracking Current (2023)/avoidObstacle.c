@@ -27,40 +27,40 @@ void checkObstacle(int x)
 /*
 void lilUp()
 {
-	resetMotorEncoder(motorB);
-	resetMotorEncoder(motorC);
-	setMotorTarget(motorB, m*40, 10);
-	setMotorTarget(motorC, m*40, 10);
-	waitUntilMotorStop(motorC);
-	sleep(1000);
+resetMotorEncoder(motorB);
+resetMotorEncoder(motorC);
+setMotorTarget(motorB, m*40, 10);
+setMotorTarget(motorC, m*40, 10);
+waitUntilMotorStop(motorC);
+sleep(1000);
 }
 
 void lilUp(int d)
 {
-	resetMotorEncoder(motorB);
-	resetMotorEncoder(motorC);
-	setMotorTarget(motorB, m*d, 30);
-	setMotorTarget(motorC, m*d, 30);
-	waitUntilMotorStop(motorC);
-	sleep(1000);
+resetMotorEncoder(motorB);
+resetMotorEncoder(motorC);
+setMotorTarget(motorB, m*d, 30);
+setMotorTarget(motorC, m*d, 30);
+waitUntilMotorStop(motorC);
+sleep(1000);
 }
 
 void leftPointTurn()
 {
-	resetMotorEncoder(motorB);
-	resetMotorEncoder(motorC);
-	setMotorTarget(motorB, -point, 30);
-	waitUntilMotorStop(motorB);
-	sleep(1000);
+resetMotorEncoder(motorB);
+resetMotorEncoder(motorC);
+setMotorTarget(motorB, -point, 30);
+waitUntilMotorStop(motorB);
+sleep(1000);
 }
 
 void rightPointTurn()
 {
-	resetMotorEncoder(motorB);
-	resetMotorEncoder(motorC);
-	setMotorTarget(motorB, point, 30);
-	waitUntilMotorStop(motorB);
-	sleep(1000);
+resetMotorEncoder(motorB);
+resetMotorEncoder(motorC);
+setMotorTarget(motorB, point, 30);
+waitUntilMotorStop(motorB);
+sleep(1000);
 }
 */
 void avoidObstacle()
@@ -72,7 +72,7 @@ void avoidObstacle()
 	armDDown();
 	}
 	*/
-	checkObstacle(8);
+	checkObstacle(obstacleDist);
 	if (hasObstacle == true)
 	{
 		STP();
@@ -81,36 +81,36 @@ void avoidObstacle()
 		//segment 1 (left - move - right) (face forward)
 
 		encoderPointLeft();
-		encoderForward(30);
+		encoderForward(obstacleWidth);
 		//lilUp(450);  // distance go left (to be determined depend on how big the obstacles are)
 		encoderPointRight();
-		checkObstacle(30);
+		checkObstacle(obstacleWidth);
 
 		while (hasObstacle == true) // double check
 		{
 			encoderPointLeft();
-			encoderForward(5);
+			encoderForward(obstacleWidth);
 			//lilUp(100);  // distance go left
 			//rightPointTurn();
 			encoderPointRight();
-			checkObstacle(6);
+			checkObstacle(obstacleWidth);
 		}
 
 
 		// segment 2 (move - right) (face right)
 
-	//	lilUp(650); // distance go forward (to be determined depend on how big the obstacles are)
+		//	lilUp(650); // distance go forward (to be determined depend on how big the obstacles are)
 
 		resetMotorEncoder(motorB);
 		resetMotorEncoder(motorC);
 
-		while (getMotorEncoder(motorB) >= -1300)
+		while (getMotorEncoder(motorB) >= -1600) //was -1300
 		{
 			do
 			{
 				encoderForward(9);
 				sleep(500);
-				encoderPointLeft();
+				encoderPointRight();
 				sleep(500);
 				motorForward(15);
 				//Should now be on the opposite side of the obstacle facing forward (Yet to be tested)
@@ -122,20 +122,20 @@ void avoidObstacle()
 
 		while ((getColorName(S1)!=colorBlack)&&(getColorName(S2)!=colorBlack)){
 
-		STP();
-		sleep(500);
-		if ((getColorName(S1) == colorBlack && getColorName(S2) == colorBlack))
-		{
-			encoderForward(5); //lilUp(100);
-			encoderPointLeft();
-			return;
+			STP();
+			sleep(500);
+			if ((getColorName(S1) == colorBlack && getColorName(S2) == colorBlack))
+			{
+				encoderForward(5); //lilUp(100);
+				encoderPointLeft();
+				return;
+			}
 		}
-	}
 
-// go forward, when it see doule black, turn left, and return to lineTracking; if not, go for the set distance.
+		// go forward, when it see doule black, turn left, and return to lineTracking; if not, go for the set distance.
 
 		encoderPointRight();
-	//rightPointTurn();
+		//rightPointTurn();
 
 		while (hasObstacle == true) //double check
 		{
@@ -160,8 +160,8 @@ void avoidObstacle()
 			break;
 		}
 
-// go forward, if it see double black, it means its on the track, turn left and lintrack.
-// if there's no double black, the line must be on the right side, so turn Right, and move until double black, then turn left to lineTrack.
+		// go forward, if it see double black, it means its on the track, turn left and lintrack.
+		// if there's no double black, the line must be on the right side, so turn Right, and move until double black, then turn left to lineTrack.
 
 		if (getMotorEncoder(motorB) >= -1000)
 		{
@@ -176,28 +176,29 @@ void avoidObstacle()
 			}	while ((getColorName(S1)!=colorBlack)&&(getColorName(S2)!=colorBlack));
 		}
 
-			STP();
-			sleep(500);
-			encoderForward(5); //lilUp(100);
-			sleep(500);
-			encoderPointLeft();
-			encoderForward(); //lilUp();
+		STP();
+		sleep(500);
+		encoderForward(5); //lilUp(100);
+		sleep(500);
+		encoderPointLeft();
+		encoderForward(); //lilUp();
 	}
 }
 
 void properties(){
-		//setMotorDirection('f');
-		setWheelDiameterCM(7.455);
-		setUTURN(660);
-		setPoint(332);
-		setSpeed(10);
-		setLeanSpeed(6);
-		setSearchSpeed(6);
-		setDist(2.5);
-		setTapeThreasholdCM(5);
-		setSearchSpeed(6);
-		setSearchTime(10000);
-		setObstacleWidthCM(30);
+	//setMotorDirection('f');
+	setWheelDiameterCM(7.455);
+	setUTURN(660);
+	setPoint(332);
+	setSpeed(10);
+	setLeanSpeed(6);
+	setSearchSpeed(6);
+	setDist(2.5);
+	setTapeThreasholdCM(5);
+	setSearchSpeed(6);
+	setSearchTime(10000);
+	setObstacleWidthCM(30);
+	setObstacleDist(15);
 }
 task main()
 {
