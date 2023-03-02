@@ -19,7 +19,9 @@ int uTurnValue = 680; //for uturns when two greens are detected //OG 185 //newsc
 float dist  = 2.5;
 
 int point = 323; // for leftPointTurn & rightPointTurn //OG is m*320 (-760 for big)
+int obstacleWidth = 20;
 
+bool hasObstacle = false;
 // Setter methods should be called at the beggining of your main proram in order to set values of variables used in other functions.
 
 void setMotorDirection(char direction){
@@ -74,6 +76,9 @@ void setDist(float d){
 	dist=d;
 }
 
+void setObstacleWidthCM(int obWidth){
+	obstacleWidth=obWidth
+}
 
 //getter functions
 float getWheelDiameterCM(){
