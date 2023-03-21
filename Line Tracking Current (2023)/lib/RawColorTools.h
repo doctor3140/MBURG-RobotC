@@ -35,7 +35,7 @@ else{
 }
 
 bool leftEqualsBlack(){
-getColorRawRGB(leftS, currentRight[0], currentRight[1], currentRight[2]);
+getColorRawRGB(leftS, currentLeft[0], currentLeft[1], currentLeft[2]);
 if((black[0][0]<=currentLeft[0]<=black[1][0])&&(black[0][1]<=currentLeft[1]<=black[1][2])&&(black[0][2]<=currentLeft[2]<=black[1][2])){
 	return true;
 }
@@ -55,7 +55,7 @@ else{
 }
 
 bool leftEqualsWhite(){
-getColorRawRGB(leftS, currentRight[0], currentRight[1], currentRight[2]);
+getColorRawRGB(leftS, currentLeft[0], currentLeft[1], currentLeft[2]);
 if((white[0][0]<=currentLeft[0]<=white[1][0])&&(white[0][1]<=currentLeft[1]<=white[1][2])&&(white[0][2]<=currentLeft[2]<=white[1][2])){
 	return true;
 }
@@ -95,7 +95,7 @@ else{
 }
 
 bool leftEqualsRed(){
-getColorRawRGB(leftS, currentRight[0], currentRight[1], currentRight[2]);
+getColorRawRGB(leftS, currentLeft[0], currentLeft[1], currentLeft[2]);
 if((red[0][0]<=currentLeft[0]<=red[1][0])&&(red[0][1]<=currentLeft[1]<=red[1][2])&&(red[0][2]<=currentLeft[2]<=red[1][2])){
 	return true;
 }
@@ -103,3 +103,23 @@ else{
 	return false;
 }
 }
+
+void displayRightS(int line){
+displayBigTextLine(line, "R: %d %d %d", currentRight[0], currentRight[1], currentRight[2]);
+}
+
+void displayLeftS(int line){
+displayBigTextLine(line, "L: %d %d %d", currentLeft[0], currentLeft[1], currentLeft[2]);
+}
+
+/*
+void getRightS(){
+getColorRawRGB(rightS, currentRight[0], currentRight[1], currentRight[2]);
+}
+
+void getLeftS(){
+getColorRawRGB(leftS, currentLeft[0], currentLeft[1], currentLeft[2]);
+}
+
+not needed rn
+*/
