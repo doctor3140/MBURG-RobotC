@@ -55,21 +55,20 @@ task main()
 	startTask(display);
 	repeat(forever)
 	{
-		if(rightEqualsWhite()&&leftEqualsWhite()){
+		if((rightEqualsWhite())&&(leftEqualsWhite())){
 		colorName = 2;
 		}
-		else if(rightEqualsGreen()&&leftEqualsGreen()){
+		else if((rightEqualsGreen())&&(leftEqualsGreen())){
 		colorName = 3;
 		}
-		else if(rightEqualsRed()&&leftEqualsRed()){
+		else if((rightEqualsRed()&&leftEqualsRed())){
 		colorName = 4;
 		}
-		else if(rightEqualsBlack()&&leftEqualsBlack()){
+		else if((rightEqualsBlack())&&(leftEqualsBlack())){
 		colorName = 5;
 		}
 		else{
 			colorName = 1;
 		}
+		}
 	}
-
-}
