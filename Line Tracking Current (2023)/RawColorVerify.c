@@ -40,8 +40,6 @@ int colorName = 1;
 task display() //Display for Error Log
 {
 	repeat(forever){
-	//displayBigTextLine(2, "LCS: %d", getColorName(leftS));
-	//displayBigTextLine(4, "RCS: %d", getColorName(rightS));
 	displayRightS(2);
 	displayLeftS(4);
 	displayBigTextLine(6, "Color: %d", colorName);
@@ -52,6 +50,10 @@ task main()
 {
 	clearSounds();
 	clearTimer(T1);
+	//colorMarginBlack(15);
+	//colorMarginGreen(15);
+	//colorMarginRed(15);
+	//colorMarginWhite(15);
 	startTask(display);
 	repeat(forever)
 	{

@@ -188,6 +188,38 @@ void colorMarginWhite(int margin){
 	whiteRight[0][2]=whiteRightBase[2]+margin;
 }
 
+void colorMarginRed(int margin){
+	redLeft[0][0]=redLeftBase[0]-margin;
+	redRight[0][0]=redRightBase[0]-margin;
+	redLeft[0][1]=redLeftBase[1]-margin;
+	redRight[0][1]=redRightBase[1]-margin;
+	redLeft[0][2]=redLeftBase[2]-margin;
+	redRight[0][2]=redRightBase[2]-margin;
+
+	redLeft[0][0]=redLeftBase[0]+margin;
+	redRight[0][0]=redRightBase[0]+margin;
+	redLeft[0][1]=redLeftBase[1]+margin;
+	redRight[0][1]=redRightBase[1]+margin;
+	redLeft[0][2]=redLeftBase[2]+margin;
+	redRight[0][2]=redRightBase[2]+margin;
+}
+
+void colorMarginGreen(int margin){
+	greenLeft[0][0]=greenLeftBase[0]-margin;
+	greenRight[0][0]=greenRightBase[0]-margin;
+	greenLeft[0][1]=greenLeftBase[1]-margin;
+	greenRight[0][1]=greenRightBase[1]-margin;
+	greenLeft[0][2]=greenLeftBase[2]-margin;
+	greenRight[0][2]=greenRightBase[2]-margin;
+
+	greenLeft[0][0]=greenLeftBase[0]+margin;
+	greenRight[0][0]=greenRightBase[0]+margin;
+	greenLeft[0][1]=greenLeftBase[1]+margin;
+	greenRight[0][1]=greenRightBase[1]+margin;
+	greenLeft[0][2]=greenLeftBase[2]+margin;
+	greenRight[0][2]=greenRightBase[2]+margin;
+}
+
 void displayRightS(int line){
 getColorRawRGB(rightS, currentRight[0], currentRight[1], currentRight[2]);
 displayBigTextLine(line, "R: %d %d %d", currentRight[0], currentRight[1], currentRight[2]);
