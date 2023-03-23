@@ -164,12 +164,12 @@ void colorMarginBlack(int margin){
 	blackLeft[0][2]=blackLeftBase[2]-margin;
 	blackRight[0][2]=blackRightBase[2]-margin;
 
-	blackLeft[0][0]=blackLeftBase[0]+margin;
-	blackRight[0][0]=blackRightBase[0]+margin;
-	blackLeft[0][1]=blackLeftBase[1]+margin;
-	blackRight[0][1]=blackRightBase[1]+margin;
-	blackLeft[0][2]=blackLeftBase[2]+margin;
-	blackRight[0][2]=blackRightBase[2]+margin;
+	blackLeft[1][0]=blackLeftBase[0]+margin;
+	blackRight[1][0]=blackRightBase[0]+margin;
+	blackLeft[1][1]=blackLeftBase[1]+margin;
+	blackRight[1][1]=blackRightBase[1]+margin;
+	blackLeft[1][2]=blackLeftBase[2]+margin;
+	blackRight[1][2]=blackRightBase[2]+margin;
 }
 
 void colorMarginWhite(int margin){
@@ -180,12 +180,12 @@ void colorMarginWhite(int margin){
 	whiteLeft[0][2]=whiteLeftBase[2]-margin;
 	whiteRight[0][2]=whiteRightBase[2]-margin;
 
-	whiteLeft[0][0]=whiteLeftBase[0]+margin;
-	whiteRight[0][0]=whiteRightBase[0]+margin;
-	whiteLeft[0][1]=whiteLeftBase[1]+margin;
-	whiteRight[0][1]=whiteRightBase[1]+margin;
-	whiteLeft[0][2]=whiteLeftBase[2]+margin;
-	whiteRight[0][2]=whiteRightBase[2]+margin;
+	whiteLeft[1][0]=whiteLeftBase[0]+margin;
+	whiteRight[1][0]=whiteRightBase[0]+margin;
+	whiteLeft[1][1]=whiteLeftBase[1]+margin;
+	whiteRight[1][1]=whiteRightBase[1]+margin;
+	whiteLeft[1][2]=whiteLeftBase[2]+margin;
+	whiteRight[1][2]=whiteRightBase[2]+margin;
 }
 
 void colorMarginRed(int margin){
@@ -196,12 +196,12 @@ void colorMarginRed(int margin){
 	redLeft[0][2]=redLeftBase[2]-margin;
 	redRight[0][2]=redRightBase[2]-margin;
 
-	redLeft[0][0]=redLeftBase[0]+margin;
-	redRight[0][0]=redRightBase[0]+margin;
-	redLeft[0][1]=redLeftBase[1]+margin;
-	redRight[0][1]=redRightBase[1]+margin;
-	redLeft[0][2]=redLeftBase[2]+margin;
-	redRight[0][2]=redRightBase[2]+margin;
+	redLeft[1][0]=redLeftBase[0]+margin;
+	redRight[1][0]=redRightBase[0]+margin;
+	redLeft[1][1]=redLeftBase[1]+margin;
+	redRight[1][1]=redRightBase[1]+margin;
+	redLeft[1][2]=redLeftBase[2]+margin;
+	redRight[1][2]=redRightBase[2]+margin;
 }
 
 void colorMarginGreen(int margin){
@@ -212,12 +212,12 @@ void colorMarginGreen(int margin){
 	greenLeft[0][2]=greenLeftBase[2]-margin;
 	greenRight[0][2]=greenRightBase[2]-margin;
 
-	greenLeft[0][0]=greenLeftBase[0]+margin;
-	greenRight[0][0]=greenRightBase[0]+margin;
-	greenLeft[0][1]=greenLeftBase[1]+margin;
-	greenRight[0][1]=greenRightBase[1]+margin;
-	greenLeft[0][2]=greenLeftBase[2]+margin;
-	greenRight[0][2]=greenRightBase[2]+margin;
+	greenLeft[1][0]=greenLeftBase[0]+margin;
+	greenRight[1][0]=greenRightBase[0]+margin;
+	greenLeft[1][1]=greenLeftBase[1]+margin;
+	greenRight[1][1]=greenRightBase[1]+margin;
+	greenLeft[1][2]=greenLeftBase[2]+margin;
+	greenRight[1][2]=greenRightBase[2]+margin;
 }
 
 void displayRightS(int line){

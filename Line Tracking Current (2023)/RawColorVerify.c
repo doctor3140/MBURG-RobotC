@@ -50,10 +50,10 @@ task main()
 {
 	clearSounds();
 	clearTimer(T1);
-	//colorMarginBlack(15);
+	colorMarginBlack(20);
 	//colorMarginGreen(15);
-	//colorMarginRed(15);
-	//colorMarginWhite(15);
+	colorMarginRed(30);
+	colorMarginWhite(10);
 	startTask(display);
 	repeat(forever)
 	{
