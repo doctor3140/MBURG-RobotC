@@ -23,6 +23,8 @@ float robotFront;
 float robotBack;
 float robotSides;
 
+bool errorRescue = false;
+
 float currentXY[2] = {
 	{0, 0}
 	};
@@ -30,24 +32,57 @@ string direction[4] = {
 	{"Up", "Down", "Left", "Right"}
 };
 
-int
+int currentDirection = 0; //0 to start forward
 
 
-setBoxDimensions(float w, float l, float m){
+
+void setBoxDimensions(float w, float l, float m){
 	boxWidth = w;
 	boxLength = l;
 	boxMargin = m;
 }
 
-setRobotDimensions(float f, float b, float s){
+void setRobotDimensions(float f, float b, float s){
 	robotFront = f;
 	robotBack = b;
 	robotSides = s;
 } //in CM might want to convert to MM ???
 
+task displayPos(){
+		repeat(forever){
+		displayBigTextLine(2, "SS: %d", SensorValue[S4]);
+		displayBigTextLine(4, "X: %d", currentXY[0]);
+		displayBigTextLine(6, "Y: %d", currentXY[1]);
+		displayBigTextLine(6, "D: %d", direction[currentDirection]);
+		sleep(10); //refreshrate in ms
+	}
+	}
 
+void directionOverFlow(string d){
+	if(d.equals("Right")){
+		if(currentDirection>4){
+			currentDirection-4;	
+		}
+		else{
+			currentDirection++;
+		}
+	}
+	else{
+		if(currentDirection<0){
+			currentDirection+4;	
+		}
+		else{
+			currentDirection--;
+		}
+	
+	}
+}
 
-mowRoom(){
+void lawnRightTurn(){
+	currentDirection	
+}
+
+void mowRoom(){
 //if(rightEqualsReflect()&&leftEqualsReflect){
 
 	
@@ -61,15 +96,7 @@ mowRoom(){
 	//current goal is to make it know the position in a box and navigate
 	*/
 
-	task displayPos(){
-		repeat(forever){
-		displayBigTextLine(2, "SS: %d", SensorValue[S4]);
-		displayBigTextLine(4, "X: %d", currentXY[0]);
-		displayBigTextLine(6, "Y: %d", currentXY[1]);
-		displayBigTextLine(6, "D: %d", direction[]);
-		sleep(10); //refreshrate in ms
-	}
-	}
+
 
 //}
 
