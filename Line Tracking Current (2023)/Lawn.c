@@ -74,12 +74,17 @@ void directionOverFlow(string d){
 		else{
 			currentDirection--;
 		}
-	
 	}
 }
 
 void lawnRightTurn(){
-	currentDirection	
+	encoderPointRight();
+	directionOverFlow("Right");	
+}
+
+void lawnLeftTurn(){
+	encoderPointLeft();
+	directionOverFlow("Left");	
 }
 
 void mowRoom(){
