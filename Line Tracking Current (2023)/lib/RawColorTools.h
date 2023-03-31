@@ -34,21 +34,25 @@ int redLeftBase[3]= {
 };
 
 //Values for fine tweaking otherwise
+//Black fixed by Masa 3/29/2023
 int blackRight[2][3]= {
-		{13, 28, 4},
-	  {23, 37, 14}
+		{13, 19, 4},
+	  {25, 44, 14}
 };
+
 int whiteRight[2][3]= {
-		{245, 260, 152},
-	  {255, 270, 162}
+		{202, 260, 115},
+	  {265, 270, 150}
 };
+//green changed by Masa 3/29/2023
 int greenRight[2][3]= {
-		{22, 87, 27},
-	  {55, 136, 31}
+		{34, 117, 17},
+	  {55, 142, 31}
 };
+//Red fixed by Masa 3/29/2023
 int redRight[2][3]= {
-		{235, 42, 11},
-	  {245, 52, 21}
+		{165, 28, 8},
+	  {195, 60, 21}
 };
 
 
