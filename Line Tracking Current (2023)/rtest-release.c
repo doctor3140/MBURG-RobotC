@@ -54,7 +54,7 @@ int uTurnValue = m*680; //for uturns when two greens are detected //OG 185 //new
 
 int face = m*-320; // for faceLeft & faceRight //OG is m*190 (-320 total for big) //newscrap 160
 int point = m*-700; // for leftPointTurn & rightPointTurn //OG is m*320 (-760 for big)
-
+int obstacleDistance = 5; // for the value that the robot distinguishes if there is an obstacle in front of it
 //variables for obstacle
 bool hasObstacle = false;
 bool leftBlack = false;
@@ -551,7 +551,7 @@ void lineTracking()
 	{
 		//playSound(soundBlip);
 		STP();
-		if ((getColorName(rightS)==colorGreen)&&(getColorName(leftS)==colorGreen)) //both green -> Uturn
+		if ((getColorName(leftS)==colorGreen)&&(getColorName(rightS)==colorGreen)) //both green -> Uturn
 		{
 			uTurn();
 		}
@@ -919,9 +919,13 @@ task main()
 	clearTimer(T1);
 	repeat(forever)
 	{
-		lineTracking();//basically the entire program
-		//avoidObstacle();
-		//sweepRoom();
+		while(SensorValue[S4] < obstacleDistance){
+
+			lineTracking();//basically the entire program <-- no this is false
+			//sweepRoom();
+		}
+		checkObstacle(obstacleDistance);
+		avoidOBstacle();
 	}
 
 }
