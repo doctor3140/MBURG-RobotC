@@ -57,6 +57,7 @@ task displayPos(){
 		sleep(10); //refreshrate in ms
 	}
 	}
+
 /*
 bool equals(string str1, string str2){
 	return (stringFind(str1, str2)>=0);
@@ -131,6 +132,6 @@ void properties(){
 task main(){
 	startTask(displayPos);
 	properties();
-	setDimension(90, 120, .1);
+	setBoxDimensions(90, 120, .1);
 	mowRoom();
 }
