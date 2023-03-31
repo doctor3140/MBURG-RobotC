@@ -145,7 +145,7 @@ void encoderFoward(){
 	sleep(1000);
 }
 
-void encoderFoward(float CM){
+void encoderForward(float CM){
 	resetMotorEncoder(leftMotor);
 	resetMotorEncoder(rightMotor);
 	setMotorTarget(leftMotor, cmConvertToMotorEncoder(CM)*m, speed);
