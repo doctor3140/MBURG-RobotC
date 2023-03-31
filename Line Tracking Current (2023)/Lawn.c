@@ -10,10 +10,10 @@
 #include "\lib\teamTools.h"
 #include "lib\RawColorTools.h"
 
-#define UP 0;
-#define DOWN 1;
-#define LEFT 2;
-#define RIGHT 3;
+#define UP 0
+#define DOWN 1
+#define LEFT 2
+#define RIGHT 3
 
 float boxWidth;
 float boxLength;
@@ -57,47 +57,55 @@ task displayPos(){
 		sleep(10); //refreshrate in ms
 	}
 	}
-
-void directionOverFlow(string d){
-	if(d.equals("Right")){
+/*
+bool equals(string str1, string str2){
+	return (stringFind(str1, str2)>=0);
+}
+//don't know why I can't use equals() :(
+*/
+void directionOverFlow(int d){
+	if(d==RIGHT){
 		if(currentDirection>4){
-			currentDirection-4;	
+			currentDirection-=4;
 		}
 		else{
 			currentDirection++;
 		}
 	}
-	else{
+	else if(d==LEFT){
 		if(currentDirection<0){
-			currentDirection+4;	
+			currentDirection+=4;
 		}
 		else{
 			currentDirection--;
 		}
 	}
+	else{
+		errorRescue=true;
+		}
 }
 
 void lawnRightTurn(){
 	encoderPointRight();
-	directionOverFlow("Right");	
+	directionOverFlow(RIGHT); //RIGHT = 3
 }
 
 void lawnLeftTurn(){
 	encoderPointLeft();
-	directionOverFlow("Left");	
+	directionOverFlow(LEFT); //LEFT = 2
 }
 
 void mowRoom(){
 //if(rightEqualsReflect()&&leftEqualsReflect){
 
-	
+
 }
 	/*
 	mapRoom()
 	find wall to front
 	find wall to left
 	find wall to right
-	
+
 	//current goal is to make it know the position in a box and navigate
 	*/
 
