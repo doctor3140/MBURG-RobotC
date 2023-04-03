@@ -72,6 +72,16 @@ int redLeft[2][3]= {
 		{215, 46, 19},
 	  {225, 56, 29}
 };
+//The methods, silverLeft and siverRight, are temporary cuz I've not measured the silver value yet.
+int silverLeft[2][3] = {
+	{255, 255, 255},
+	{255, 255, 255}
+}
+
+int silverRight[2][3] = {
+	{255, 255, 255},
+	{255, 255, 255}
+}
 
 int test[2][3]= {
 		{0, 0, 0},
@@ -158,6 +168,28 @@ if(((redLeft[0][0]<=currentLeft[0])&&(currentLeft[0]<=redLeft[1][0]))&&((redLeft
 else{
 	return false;
 }
+}
+
+//This bool method is for the tin foil in front of the rescue room
+/* I have to test the value for the silver, so I will change it*/
+bool leftEqualsSilver(){
+	getColorRawRGB(leftS, currentLeft[0], currentLeft[1], currentleft[2]);
+	if(((silverLeft[0][0]<=currentLeft[0])&&(currentLeft[0]<=silverLeft[1][0]))&&((silverLeft[0][1]<=currentLeft[1])&&(currentLeft[1]<=silverLeft[1][1]))&&((silverLeft[0][2]<=currentLeft[2])&&(currentLeft[2]<=silverLeft[1][2])))
+	{	return true;
+	}
+	else {
+		return false;
+	}
+}
+
+bool rightEqualsSilver(){
+	getColorRawRGB(rightS, currentRight[0], currentRight[1], currentRight[2]);
+	if(((silverRight[0][0]<=currentRight[0])&&(currentRight[0]<=silverRight[1][0]))&&((silverRight[0][1]<=currentRight[1])&&(currentRight[1]<=silverRight[1][1]))&&((silverRight[0][2]<=currentRight[2])&&(currentRight[2]<=silverRight[1][2])))
+	{	return true;
+	}
+	else {
+		return false;
+	}
 }
 
 void colorMarginBlack(int margin){
