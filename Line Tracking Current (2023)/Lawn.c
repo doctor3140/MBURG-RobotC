@@ -33,7 +33,7 @@ string direction[4] = {
 };
 
 int currentDirection = 0; //0 to start forward
-
+//float
 
 
 void setBoxDimensions(float w, float l, float m){
@@ -41,6 +41,8 @@ void setBoxDimensions(float w, float l, float m){
 	boxLength = l;
 	boxMargin = m;
 }
+
+
 
 void setRobotDimensions(float f, float b, float s){
 	robotFront = f;
@@ -57,6 +59,7 @@ task displayPos(){
 		sleep(10); //refreshrate in ms
 	}
 	}
+
 /*
 bool equals(string str1, string str2){
 	return (stringFind(str1, str2)>=0);
@@ -87,19 +90,74 @@ void directionOverFlow(int d){
 
 void lawnRightTurn(){
 	encoderPointRight();
-	directionOverFlow(RIGHT); //RIGHT = 3
+	directionOverFlow(RIGHT);
 }
 
 void lawnLeftTurn(){
 	encoderPointLeft();
-	directionOverFlow(LEFT); //LEFT = 2
+	directionOverFlow(LEFT);
 }
+
+void lawnForward(int dist){
+	encoderForward(dist);
+	if(currentDirection==UP){
+		currentXY[1]+=dist;
+	}
+	else if(currentDirection==DOWN){
+		currentXY[1]-=dist;
+	}
+	else if(currentDirection==RIGHT){
+		currentXY[0]+=dist;
+	}
+	else if(currentDirection==LEFT){
+		currentXY[0]-=dist;
+	}
+	else{
+		errorRescue=true;
+	}
+}
+
+void lawnBackward(int dist){
+	encoderBackward(dist);
+	if(currentDirection==UP){
+		currentXY[1]-=dist;
+	}
+	else if(currentDirection==DOWN){
+		currentXY[1]+=dist;
+	}
+	else if(currentDirection==RIGHT){
+		currentXY[0]-=dist;
+	}
+	else if(currentDirection==LEFT){
+		currentXY[0]+=dist;
+	}
+	else{
+		errorRescue=true;
+	}
+}
+
+
 
 void mowRoom(){
+//commented out until needed
 //if(rightEqualsReflect()&&leftEqualsReflect){
-
+//ignoring exits, and triangles for zones
+STP();
+// IDENTIFY WALL //
+if((SensorValue(sonarSensor)>=(boxLength-boxLength*margin))&&(sonarSensor<=(boxLength+boxLength*margin))){
+	boxLength=SensorValue(sonarSensor);
+}
+else if((SensorValue(sonarSensor)>=(boxWidth-boxWidth*margin))&&(sonarSensor<=(boxWidth+boxWidth*margin))){
+	boxWidth=SensorValue(sonarSensor);
+}
+else{
+	errorRescue=true;
+	//will replace later for case of exit and other stuff
+}
+lawnForward()
 
 }
+
 	/*
 	mapRoom()
 	find wall to front
@@ -131,6 +189,6 @@ void properties(){
 task main(){
 	startTask(displayPos);
 	properties();
-	setDimension(90, 120, .1);
+	setBoxDimensions(90, 120, .1);
 	mowRoom();
 }

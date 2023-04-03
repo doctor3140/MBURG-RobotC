@@ -72,5 +72,5 @@ task main()
 		else{
 			colorName = 1;
 		}
-		}
 	}
+}

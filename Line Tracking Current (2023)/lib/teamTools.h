@@ -126,17 +126,17 @@ void STP(){
 	motor[rightMotor]=0;
 }
 
-void motorFoward(){
+void motorForward(){
 	motor[leftMotor] = (speed*m);
 	motor[rightMotor] = (speed*m);
 }
 
-void motorFoward(float spd){
+void motorForward(float spd){
 	motor[leftMotor] = (spd*m);
 	motor[rightMotor] = (spd*m);
 }
 
-void encoderFoward(){
+void encoderForward(){
 	resetMotorEncoder(leftMotor);
 	resetMotorEncoder(rightMotor);
 	setMotorTarget(leftMotor, cmConvertToMotorEncoder(dist)*m, speed);
@@ -145,7 +145,7 @@ void encoderFoward(){
 	sleep(1000);
 }
 
-void encoderFoward(float CM){
+void encoderForward(float CM){
 	resetMotorEncoder(leftMotor);
 	resetMotorEncoder(rightMotor);
 	setMotorTarget(leftMotor, cmConvertToMotorEncoder(CM)*m, speed);

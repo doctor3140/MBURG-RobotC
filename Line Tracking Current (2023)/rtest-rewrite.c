@@ -133,19 +133,19 @@ void leftTurn()
 {
 	STP();
 	sleep(200); //was 500
-	encoderFoward(tapeThreasholdCM);
+	encoderForward(tapeThreasholdCM);
 	if (leftEqualsBlack()) //was leftS, but since leftS is Right then it should be rightS nvm???
 	{
-		encoderFoward(40);
+		encoderForward(40);
 		encoderPointLeft();
 		if(checkTurnFurther && (leftEqualsWhite())){
 		findLineLeft();
 		}
-		encoderFoward(20);
+		encoderForward(20);
 		sleep(20);
 	}
 	else{
-		encoderFoward(tapeThreasholdCM);
+		encoderForward(tapeThreasholdCM);
 	}
 }
 
@@ -153,19 +153,19 @@ void rightTurn()
 {
 	STP();
 	sleep(200);
-	encoderFoward(tapeThreasholdCM); //Turn off if momentum is too much
+	encoderForward(tapeThreasholdCM); //Turn off if momentum is too much
 	if (rightEqualsBlack()) //was rightS, but since rightS is Left then it should be leftS nvm???
 	{
-		encoderFoward(40);
+		encoderForward(40);
 		encoderPointRight();
 		if(checkTurnFurther && rightEqualsWhite()){
 		findLineRight();
 		}
-		encoderFoward(20);
+		encoderForward(20);
 		sleep(20);
 	}
 	else{
-		encoderFoward(tapeThreasholdCM);
+		encoderForward(tapeThreasholdCM);
 	}
 }
 
@@ -269,7 +269,7 @@ void lineTracking()
 	}
 if ((rightEqualsBlack())&&(leftEqualsBlack()))//Zig and Intersection //Adddition
 		{
-			encoderFoward(130);//OG 70
+			encoderForward(130);//OG 70
 			findLineRight();
 		}
 	else if (rightEqualsBlack()) // lean left
@@ -278,7 +278,7 @@ if ((rightEqualsBlack())&&(leftEqualsBlack()))//Zig and Intersection //Adddition
 
 		if ((rightEqualsBlack())&&(leftEqualsBlack()))//Zig and Intersection
 		{
-			encoderFoward(130);//OG 70
+			encoderForward(130);//OG 70
 			findLineRight();
 		}
 	}
@@ -289,14 +289,14 @@ if ((rightEqualsBlack())&&(leftEqualsBlack()))//Zig and Intersection //Adddition
 
 		if ((rightEqualsBlack())&&(leftEqualsBlack()))//Zig and Intersection for LT
 		{
-			encoderFoward(70);
+			encoderForward(70);
 			findLineLeft();
 		}
 	}
 
 	else if ((rightEqualsWhite())&&(leftEqualsWhite())) //both white -> move in straight line
 	{
-		motorFoward();
+		motorForward();
 	}
 
 	else // problem/unkown -> error sign
