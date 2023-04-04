@@ -48,17 +48,17 @@ bool checkSonar = false; //to enable/disable checkObstacle function
 
 void checkObstacle(int x)
 {
-if(checkSonar){
-sleep(500); //added to prevent misreading on seesaw
-	if (SensorValue[S4] < x)
-	{
-		hasObstacle = true;
+	if(checkSonar){
+	sleep(500); //added to prevent misreading on seesaw
+		if (SensorValue[S4] < x)
+		{
+			hasObstacle = true;
+		}
+		else
+		{
+			hasObstacle = false;
+		}
 	}
-	else
-	{
-		hasObstacle = false;
-	}
-}
 }
 
 task display() //Display for Error Log
@@ -259,6 +259,10 @@ void lineTracking()
 			{
 				rightTurn();
 			}
+		}
+		else if ((leftEqualsSilver()) && (rightEqualsSilver())) //both silver -> rescue room
+		{
+			sweepRoom();
 		}
 		else
 		{
