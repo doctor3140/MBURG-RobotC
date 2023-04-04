@@ -311,9 +311,9 @@ if ((rightEqualsBlack())&&(leftEqualsBlack()))//Zig and Intersection //Adddition
 
 void properties(){
 		//setMotorDirection('f');
-		setWheelDiameterCM(7.455);
+		setWheelDiameterCM(10.5);
 		setUTURN(660);
-		setPoint(332);
+		setPoint(139);
 		setSpeed(20);
 		setLeanSpeed(6);
 		setSearchSpeed(3);
@@ -321,6 +321,7 @@ void properties(){
 		setTapeThreasholdCM(2.5);
 		setSearchSpeed(3);
 		setSearchTime(4000);
+		setRawColorSensing(false);
 }
 
 //TASK MAIN//
