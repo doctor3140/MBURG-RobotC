@@ -215,6 +215,7 @@ bool leftEqualsRed(){
 //This bool method is for the tin foil in front of the rescue room
 /* I have to test the value for the silver, so I will change it*/
 bool leftEqualsSilver(){
+if(rawColorSensing == true){
 	getColorRawRGB(leftS, currentLeft[0], currentLeft[1], currentleft[2]);
 	if(((silverLeft[0][0]<=currentLeft[0])&&(currentLeft[0]<=silverLeft[1][0]))&&((silverLeft[0][1]<=currentLeft[1])&&(currentLeft[1]<=silverLeft[1][1]))&&((silverLeft[0][2]<=currentLeft[2])&&(currentLeft[2]<=silverLeft[1][2])))
 	{	
@@ -224,8 +225,11 @@ bool leftEqualsSilver(){
 		return false;
 	}
 }
+//need to figure out how to switch to reflect on the fly
+}
 
 bool rightEqualsSilver(){
+if(rawColorSensing == true){
 	getColorRawRGB(rightS, currentRight[0], currentRight[1], currentRight[2]);
 	if(((silverRight[0][0]<=currentRight[0])&&(currentRight[0]<=silverRight[1][0]))&&((silverRight[0][1]<=currentRight[1])&&(currentRight[1]<=silverRight[1][1]))&&((silverRight[0][2]<=currentRight[2])&&(currentRight[2]<=silverRight[1][2])))
 	{	
@@ -234,6 +238,8 @@ bool rightEqualsSilver(){
 	else {
 		return false;
 	}
+}
+//need to figure out how to switch to reflect on the fly
 }
 
 void colorMarginBlack(int margin){
