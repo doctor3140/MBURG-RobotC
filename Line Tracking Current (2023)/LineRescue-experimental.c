@@ -262,7 +262,7 @@ void lineTracking()
 		}
 		else if ((leftEqualsSilver()) && (rightEqualsSilver())) //both silver -> rescue room
 		{
-			sweepRoom();
+			//sweepRoom();
 		}
 		else
 		{

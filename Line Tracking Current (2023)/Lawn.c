@@ -7,7 +7,7 @@
 #pragma config(Motor,  motorC,          rightMotor,    tmotorEV3_Large, PIDControl, reversed, driveRight, encoder)
 #pragma config(Motor,  motorD,           ,             tmotorEV3_Large, openLoop)
 
-#include "\lib\teamTools.h"
+#include "lib\teamTools.h"
 #include "lib\RawColorTools.h"
 
 #define UP 0
@@ -144,17 +144,34 @@ void mowRoom(){
 //ignoring exits, and triangles for zones
 STP();
 // IDENTIFY WALL //
-if((SensorValue(sonarSensor)>=(boxLength-boxLength*margin))&&(sonarSensor<=(boxLength+boxLength*margin))){
+int firstSide = 0; //to identify if real length has been taken
+bool gotWidth = false; //to identify if real width has been taken
+if((SensorValue(sonarSensor)>=(boxLength-boxLength*boxMargin))&&(SensorValue(sonarSensor)<=(boxLength+boxLength*boxMargin))){
 	boxLength=SensorValue(sonarSensor);
+	gotLength=true;
 }
-else if((SensorValue(sonarSensor)>=(boxWidth-boxWidth*margin))&&(sonarSensor<=(boxWidth+boxWidth*margin))){
+else if((SensorValue(sonarSensor)>=(boxWidth-boxWidth*boxMargin))&&(SensorValue(sonarSensor)<=(boxWidth+boxWidth*boxMargin))){
 	boxWidth=SensorValue(sonarSensor);
+	gotLength=true;
 }
 else{
 	errorRescue=true;
 	//will replace later for case of exit and other stuff
 }
-lawnForward()
+lawnForward(robotSides);
+lawnRightTurn(); //could also be left?
+
+if(gotLength==false){
+	boxLength=SensorValue(sonarSensor)+robotBack;
+}
+else if(gotWidth==false){
+	boxWidth=SensorValue(sonarSensor)+robotBack;
+}
+else{
+	errorRescue=true;
+	//will replace later for case of exit and other stuff
+}
+while(SensorValue(sonarSensor)<box
 
 }
 
