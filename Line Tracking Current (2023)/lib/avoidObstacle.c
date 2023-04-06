@@ -21,7 +21,7 @@ int obstacleLength = 13;
 int straightDistance = 0;
 int leftDistance = 0;
 
-void setTravelVariales(int x) { // x refers to the value of the distance between obstacle and robot
+void setTravelVariales() { // x refers to the value of the distance between obstacle and robot
     leftDistance = obstacleWidth+robotWidth;
     straightDistance = 2*robotLength+2*obstacleDistance+obstacleLength;
 }
@@ -96,21 +96,22 @@ void avoidObstacle()
 		//segment 1 (left - move - right) (face forward)
 
 		encoderPointLeft();
-		encoderForward(9);
+		encoderForward(leftDistance);
 		//lilUp(450);  // distance go left (to be determined depend on how big the obstacles are)
 		encoderPointRight();
-		checkObstacle(6);
+		checkObstacle(obstacleDistance);
 
-		while (hasObstacle == true) // double check
-		{
+		/*  What the heck is this code? I don't think it works
+		{											
+		while (hasObstacle == true) // double chec
 			encoderPointLeft();
 			encoderForward(5);
-			//lilUp(100);  // distance go left
+			//lilUp(100);  
 			//rightPointTurn();
 			encoderPointRight();
 			checkObstacle(6);
 		}
-
+		*/
 
 		// segment 2 (move - right) (face right)
 
@@ -119,7 +120,7 @@ void avoidObstacle()
 		resetMotorEncoder(motorB);
 		resetMotorEncoder(motorC);
 
-		while (getMotorEncoder(motorB) >= -1300)
+		while (getMotorEncoder(motorB) >= -straightDistance)
 		{
 			do
 			{
