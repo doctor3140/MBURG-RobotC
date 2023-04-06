@@ -15,6 +15,9 @@
 #define LEFT 2
 #define RIGHT 3
 
+#define LENGTH 1
+#define WIDTH 2
+
 float boxWidth;
 float boxLength;
 float boxMargin;
@@ -145,14 +148,13 @@ void mowRoom(){
 STP();
 // IDENTIFY WALL //
 int firstSide = 0; //to identify if real length has been taken
-bool gotWidth = false; //to identify if real width has been taken
 if((SensorValue(sonarSensor)>=(boxLength-boxLength*boxMargin))&&(SensorValue(sonarSensor)<=(boxLength+boxLength*boxMargin))){
 	boxLength=SensorValue(sonarSensor);
-	gotLength=true;
+	firstSide = LENGTH;
 }
 else if((SensorValue(sonarSensor)>=(boxWidth-boxWidth*boxMargin))&&(SensorValue(sonarSensor)<=(boxWidth+boxWidth*boxMargin))){
 	boxWidth=SensorValue(sonarSensor);
-	gotLength=true;
+	firstSide = WIDTH;
 }
 else{
 	errorRescue=true;
@@ -161,19 +163,45 @@ else{
 lawnForward(robotSides);
 lawnRightTurn(); //could also be left?
 
-if(gotLength==false){
+if(firstSide==LENGTH){
 	boxLength=SensorValue(sonarSensor)+robotBack;
 }
-else if(gotWidth==false){
+else if(firstSide==WIDTH){
 	boxWidth=SensorValue(sonarSensor)+robotBack;
 }
 else{
 	errorRescue=true;
 	//will replace later for case of exit and other stuff
 }
-while(SensorValue(sonarSensor)<box
 
+//NONE OF THIS WILL WORK PRIOR TO FIGURING OUT WHETHER ITS LEFT OR RIGHT
+if(firstSide==LENGTH){
+	while(sensorvalue(sonarsensor)<boxLength-robotside){
+		lawnforward(1);	
+	}
+	lawnRight();
+	while(SensorValue(sonarSensor)<boxWidth-robotSide){
+		lawnForward(1);
+	}	
+	lawnRight();
 }
+
+else if(firstSide==WIDTH){
+	while(SensorValue(sonarSensor)<boxWidth-robotSide){
+		lawnForward(1);
+	}
+	lawnRight();
+while(sensorvalue(sonarsensor)<boxlength-robotside){
+		lawnforward(1);	
+	}
+	lawnRight();
+}
+
+else{
+	errorRescue=true;
+}
+}
+
 
 	/*
 	mapRoom()
