@@ -11,7 +11,7 @@
 task main(){
 	motor[motorB] = 20;
 	repeat(forever){
-		displayCenteredTextLine(2, "RPM is: %d", getMotorRPM(leftMotor);
+		displayCenteredTextLine(2, "Left RPM is: %d", getMotorRPM(leftMotor);
 		sleep(10);
 	}
 }
