@@ -20,9 +20,10 @@ int obstacleLength = 13;
 //don't have to change these two
 int straightDistance = 0;
 int leftDistance = 0;
-
+int rightDistance = 0;
 void setTravelVariales(int x) { // x refers to the value of the distance between obstacle and robot
     leftDistance = obstacleWidth+robotWidth;
+	rightDistance = leftDistance;
     straightDistance = 2*robotLength+2*obstacleDistance+obstacleLength;
 }
 void checkObstacle(int x)
@@ -96,11 +97,12 @@ void avoidObstacle()
 		//segment 1 (left - move - right) (face forward)
 
 		encoderPointLeft();
-		encoderForward(9);
+		encoderForward(leftDistance);
 		//lilUp(450);  // distance go left (to be determined depend on how big the obstacles are)
 		encoderPointRight();
-		checkObstacle(6);
+		//checkObstacle(obstacleDistance);
 
+		/*
 		while (hasObstacle == true) // double check
 		{
 			encoderPointLeft();
@@ -110,7 +112,7 @@ void avoidObstacle()
 			encoderPointRight();
 			checkObstacle(6);
 		}
-
+		*/
 
 		// segment 2 (move - right) (face right)
 
@@ -119,7 +121,7 @@ void avoidObstacle()
 		resetMotorEncoder(motorB);
 		resetMotorEncoder(motorC);
 
-		while (getMotorEncoder(motorB) >= -1300)
+		while (getMotorEncoder(motorB) >= -1*leftDistance) //original value: -1300 
 		{
 			do
 			{
@@ -130,23 +132,33 @@ void avoidObstacle()
 			break;
 		}
 
+		while (getMotorEncoder(MotorB) >= -1*rightDistance){
+			do 
+			{
+				motorForward(15);
+
+			} while((getColorName(S1)!=colorBlack)&&(getColorName(S2)!=colorBlack));
+			break;
+		}
+
+
 		while ((getColorName(S1)!=colorBlack)&&(getColorName(S2)!=colorBlack)){
 
-		STP();
-		sleep(500);
-		if ((getColorName(S1) == colorBlack && getColorName(S2) == colorBlack))
-		{
-			encoderForward(5); //lilUp(100);
-			encoderPointLeft();
-			return;
+			STP();
+			sleep(500);
+			if ((getColorName(S1) == colorBlack && getColorName(S2) == colorBlack))
+			{
+				encoderForward(5); //lilUp(100);
+				encoderPointLeft();
+				return;
+			}
 		}
-	}
 
 // go forward, when it see doule black, turn left, and return to lineTracking; if not, go for the set distance.
 
 		encoderPointRight();
 	//rightPointTurn();
-
+    /*
 		while (hasObstacle == true) //double check
 		{
 			encoderPointLeft();
@@ -192,6 +204,7 @@ void avoidObstacle()
 			sleep(500);
 			encoderPointLeft();
 			encoderForward(); //lilUp();
+		*/
 	}
 }
 
