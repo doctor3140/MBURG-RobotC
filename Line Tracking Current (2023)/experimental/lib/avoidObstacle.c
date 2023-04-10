@@ -19,13 +19,18 @@ int obstacleLength = 13;
 //I'm gonna work on put leftDistance and straightDistance to the following method tomorrow 4/5
 //don't have to change these two
 int straightDistance = 0;
-int leftDistance = 0;
+int leftDistance = -600;
 int rightDistance = 0;
+
+
 void setTravelVariales(int x) { // x refers to the value of the distance between obstacle and robot
-    leftDistance = obstacleWidth+robotWidth;
-	rightDistance = leftDistance;
-    straightDistance = 2*robotLength+2*obstacleDistance+obstacleLength;
+    leftDistance = 10*(obstacleWidth + robotWidth);                          //350
+	rightDistance = leftDistance;                                            
+    straightDistance = 10*(2*robotLength+2*obstacleDistance+obstacleLength); //1300
+	//I might better to set straightDistance 1300
 }
+
+
 void checkObstacle(int x)
 {
 	if (SensorValue[S4] < x)
@@ -38,7 +43,7 @@ void checkObstacle(int x)
 	}
 }
 
-void 
+
 /*
 void lilUp()
 {
@@ -132,23 +137,28 @@ void avoidObstacle()
 			break;
 		}
 
-		while (getMotorEncoder(MotorB) >= -1*rightDistance){
+		resetMotorEncoder(motorB);
+		resetMotorEncoder(motorC);
+		encoderPointRight();
+
+		while (getMotorEncoder(MotorB) >= -1*rightDistance-50){ ///Robot should stop in front of black line
 			do 
 			{
 				motorForward(15);
 
-			} while((getColorName(S1)!=colorBlack)&&(getColorName(S2)!=colorBlack));
+			} while((getColorName(S1)!=colorBlack)&&(getColorName(S2)!=colorBlack)); //I think this is unnecessary but I'll keep this
 			break;
 		}
-
+		STP();
+		sleep(500);
+		resetMotorEncoder(motorB);
+		resetMotorEncoder(motorC);
 
 		while ((getColorName(S1)!=colorBlack)&&(getColorName(S2)!=colorBlack)){
-
-			STP();
-			sleep(500);
+			motorForward(5);
 			if ((getColorName(S1) == colorBlack && getColorName(S2) == colorBlack))
 			{
-				encoderForward(5); //lilUp(100);
+				encoderForward(5); //lilUp(100); I think encoderForward does not work
 				encoderPointLeft();
 				return;
 			}
@@ -156,7 +166,7 @@ void avoidObstacle()
 
 // go forward, when it see doule black, turn left, and return to lineTracking; if not, go for the set distance.
 
-		encoderPointRight();
+		//encoderPointRight();
 	//rightPointTurn();
     /*
 		while (hasObstacle == true) //double check
