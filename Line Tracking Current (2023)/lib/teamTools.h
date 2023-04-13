@@ -32,7 +32,7 @@ void setMotorDirection(char direction){
 	else{
 		displayBigTextLine(2, "X setMotorDirection");
 	}
-}//'f' for foward 'b' for backward. This is used if you have a gear ratio that inverts the diection of the motors
+}//'f' for Forward 'b' for backward. This is used if you have a gear ratio that inverts the diection of the motors
 
 void setWheelDiameterCM(float diameter){
 	wheelDiameter=diameter;
@@ -55,7 +55,7 @@ void setLeanSpeed(float spd){
 }
 
 void setSearchSpeed(float spd){
-	SearchSpeed=spd;
+	searchSpeed=spd;
 }
 
 void setSearchTime(int time){

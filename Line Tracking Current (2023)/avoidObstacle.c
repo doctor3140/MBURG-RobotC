@@ -10,26 +10,6 @@
 #include "\lib\teamTools.h"
 
 bool hasObstacle = false;
-int obstacleDistance = 8;
-int robotWidth = 20;
-int robotLength = 20;
-int obstacleWidth = 15;
-int obstacleLength = 13;
-
-//I'm gonna work on put leftDistance and straightDistance to the following method tomorrow 4/5
-//don't have to change these two
-int straightDistance = 0;
-int leftDistance = -600;
-int rightDistance = 0;
-
-
-void setTravelVariales(int x) { // x refers to the value of the distance between obstacle and robot
-    leftDistance = 10*(obstacleWidth + robotWidth);                          //350
-	rightDistance = leftDistance;                                            
-    straightDistance = 10*(2*robotLength+2*obstacleDistance+obstacleLength); //1300
-	//I might better to set straightDistance 1300
-}
-
 
 void checkObstacle(int x)
 {
@@ -42,7 +22,6 @@ void checkObstacle(int x)
 		hasObstacle = false;
 	}
 }
-
 
 /*
 void lilUp()
@@ -93,7 +72,7 @@ void avoidObstacle()
 	armDDown();
 	}
 	*/
-	checkObstacle(obstacleDistance);
+	checkObstacle(8);
 	if (hasObstacle == true)
 	{
 		STP();
@@ -102,12 +81,11 @@ void avoidObstacle()
 		//segment 1 (left - move - right) (face forward)
 
 		encoderPointLeft();
-		encoderForward(leftDistance);
+		encoderForward(9);
 		//lilUp(450);  // distance go left (to be determined depend on how big the obstacles are)
 		encoderPointRight();
-		//checkObstacle(obstacleDistance);
+		checkObstacle(6);
 
-		/*
 		while (hasObstacle == true) // double check
 		{
 			encoderPointLeft();
@@ -117,7 +95,7 @@ void avoidObstacle()
 			encoderPointRight();
 			checkObstacle(6);
 		}
-		*/
+
 
 		// segment 2 (move - right) (face right)
 
@@ -125,46 +103,35 @@ void avoidObstacle()
 
 		resetMotorEncoder(motorB);
 		resetMotorEncoder(motorC);
-		do
+
+		while (getMotorEncoder(motorB) >= -1300)
+		{
+			do
 			{
 				motorForward(15);
 				//motor[motorB]=15;
 				//motor[motorC]=15;
-			}
-		while (getMotorEncoder(motorB) >= -1*leftDistance) //original value: -1300 
-
-		resetMotorEncoder(motorB);
-		resetMotorEncoder(motorC);
-		encoderPointRight();
-
-		do 
-			{
-				motorForward(15);
-
-			}
-		while (getMotorEncoder(MotorB) >= -1*rightDistance-50){ ///Robot should stop in front of black line
+			}	while ((getColorName(S1)!=colorBlack)&&(getColorName(S2)!=colorBlack));
+			break;
 		}
+
+		while ((getColorName(S1)!=colorBlack)&&(getColorName(S2)!=colorBlack)){
+
 		STP();
 		sleep(500);
-		resetMotorEncoder(motorB);
-		resetMotorEncoder(motorC);
-		/*
-		while ((getColorName(S1)!=colorBlack)&&(getColorName(S2)!=colorBlack)){
-			motorForward(5);
-			if ((getColorName(S1) == colorBlack && getColorName(S2) == colorBlack))
-			{
-				encoderForward(5); //lilUp(100); I think encoderForward does not work
-				encoderPointLeft();
-				return;
-			}
+		if ((getColorName(S1) == colorBlack && getColorName(S2) == colorBlack))
+		{
+			encoderForward(5); //lilUp(100);
+			encoderPointLeft();
+			return;
 		}
-		*/
+	}
 
 // go forward, when it see doule black, turn left, and return to lineTracking; if not, go for the set distance.
 
-		//encoderPointRight();
+		encoderPointRight();
 	//rightPointTurn();
-    /*
+
 		while (hasObstacle == true) //double check
 		{
 			encoderPointLeft();
@@ -210,7 +177,6 @@ void avoidObstacle()
 			sleep(500);
 			encoderPointLeft();
 			encoderForward(); //lilUp();
-		*/
 	}
 }
 
