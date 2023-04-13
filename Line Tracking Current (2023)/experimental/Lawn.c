@@ -176,25 +176,25 @@ else{
 
 //NONE OF THIS WILL WORK PRIOR TO FIGURING OUT WHETHER ITS LEFT OR RIGHT
 if(firstSide==LENGTH){
-	while(sensorvalue(sonarsensor)<boxLength-robotside){
-		lawnforward(1);	
-	}
-	lawnRight();
-	while(SensorValue(sonarSensor)<boxWidth-robotSide){
+	while(SensorValue(sonarSensor)<boxLength-robotSides){
 		lawnForward(1);
-	}	
-	lawnRight();
+	}
+	lawnRightTurn();
+	while(SensorValue(sonarSensor)<boxWidth-robotSides){
+		lawnForward(1);
+	}
+	lawnRightTurn();
 }
 
 else if(firstSide==WIDTH){
-	while(SensorValue(sonarSensor)<boxWidth-robotSide){
+	while(SensorValue(sonarSensor)<boxWidth-robotSides){
 		lawnForward(1);
 	}
-	lawnRight();
-while(sensorvalue(sonarsensor)<boxlength-robotside){
-		lawnforward(1);	
+	lawnRightTurn();
+while(SensorValue(sonarSensor)<boxLength-robotSides){
+		lawnForward(1);
 	}
-	lawnRight();
+	lawnRightTurn();
 }
 
 else{
