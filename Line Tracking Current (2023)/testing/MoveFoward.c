@@ -5,7 +5,7 @@
 task main()
 {
 repeat(forever){
-motor[motorB] = 15;
-motor[motorC] = 15;
+motor[motorB] = 100;
+motor[motorC] = 100;
 }
 }
