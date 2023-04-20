@@ -40,55 +40,14 @@ task display() //Display for Error Log
 	}
 }
 
-/*
-void lilUp()
-{
-	resetMotorEncoder(motorB);
-	resetMotorEncoder(motorC);
-	setMotorTarget(motorB, m*40, 10);
-	setMotorTarget(motorC, m*40, 10);
-	waitUntilMotorStop(motorC);
-	sleep(1000);
-}
 
-
-void lilUp(int d)
-{
-	resetMotorEncoder(motorB);
-	resetMotorEncoder(motorC);
-	setMotorTarget(motorB, m*d, 30);
-	setMotorTarget(motorC, m*d, 30);
-	waitUntilMotorStop(motorC);
-	sleep(1000);
-}
-
-void leftPointTurn()
-{
-	resetMotorEncoder(motorB);
-	resetMotorEncoder(motorC);
-	setMotorTarget(motorB, -point, 30);
-	waitUntilMotorStop(motorB);
-	sleep(1000);
-}
-
-void rightPointTurn()
-{
-	resetMotorEncoder(motorB);
-	resetMotorEncoder(motorC);
-	setMotorTarget(motorB, point, 30);
-	waitUntilMotorStop(motorB);
-	sleep(1000);
-}
-*/
 void avoidObstacle()
 {
-
-
 	checkObstacle(obstacleDistance);
 	resetMotorEncoder(motorB);
 	resetMotorEncoder(motorC);
-	encoderBackward(obstacleDistance/2);
-	checkObstacle(ObstacleDistance);
+	encoderBackward(turnDistance);
+	checkObstacle(obstacleDistance+turnDistance);
 	if (hasObstacle == true)
 	{
 		STP();
@@ -134,7 +93,7 @@ void avoidObstacle()
 		sleep(500);
 		if ((getColorName(S1) == colorBlack && getColorName(S2) == colorBlack))
 		{
-			encoderForward(5); 
+			encoderForward(5);
 			encoderPointLeft();
 			return;
 		}
@@ -185,7 +144,7 @@ void avoidObstacle()
 			encoderForward(5);
 			sleep(500);
 			encoderPointLeft();
-			encoderForward(); 
+			encoderForward();
 
 }
 
@@ -208,7 +167,9 @@ task main()
 	startTask(display);
 	repeat(forever)
 	{
-		encoderForward(); //lilUp();
+		while(SensorValue[S4] > obstacleDistance){
+			motorForward(5);
+		}
 		avoidObstacle();
 	}
 }
