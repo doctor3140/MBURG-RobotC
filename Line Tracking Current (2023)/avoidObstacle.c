@@ -182,9 +182,9 @@ void avoidObstacle()
 
 void properties(){
 		//setMotorDirection('f');
-		setWheelDiameterCM(7.455);
-		setUTURN(660);
-		setPoint(332);
+		//setWheelDiameterCM(7.455);
+		setUTURN(330);
+		setPoint(165);
 		setSpeed(10);
 		setLeanSpeed(6);
 		setSearchSpeed(6);
