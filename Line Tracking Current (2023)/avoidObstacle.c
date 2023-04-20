@@ -13,7 +13,8 @@ float robotWidth = 13.6;
 float robotLength = 17;
 float maxObstacleSize = 14;
 bool hasObstacle = false;
-float obstacleDistance = robotWidth/2;  // 1 is margin error
+float obstacleDistance = 1; //the distance when it will see the obstacle in cm (confirm this)
+float turnDistance= robotWidth/2;  // 1 is margin error
 
 
 
