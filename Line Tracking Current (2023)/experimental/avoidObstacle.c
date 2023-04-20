@@ -13,14 +13,14 @@ float robotWidth = 13.6;
 float robotLength = 17;
 float maxObstacleSize = 14;
 bool hasObstacle = false;
-float obstacleDistance = 1; //the distance when it will see the obstacle in cm (confirm this)
+float obstacleDistance = 3; //the distance when it will see the obstacle in cm (confirm this)
 float turnDistance= robotWidth/2;  // 1 is margin error
 
 
 
 void checkObstacle(int x)
 {
-	if (SensorValue[S4] < x)
+	if (SensorValue[S4] <= x)
 	{
 		hasObstacle = true;
 	}
@@ -46,8 +46,9 @@ void avoidObstacle()
 	checkObstacle(obstacleDistance);
 	resetMotorEncoder(motorB);
 	resetMotorEncoder(motorC);
-	encoderBackward(turnDistance);
-	checkObstacle(obstacleDistance+turnDistance);
+	encoderBackward(turnDistance-obstacleDistance);
+	//checkObstacle(obstacleDistance+turnDistance);
+
 	if (hasObstacle == true)
 	{
 		STP();
@@ -56,11 +57,12 @@ void avoidObstacle()
 		//segment 1 (left - move - right) (face forward)
 
 		encoderPointLeft();
-		encoderForward(9);
+		encoderForward(robotWidth);
 		 // distance go left (to be determined depend on how big the obstacles are)
 		encoderPointRight();
 		checkObstacle(6);
   }
+ /*
 		while (hasObstacle == true) // double check
 		{
 			encoderPointLeft();
@@ -145,7 +147,7 @@ void avoidObstacle()
 			sleep(500);
 			encoderPointLeft();
 			encoderForward();
-
+*/
 }
 
 void properties(){
@@ -165,11 +167,13 @@ task main()
 {
 	properties();
 	startTask(display);
-	repeat(forever)
-	{
+	//repeat(forever)
+	//{
 		while(SensorValue[S4] > obstacleDistance){
 			motorForward(5);
 		}
+
+		STP();
 		avoidObstacle();
-	}
+	//}
 }
