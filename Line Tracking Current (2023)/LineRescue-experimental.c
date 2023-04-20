@@ -1,4 +1,3 @@
-<<<<<<< HEAD:Line Tracking Current (2023)/LineRescue-experimental.c
 #pragma config(Sensor, S1,     rightS,         sensorEV3_Color, modeEV3Color_RGB_Raw)
 #pragma config(Sensor, S2,     leftS,          sensorEV3_Color, modeEV3Color_RGB_Raw)
 #pragma config(Sensor, S3,     reflect,        sensorEV3_Color)

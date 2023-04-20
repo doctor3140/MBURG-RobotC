@@ -5,7 +5,7 @@
 /* NOTICE: It is not recommended to change the variables directly. Please use getter and setter methods/functions! */
 
 int m = 1; // for motor direction
-float wheelDiameter = 5; //diameter of wheel in cm
+float wheelDiameter = 5.5 //diameter of wheel in cm
 int a = 1; //for arm direction
 
 float speed = 20;
