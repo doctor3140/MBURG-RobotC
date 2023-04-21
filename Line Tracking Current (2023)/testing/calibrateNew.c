@@ -1,5 +1,5 @@
-#pragma config(Sensor, S1,     rightS,         sensorEV3_Color, modeEV3Color_Color)
-#pragma config(Sensor, S2,     leftS,          sensorEV3_Color, modeEV3Color_Color)
+#pragma config(Sensor, S1,     leftS,         sensorEV3_Color, modeEV3Color_Color)
+#pragma config(Sensor, S2,     rightS,          sensorEV3_Color, modeEV3Color_Color)
 #pragma config(Sensor, S3,     reflect,        sensorEV3_Color)
 #pragma config(Sensor, S4,     sonarSensor,    sensorEV3_Ultrasonic)
 #pragma config(Motor,  motorA,          armMotor,      tmotorEV3_Medium, PIDControl, encoder)
@@ -86,7 +86,7 @@ task main(){
 	keyMap();
 	repeat(forever){
 		if(getButtonPress(buttonLeft)){
-			//leftCalibrate();
+			leftCalibrate();
 		}
 		if(getButtonPress(buttonRight)){
 			rightCalibrate();
