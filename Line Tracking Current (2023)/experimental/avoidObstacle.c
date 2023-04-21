@@ -60,9 +60,10 @@ void avoidObstacle()
 		encoderForward(robotWidth);
 		 // distance go left (to be determined depend on how big the obstacles are)
 		encoderPointRight();
-		checkObstacle(6);
-  }
- /*
+		checkObstacle(obstacleDistance);
+	  }
+	//worked up to here
+ 
 		while (hasObstacle == true) // double check
 		{
 			encoderPointLeft();
@@ -147,7 +148,6 @@ void avoidObstacle()
 			sleep(500);
 			encoderPointLeft();
 			encoderForward();
-*/
 }
 
 void properties(){
