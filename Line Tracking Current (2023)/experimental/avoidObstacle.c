@@ -63,15 +63,15 @@ void avoidObstacle()
 		checkObstacle(obstacleDistance);
 	  }
 	//worked up to here
- 
-		while (hasObstacle == true) // double check
+
+		/*while (hasObstacle == true) // double check
 		{
 			encoderPointLeft();
 			encoderForward(5); // distance go left
 			//rightPointTurn();
 			encoderPointRight();
 			checkObstacle(6);
-		}
+		}*/
 
 
 		// segment 2 (move - right) (face right)
@@ -81,15 +81,9 @@ void avoidObstacle()
 		resetMotorEncoder(motorB);
 		resetMotorEncoder(motorC);
 
-		while (getMotorEncoder(motorB) >= -130)
-		{
-			do
-			{
-				motorForward(15);
-			}	while ((getColorName(S1)!=colorBlack)&&(getColorName(S2)!=colorBlack));
-			break;
-		}
+		encoderForward((2*obstacleDistance+robotLength+(turnDistance-obstacleDistance));
 
+		/*
 		while ((getColorName(S1)!=colorBlack)&&(getColorName(S2)!=colorBlack)){
 
 		STP();
@@ -101,52 +95,29 @@ void avoidObstacle()
 			return;
 		}
 	}
-
+	*/
 // go forward, when it see doule black, turn left, and return to lineTracking; if not, go for the set distance.
 
 		encoderPointRight();
 	//rightPointTurn();
 
-		while (hasObstacle == true) //double check
-		{
-			encoderPointLeft();
-			encoderForward(5);  // distance go left
-			encoderPointRight();
-			checkObstacle(20);
-		}
-
 		// segment 3 (move until black - left - lineTracking) (face forward)
 		resetMotorEncoder(motorB);
 		resetMotorEncoder(motorC);
 
-		while (getMotorEncoder(motorB) >= -1200)
-		{
+		encoderForward(robotWidth);
+
 			do
 			{
 				motorForward(15);
-			}	while ((getColorName(S1)!=colorBlack)&&(getColorName(S2)!=colorBlack));
-			break;
-		}
+			}
+			while((getColorName(S1)!=colorBlack)&&(getColorName(S2)!=colorBlack));
+		if((getColorName(S1)==colorBlack)&&(getColorName(S2)==colorBlack)) encoderPointLeft();
 
 // go forward, if it see double black, it means its on the track, turn left and lintrack.
 // if there's no double black, the line must be on the right side, so turn Right, and move until double black, then turn left to lineTrack.
-
-		if (getMotorEncoder(motorB) >= -1000)
-		{
 			STP();
 			sleep(500);
-			encoderPointRight();
-			do
-			{
-				motorForward(15);
-			}	while ((getColorName(S1)!=colorBlack)&&(getColorName(S2)!=colorBlack));
-		}
-
-			STP();
-			sleep(500);
-			encoderForward(5);
-			sleep(500);
-			encoderPointLeft();
 			encoderForward();
 }
 
