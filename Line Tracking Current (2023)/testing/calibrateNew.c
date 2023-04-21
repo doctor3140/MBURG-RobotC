@@ -62,6 +62,11 @@ void leftCalibrate(){
 		leftMotorMove();			
 	}
 	STP();
+	while(getColorName(rightS) == colorWhite){
+		leftMotorMove();
+	}
+	STP();
+
 }
 
 
@@ -78,6 +83,11 @@ void rightCalibrate(){
 		rightMotorMove();			
 	}
 	STP();
+	while(getColorName(leftS) == colorWhite){
+		rightMotorMove();
+	}
+	STP();
+
 }
 
 task main(){
