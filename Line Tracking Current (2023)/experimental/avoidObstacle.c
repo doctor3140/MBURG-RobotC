@@ -112,7 +112,8 @@ void avoidObstacle()
 				motorForward(15);
 			}
 			while((getColorName(S1)!=colorBlack)&&(getColorName(S2)!=colorBlack));
-		if((getColorName(S1)==colorBlack)&&(getColorName(S2)==colorBlack)) encoderPointLeft();
+		//if((getColorName(S1)==colorBlack)&&(getColorName(S2)==colorBlack))
+			encoderPointLeft();
 
 // go forward, if it see double black, it means its on the track, turn left and lintrack.
 // if there's no double black, the line must be on the right side, so turn Right, and move until double black, then turn left to lineTrack.
