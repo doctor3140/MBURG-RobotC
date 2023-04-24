@@ -126,7 +126,7 @@ void properties(){
 		//setMotorDirection('f');
 		//setWheelDiameterCM(7.455);
 		setUTURN(330);
-		setPoint(165);
+		setPoint(172);
 		setSpeed(10);
 		setLeanSpeed(6);
 		setSearchSpeed(6);
