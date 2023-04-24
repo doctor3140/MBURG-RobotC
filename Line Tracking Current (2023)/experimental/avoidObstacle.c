@@ -81,7 +81,7 @@ void avoidObstacle()
 		resetMotorEncoder(motorB);
 		resetMotorEncoder(motorC);
 
-		encoderForward((2*obstacleDistance+robotLength+(turnDistance-obstacleDistance));
+		encoderForward((obstacleDistance+robotLength)+(2*turnDistance));
 
 		/*
 		while ((getColorName(S1)!=colorBlack)&&(getColorName(S2)!=colorBlack)){
@@ -104,29 +104,35 @@ void avoidObstacle()
 		// segment 3 (move until black - left - lineTracking) (face forward)
 		resetMotorEncoder(motorB);
 		resetMotorEncoder(motorC);
-
+/*
 		encoderForward(robotWidth);
 
-			do
-			{
+
+		while ((getColorName(S1)!=colorBlack)) //change to ==white if no work (most likely redundent remove cmt after testing)
+	    {
 				motorForward(15);
 			}
-			while((getColorName(S1)!=colorBlack)&&(getColorName(S2)!=colorBlack));
+			STP();
+			*/
+			while((getColorName(leftS)==colorWhite)||(getColorName(leftS)==colorWhite)){
+			motorForward(5);
+			}
+			sleep(500);
+			//if(getColorName(S1)==colorWhite)
+				encoderPointLeft();
 		//if((getColorName(S1)==colorBlack)&&(getColorName(S2)==colorBlack))
-			encoderPointLeft();
 
 // go forward, if it see double black, it means its on the track, turn left and lintrack.
 // if there's no double black, the line must be on the right side, so turn Right, and move until double black, then turn left to lineTrack.
 			STP();
 			sleep(500);
-			encoderForward();
 }
 
 void properties(){
 		//setMotorDirection('f');
 		//setWheelDiameterCM(7.455);
 		setUTURN(330);
-		setPoint(172);
+		setPoint(150);
 		setSpeed(10);
 		setLeanSpeed(6);
 		setSearchSpeed(6);
