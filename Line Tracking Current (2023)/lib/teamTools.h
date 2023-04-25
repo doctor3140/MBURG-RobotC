@@ -58,8 +58,8 @@ void setSearchSpeed(float spd){
 	searchSpeed=spd;
 }
 
-void setSearchTime(int time){
-	searchTime=time;
+void setSearchTime(int sec){
+	searchTime=(sec*1000);
 }
 
 void setTapeThreasholdCM(float CM){
