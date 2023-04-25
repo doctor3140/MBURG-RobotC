@@ -88,7 +88,7 @@ void leftCalibrate(){
 	*/
 }
 
-
+/*
 void rightCalibrate(){
 	startTask(display);
 	sleep(200);
@@ -115,7 +115,43 @@ void rightCalibrate(){
 	}
 	STP();
 	*/
+//}
+
+	void rightCalibrate(){
+	startTask(display);
+	sleep(200);
+	playSound(soundFastUpwardTones);//Start of experiment
+	sleep(500);
+	resetMotorEncoder(leftMotor);
+	resetMotorEncoder(rightMotor);
+	setMotorTarget(leftMotor, estimate, ltSpeed);
+	setMotorTarget(rightMotor, estimate, -ltSpeed);
+	waitUntilMotorStop(rightMotor);
+	sleep(1000);
+	if((getColorName(rightS) == colorWhite)&&(getColorName(rightS) == colorWhite)){
+		STP();
+		setMotorBrakeMode(motorB, motorCoast);
+		setMotorBrakeMode(motorC, motorCoast);
+		sleep(1000000);
+	}
+	while(getColorName(rightS) == colorWhite){
+		rightMotorMove();
+	}
+	STP();
+	if((getColorName(rightS) == colorWhite)&&(getColorName(rightS) == colorWhite)){
+	sleep(1000000);
+	}
+	else{
+	leftMotorMove();
+	while(true){
+	if((getColorName(rightS) == colorWhite)&&(getColorName(rightS) == colorWhite))
+		STP();
+		sleep(1000000);
+	}
+	STP();
 }
+}
+
 
 task main(){
 	rsMotors();

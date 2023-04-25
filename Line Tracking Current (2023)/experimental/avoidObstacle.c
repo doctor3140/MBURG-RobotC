@@ -36,7 +36,7 @@ task display() //Display for Error Log
 	displayBigTextLine(6, "SS: %d", SensorValue[S4]);
 	displayBigTextLine(8, "LeftM: %d", getMotorEncoder(leftMotor));
 	displayBigTextLine(10, "RightM: %d", getMotorEncoder(rightMotor));
-	sleep(20); //refreshrate in ms
+	sleep(10); //refreshrate in ms
 	}
 }
 
