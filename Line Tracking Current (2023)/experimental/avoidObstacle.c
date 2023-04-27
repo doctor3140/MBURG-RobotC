@@ -47,83 +47,30 @@ void avoidObstacle()
 	resetMotorEncoder(motorB);
 	resetMotorEncoder(motorC);
 	encoderBackward(turnDistance-obstacleDistance);
-	//checkObstacle(obstacleDistance+turnDistance);
 
 	if (hasObstacle == true)
 	{
 		STP();
 		sleep(1000);
-
-		//segment 1 (left - move - right) (face forward)
-
 		encoderPointLeft();
 		encoderForward(robotWidth);
-		 // distance go left (to be determined depend on how big the obstacles are)
 		encoderPointRight();
 		checkObstacle(obstacleDistance);
 	  }
-	//worked up to here
-
-		/*while (hasObstacle == true) // double check
-		{
-			encoderPointLeft();
-			encoderForward(5); // distance go left
-			//rightPointTurn();
-			encoderPointRight();
-			checkObstacle(6);
-		}*/
-
-
-		// segment 2 (move - right) (face right)
-
-	 // distance go forward (to be determined depend on how big the obstacles are)
 
 		resetMotorEncoder(motorB);
 		resetMotorEncoder(motorC);
 
 		encoderForward((obstacleDistance+robotLength)+(2*turnDistance));
 
-		/*
-		while ((getColorName(S1)!=colorBlack)&&(getColorName(S2)!=colorBlack)){
-
-		STP();
-		sleep(500);
-		if ((getColorName(S1) == colorBlack && getColorName(S2) == colorBlack))
-		{
-			encoderForward(5);
-			encoderPointLeft();
-			return;
-		}
-	}
-	*/
-// go forward, when it see doule black, turn left, and return to lineTracking; if not, go for the set distance.
-
 		encoderPointRight();
-	//rightPointTurn();
-
-		// segment 3 (move until black - left - lineTracking) (face forward)
 		resetMotorEncoder(motorB);
 		resetMotorEncoder(motorC);
-/*
-		encoderForward(robotWidth);
-
-
-		while ((getColorName(S1)!=colorBlack)) //change to ==white if no work (most likely redundent remove cmt after testing)
-	    {
-				motorForward(15);
-			}
-			STP();
-			*/
 			while((getColorName(leftS)==colorWhite)||(getColorName(leftS)==colorWhite)){
 			motorForward(5);
 			}
 			sleep(500);
-			//if(getColorName(S1)==colorWhite)
-				encoderPointLeft();
-		//if((getColorName(S1)==colorBlack)&&(getColorName(S2)==colorBlack))
-
-// go forward, if it see double black, it means its on the track, turn left and lintrack.
-// if there's no double black, the line must be on the right side, so turn Right, and move until double black, then turn left to lineTrack.
+			encoderPointLeft();
 			STP();
 			sleep(500);
 }
