@@ -205,24 +205,25 @@ void motorLeanRight(float spd){
 //going to test out different kinds of turns for motorSearch
 
 void motorSearchLeft(){
-	//motor[leftMotor]=(-searchSpeed*m);
+	motor[leftMotor]=(-searchSpeed*m);
 	motor[rightMotor]=(searchSpeed*m);
 }
 
 void motorSearchLeft(float spd){
-	//motor[leftMotor]=(-spd*m);
+	motor[leftMotor]=(-spd*m);
 	motor[rightMotor]=(spd*m);
 }
 
 void motorSearchRight(){
 	motor[leftMotor]=(searchSpeed*m);
-	//motor[rightMotor]=(-searchSpeed*m);
+	motor[rightMotor]=(-searchSpeed*m);
 }
 
 void motorSearchRight(float spd){
 	motor[leftMotor]=(spd*m);
 	motor[rightMotor]=(-spd*m);
 }
+
 
 void encoderPointLeft(){
 	resetMotorEncoder(leftMotor);

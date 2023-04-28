@@ -10,7 +10,7 @@
 
 #include "\lib\teamTools.h"
 #define FINDDIST 1
-#define TURNDIST 3
+#define TURNDIST 1
 /*
 rightS is right;
 leftS is left;
@@ -72,17 +72,21 @@ task display() //Display for Error Log
 	}
 }
 
-void findLineLeft()
+void findLineLeft(bool bothWheels)
 {
 	clearTimer(T1);
 	//playSound(soundBlip);
-	encoderForward(FINDDIST);
+	//encoderForward(FINDDIST);
 	while (time1[T1] < searchTime) //need to find better timing method/boot-out. Consult WindSprints for better bootout
 	{
 		if ((getColorName(rightS)==colorWhite)) //was right
 		{
+			if(bothWheels){
 			motorSearchLeft();
-			//startTask(display);
+			}
+			else{
+			motor[rightMotor] = getSearchSpeed();
+			}
 		}
 		else if(getColorName(rightS)==colorBlack)
 		{
@@ -100,15 +104,20 @@ void findLineLeft()
 }
 
 
-void findLineRight()
+void findLineRight(bool bothWheels)
 {
 	clearTimer(T1);
-	encoderForward(FINDDIST);
+	//encoderForward(FINDDIST);
 	while (time1[T1] < searchTime) //need to find better timing method/boot-out. Consult WindSprints for better bootout
 	{
 		if ((getColorName(leftS)==colorWhite)) //was left
 		{
+			if(bothWheels){
 			motorSearchRight();
+			}
+			else{
+			motor[leftMotor] = getSearchSpeed();
+			}
 			//startTask(display);
 		}
 		else if (getColorName(leftS)==colorBlack)
@@ -135,16 +144,16 @@ void leftTurn()
 	encoderForward(getTapeThreasholdCM());
 	if (getColorName(leftS)==colorBlack) //was leftS, but since leftS is Right then it should be rightS nvm???
 	{
-		encoderForward(TURNDIST);
+		//encoderForward(TURNDIST);
 		encoderPointLeft();
 		if(checkTurnFurther && (getColorName(leftS)==colorWhite)){
-		findLineLeft();
+		findLineLeft(true);
 		}
 		encoderForward();
 		sleep(20);
 	}
 	else{
-		findLineRight();
+		findLineRight(false);
 	}
 }
 
@@ -157,16 +166,16 @@ void rightTurn()
 	if (getColorName(rightS)==colorBlack) //was rightS, but since rightS is Left then it should be leftS nvm???
 	{
 		playSound(soundBeepBeep);
-		encoderForward(TURNDIST);
+		//encoderForward(TURNDIST);
 		encoderPointRight();
 		if(checkTurnFurther && (getColorName(rightS)==colorWhite)){
-		findLineRight();
+		findLineRight(true);
 		}
-		encoderForward();
+		encoderForward(false);
 		sleep(20);
 	}
 	else{
-		findLineLeft();
+		findLineLeft(false);
 	}
 }
 
@@ -270,7 +279,7 @@ if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig 
 		{
 			//playTone(20, 5);
 			encoderForward(getTapeThreasholdCM());
-			findLineRight();
+			findLineRight(true);
 		}
 	else if (getColorName(rightS)==colorBlack) // lean left
 	{
@@ -280,7 +289,7 @@ if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig 
 		if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig and Intersection
 		{
 			encoderForward(getTapeThreasholdCM());
-			findLineRight();
+			findLineRight(true);
 		}
 		/*
 		//reduntant I think
@@ -303,7 +312,7 @@ if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig 
 		if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig and Intersection for LT
 		{
 			encoderForward(getTapeThreasholdCM());
-			findLineLeft();
+			findLineLeft(true);
 		}
 		/*
 		//reduntant I think
@@ -340,9 +349,9 @@ void properties(){
 		setSpeed(5);
 		setLeanSpeed(4);
 		setSearchSpeed(3);
-		setDist(2.5);
-		setTapeThreasholdCM(2.5);//original value=2.5
-		setSearchTime(5); //was 500
+		setDist(3);
+		setTapeThreasholdCM(2.0);//original value=2.5
+		setSearchTime(4); //was 500
 }
 
 //TASK MAIN//
