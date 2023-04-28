@@ -55,23 +55,18 @@ bool checkSonar = false; //to enable/disable checkObstacle function
 
 bool LT = true;
 
-void checkObstacle(int x)
-{
-if(checkSonar){
-sleep(500); //added to prevent misreading on seesaw
-	if (SensorValue[S4] < x)
+bool checkObstacle(int x)
+{	if (SensorValue[S4] < x)
 	{
-		hasObstacle = true;
+		return true;
 	}
 	else
 	{
-		hasObstacle = false;
+		return false;
 	}
 }
-}
-task avoidObstacle()
+void avoidObstacle()
 {
-	repeat(forever){
 		//while((SensorValue[S4] >= obstacleDistance))
 		//{
 			//sleep(500)
@@ -112,7 +107,7 @@ task avoidObstacle()
 				}
 					hasObstacle = false;
 					//startTask(main);
-	}
+
 }
 task display() //Display for Error Log
 {

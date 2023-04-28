@@ -55,31 +55,24 @@ bool checkSonar = false; //to enable/disable checkObstacle function
 
 bool LT = true;
 
-void checkObstacle(int x)
+bool checkObstacle(int x)
 {
-if(checkSonar){
-sleep(500); //added to prevent misreading on seesaw
 	if (SensorValue[S4] < x)
 	{
-		hasObstacle = true;
+		return true;
 	}
 	else
 	{
-		hasObstacle = false;
+		return false;
 	}
 }
-}
-task avoidObstacle()
+void avoidObstacle()
 {
-	repeat(forever){
 		//while((SensorValue[S4] >= obstacleDistance))
 		//{
 			//sleep(500)
 			playTone();
 			checkObstacle(obstacleDistance);
-
-			if (hasObstacle == true)
-			{
 				LT = false; //hate this find better way
 				STP();
 				resetMotorEncoder(motorB);
@@ -109,10 +102,8 @@ task avoidObstacle()
 					STP();
 					sleep(500);
 					LT = true;
-				}
 					hasObstacle = false;
 					//startTask(main);
-	}
 }
 task display() //Display for Error Log
 {
@@ -413,10 +404,11 @@ task main()
 	clearTimer(T1);
 	properties();
 	startTask(display);
-	startTask(avoidObstacle);
 	repeat(forever)
 	{
-			lineTracking();//basically the entire program
+			if(checkObstacle(obstacleDistance))avoidObstacle();
+			else	lineTracking();//basically the entire program
+
 		//avoidObstacle();
 		//sweepRoom();
 	}
