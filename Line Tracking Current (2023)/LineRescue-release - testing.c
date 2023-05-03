@@ -55,15 +55,15 @@ bool checkSonar = false; //to enable/disable checkObstacle function
 
 bool LT = true;
 
-bool checkObstacle(int x)
+void checkObstacle(int x)
 {
 	if (SensorValue[S4] < x)
 	{
-		return true;
+		hasObstacle = true;
 	}
 	else
 	{
-		return false;
+		hasObstacle = false;
 	}
 }
 void avoidObstacle()
@@ -406,7 +406,8 @@ task main()
 	startTask(display);
 	repeat(forever)
 	{
-			if(checkObstacle(obstacleDistance))avoidObstacle();
+			checkObstacle(obstacleDistance);
+			if(hasObstacle == true) avoidObstacle();
 			else	lineTracking();//basically the entire program
 
 		//avoidObstacle();
