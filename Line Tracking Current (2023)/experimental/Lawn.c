@@ -26,6 +26,8 @@ float robotFront;
 float robotBack;
 float robotSides;
 
+bool rightStart = true;
+
 bool errorRescue = false;
 
 float currentXY[2] = {
@@ -139,6 +141,33 @@ void lawnBackward(int dist){
 	}
 }
 
+int turnCount=0;
+void lawnTurn(){
+	if(rightStart){
+	lawnTurnLeft();
+	}
+	else{
+	lawnTurnRight();
+	}
+
+	/*
+	if(rightStart){
+		if(turnCount%2==0)
+			lawnTurnRight();
+		else
+			lawnTurnLeft();
+	}
+	else{
+		if(turnCount%2==0)
+			lawnTurnLeft();
+		else
+			lawnTurnRight();
+	}
+	*/
+}
+
+
+
 
 
 void mowRoom(){
@@ -179,22 +208,22 @@ if(firstSide==LENGTH){
 	while(SensorValue(sonarSensor)<boxLength-robotSides){
 		lawnForward(1);
 	}
-	lawnRightTurn();
+	lawnLeftTurn();
 	while(SensorValue(sonarSensor)<boxWidth-robotSides){
 		lawnForward(1);
 	}
-	lawnRightTurn();
+	lawnTurn();
 }
 
 else if(firstSide==WIDTH){
 	while(SensorValue(sonarSensor)<boxWidth-robotSides){
 		lawnForward(1);
 	}
-	lawnRightTurn();
+	lawnTurn();
 while(SensorValue(sonarSensor)<boxLength-robotSides){
 		lawnForward(1);
 	}
-	lawnRightTurn();
+	lawnTurn();
 }
 
 else{
@@ -234,6 +263,6 @@ task main(){
 	startTask(displayPos);
 	properties();
 	setBoxDimensions(90, 120, .1);
-	//setRobotDimensions();
+	setRobotDimensions(11, 17, 23);
 	mowRoom();
 }
