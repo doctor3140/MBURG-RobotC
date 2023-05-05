@@ -5,7 +5,7 @@
 /* NOTICE: It is not recommended to change the variables directly. Please use getter and setter methods/functions! */
 
 int m = 1; // for motor direction
-float wheelDiameter = 5.5 //diameter of wheel in cm
+float wheelDiameter = 5; //diameter of wheel in cm
 int a = 1; //for arm direction
 
 float speed = 20;
@@ -32,7 +32,7 @@ void setMotorDirection(char direction){
 	else{
 		displayBigTextLine(2, "X setMotorDirection");
 	}
-}//'f' for foward 'b' for backward. This is used if you have a gear ratio that inverts the diection of the motors
+}//'f' for Forward 'b' for backward. This is used if you have a gear ratio that inverts the diection of the motors
 
 void setWheelDiameterCM(float diameter){
 	wheelDiameter=diameter;
@@ -55,11 +55,11 @@ void setLeanSpeed(float spd){
 }
 
 void setSearchSpeed(float spd){
-	SearchSpeed=spd;
+	searchSpeed=spd;
 }
 
-void setSearchTime(int time){
-	searchTime=time;
+void setSearchTime(int sec){
+	searchTime=(sec*1000);
 }
 
 void setTapeThreasholdCM(float CM){
@@ -202,6 +202,8 @@ void motorLeanRight(float spd){
 	motor[rightMotor]=(-spd*m);
 }
 
+//going to test out different kinds of turns for motorSearch
+
 void motorSearchLeft(){
 	motor[leftMotor]=(-searchSpeed*m);
 	motor[rightMotor]=(searchSpeed*m);
@@ -221,6 +223,7 @@ void motorSearchRight(float spd){
 	motor[leftMotor]=(spd*m);
 	motor[rightMotor]=(-spd*m);
 }
+
 
 void encoderPointLeft(){
 	resetMotorEncoder(leftMotor);

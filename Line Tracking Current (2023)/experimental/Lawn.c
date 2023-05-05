@@ -219,21 +219,21 @@ else{
 
 void properties(){
 		//setMotorDirection('f');
-		setWheelDiameterCM(7.455);
-		setUTURN(660);
-		setPoint(332);
-		setSpeed(20);
-		setLeanSpeed(6);
+		setWheelDiameterCM(9.7);
+		setUTURN(308);
+		setPoint(154);
+		setSpeed(5);
+		setLeanSpeed(4);
 		setSearchSpeed(3);
-		setDist(2.5);
-		setTapeThreasholdCM(2.5);
-		setSearchSpeed(3);
-		setSearchTime(4000);
+		setDist(3);
+		setTapeThreasholdCM(2.0);//original value=2.5
+		setSearchTime(4); //was 500
 }
 
 task main(){
 	startTask(displayPos);
 	properties();
 	setBoxDimensions(90, 120, .1);
+	//setRobotDimensions();
 	mowRoom();
 }
