@@ -1,0 +1,2 @@
+# Line Tracking Current (2023)
+Versions for main line tracking code, libraries folder (.h files), experimental folder (full of in development code). The LineRescue.c files are the main competetion code run on the robot. The legacy code is deprecated, but kept due to it being the last -semi- working version that was rigorously tested. The experimental is on the other end of the spectrum and is where new features are added. The release is what should be run for the final competetion and will be bug tested. 

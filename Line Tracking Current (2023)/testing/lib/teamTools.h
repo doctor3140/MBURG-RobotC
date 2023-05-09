@@ -58,8 +58,8 @@ void setSearchSpeed(float spd){
 	searchSpeed=spd;
 }
 
-void setSearchTime(int sec){
-	searchTime=(sec*1000);
+void setSearchTime(int time){
+	searchTime=time;
 }
 
 void setTapeThreasholdCM(float CM){
@@ -202,8 +202,6 @@ void motorLeanRight(float spd){
 	motor[rightMotor]=(-spd*m);
 }
 
-//going to test out different kinds of turns for motorSearch
-
 void motorSearchLeft(){
 	motor[leftMotor]=(-searchSpeed*m);
 	motor[rightMotor]=(searchSpeed*m);
@@ -223,7 +221,6 @@ void motorSearchRight(float spd){
 	motor[leftMotor]=(spd*m);
 	motor[rightMotor]=(-spd*m);
 }
-
 
 void encoderPointLeft(){
 	resetMotorEncoder(leftMotor);
