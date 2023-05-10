@@ -24,11 +24,18 @@ Errors:
 3 - Error in leanDetect while change does not = 0
 */
 
-float robotWidth = 13.6;
-float robotLength = 17;
-float maxObstacleSize = 14;
-float obstacleDistance = 3; //the distance when it will see the obstacle in cm (confirm this)
-float turnDistance= robotWidth/2;
+//drives backwards right now 1/23/2023
+
+
+
+/*
+
+CHANGELOG!! 2/13/23
+
+Rewrote #pragma code to syntax
+
+*/
+
 
 //variables for obstacle
 bool hasObstacle = false;
@@ -37,6 +44,13 @@ bool hasObstacle = false;
 bool checkGreen = true; //to enable/disable lilCheck function
 bool checkTurnFurther = false; //to enable/disable turning further when line not found
 bool checkSonar = false; //to enable/disable checkObstacle function
+
+
+float robotWidth = 13.6;
+float robotLength = 17;
+float maxObstacleSize = 14;
+float obstacleDistance = 3; //the distance when it will see the obstacle in cm (confirm this)
+float turnDistance= robotWidth/2;
 bool LT = true;
 
 void checkObstacle(int x)
@@ -60,7 +74,6 @@ void avoidObstacle()
 		//{
 			//sleep(500)
 			playTone();
-			checkObstacle(obstacleDistance);
 				LT = false; //hate this find better way
 				STP();
 				resetMotorEncoder(motorB);
@@ -279,7 +292,9 @@ void lineTracking()
 		playTone(1300, 100);
 		sleep(6000);
 	}
-
+	else if((SensorValue[S4] <= obstacleDistance)) {
+		avoidObstacle();
+	}
 	else if((getColorName(leftS)==colorGreen) || (getColorName(rightS)==colorGreen)) // find green -> identifyGreen -> make turn
 	{
 		STP();
@@ -380,12 +395,12 @@ void properties(){
 		setWheelDiameterCM(9.7);
 		setUTURN(308);
 		setPoint(154);
-		setSpeed(5);
-		setLeanSpeed(4);
-		setSearchSpeed(3);
+		setSpeed(10); //was 5
+		setLeanSpeed(8); //was 4
+		setSearchSpeed(6); //was 3
 		setDist(3);
 		setTapeThreasholdCM(2.0);//original value=2.5
-		setSearchTime(4); //was 500
+		setSearchTime(2.25); //was 4
 }
 
 //TASK MAIN//
@@ -397,9 +412,6 @@ task main()
 	startTask(display);
 	repeat(forever)
 	{
-			checkObstacle(obstacleDistance);
-			if(hasObstacle == true) avoidObstacle();
-			else	lineTracking();//basically the entire program
-		//sweepRoom();
+			lineTracking();//basically the entire program
 	}
 }
