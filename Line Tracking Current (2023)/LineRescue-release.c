@@ -77,61 +77,72 @@ void findLineLeft(bool bothWheels)
 	clearTimer(T1);
 	//playSound(soundBlip);
 	//encoderForward(FINDDIST);
+	if(bothWheels){
 	while (time1[T1] < searchTime) //need to find better timing method/boot-out. Consult WindSprints for better bootout
 	{
 		if ((getColorName(rightS)==colorWhite)) //was right
 		{
-			if(bothWheels){
+			
 			motorSearchLeft();
-			}
-			else{
-			motor[rightMotor] = getSearchSpeed();
-			}
 		}
 		else if(getColorName(rightS)==colorBlack)
 		{
 			STP();
 			sleep(200);
-
-		}
+		}	
 	}
-
 	while ((getColorName(leftS)!=colorBlack)) //change to ==white if no work (most likely redundent remove cmt after testing)
 	{
 		motorSearchRight();
 	}
 	STP();
-}
-
-
-void findLineRight(bool bothWheels)
-{
-	clearTimer(T1);
-	//encoderForward(FINDDIST);
-	while (time1[T1] < searchTime) //need to find better timing method/boot-out. Consult WindSprints for better bootout
-	{
-		if ((getColorName(leftS)==colorWhite)) //was left
+	}
+	else{
+if ((getColorName(rightS)==colorWhite)) //was right
 		{
-			if(bothWheels){
-			motorSearchRight();
-			}
-			else{
-			motor[leftMotor] = getSearchSpeed();
-			}
-			//startTask(display);
+		motor[rightMotor] = getSearchSpeed();
 		}
-		else if (getColorName(leftS)==colorBlack)
+		else if(getColorName(rightS)==colorBlack)
 		{
 			STP();
 			sleep(200);
 		}
+	}	
+}
+
+
+void findLineRight(bool bothWheels){
+if(bothWheels){
+	while (time1[T1] < searchTime) //need to find better timing method/boot-out. Consult WindSprints for better bootout
+	{
+		if ((getColorName(leftS)==colorWhite)) //was right
+		{
+			
+			motorSearchRight();
+		}
+		else if(getColorName(leftS)==colorBlack)
+		{
+			STP();
+			sleep(200);
+		}	
 	}
 	while ((getColorName(rightS)!=colorBlack)) //change to ==white if no work (most likely redundent remove cmt after testing)
 	{
 		motorSearchLeft();
-		//startTask(display);
 	}
 	STP();
+	}
+	else{
+if ((getColorName(leftS)==colorWhite)) //was right
+		{
+		motor[leftMotor] = getSearchSpeed();
+		}
+		else if(getColorName(leftS)==colorBlack)
+		{
+			STP();
+			sleep(200);
+		}
+	}	
 }
 
 	//this is awful, please fix
