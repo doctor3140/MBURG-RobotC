@@ -13,6 +13,9 @@ float armSpeed = 20;
 float leanSpeed = 6; //the speed for double sensor lean line tracking
 float searchSpeed = 3; //the search speed for when the black line is lost
 
+float robotWidth = 13.6;
+float robotLength = 17;
+
 int searchTime = 4000; //Time for SLT & SRT (was 1k)Ft
 float tapeThreasholdCM = 2.5; //Width of Green tape (how far it needs to move forward to detect the black line in lilup. Consider making an array with a low and high distance as well as making a blackTape var.
 int uTurnValue = 680; //for uturns when two greens are detected //OG 185 //newscrap 155
@@ -21,6 +24,22 @@ float dist  = 2.5;
 int point = 323; // for leftPointTurn & rightPointTurn //OG is m*320 (-760 for big)
 
 // Setter methods should be called at the beggining of your main proram in order to set values of variables used in other functions.
+
+float getRobotWidth(){
+	return robotWidth;	
+}
+
+float getRobotLenght(){
+	return robotLength;	
+}
+
+void setRobotWidth(float rw){
+	robotWidth = rw;
+}
+
+void setRobotLength(float rl){
+	robotLength = rl;
+}
 
 void setMotorDirection(char direction){
 	if(direction=='f'){
