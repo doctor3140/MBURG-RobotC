@@ -29,13 +29,58 @@ float robotFront;
 float robotBack;
 float robotSides;
 
-bool rightStart = true;
+int currentDirection = 0;
+int turnNumberInRoom = ((boxLength/robotWidth));
 
+bool rightStart = true;
 bool errorRescue = false;
 
-void executeRescueRoom(){
+float currentXY[2] = {
+	{0, 0}
+};
 
+string direction[4] = {
+	{"Up", "Down", "Left", "Right"}
+};
+
+float boxSize[2] = {
+	{120, 90}
+};
+int CornerLocationForLeft[3] = {
+	{0, 1, 2} //from left to right and up to down, so upper left is 0, upper right is 1, lower right is 2
+};
+void setBoxDimensions(float w, float l, float m){
+	boxWidth = w;
+	boxLength = l;
+	boxMargin = m;
 }
+
+task displayPos(){
+		repeat(forever){
+		displayBigTextLine(2, "SS: %d", SensorValue[S4]);
+		displayBigTextLine(4, "X: %d", currentXY[0]);
+		displayBigTextLine(6, "Y: %d", currentXY[1]);
+		displayBigTextLine(6, "D: %d", direction[currentDirection]);
+		sleep(10); //refreshrate in ms
+	}
+}
+
+void sweepRoomFromLeft(){
+	encoderPointLeft();
+	if(SensorValue[S4] <=10) {
+		 encoderPointRight();
+		 encoderPointRight();
+		 for(int
+	}
+}
+
+void executeRescueRoom(){
+	resetMotorEncoder(motorB);
+	resetMotorEncoder(motorC);
+	encoderForward(robotLength);
+	sweepRoomFromLeft();
+}
+
 task main()
 {
 

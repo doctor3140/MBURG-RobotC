@@ -346,12 +346,12 @@ void properties(){
 		setWheelDiameterCM(9.7);
 		setUTURN(308);
 		setPoint(154);
-		setSpeed(5);
-		setLeanSpeed(4);
-		setSearchSpeed(3);
+		setSpeed(10);
+		setLeanSpeed(8);
+		setSearchSpeed(6);
 		setDist(3);
 		setTapeThreasholdCM(2.0);//original value=2.5
-		setSearchTime(4); //was 500
+		setSearchTime(3.5); //was 500
 }
 
 //TASK MAIN//
