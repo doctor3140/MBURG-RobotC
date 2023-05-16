@@ -38,7 +38,7 @@ int turnNumberInRoom = (int)((boxLength/robotWidth));
 
 bool rightStart = true;
 bool errorRescue = false;
-
+bool doneLeft = false;
 float currentXY[2] = {
 	{0, 0}
 };
@@ -70,42 +70,55 @@ task displayPos(){
 }
 
 void oneSweep(){ //this is one sweep from left to right
-	encoderForward(boxWidth-robotWidth);
+	encoderForward(boxWidth-robotWidth);// I am gonna change cuz the robot has to push toward the wall
 }
 
 void sweepRoomTurnLeft(){
 	oneSweep();
 	encoderPointLeft();
-	moveForward(robotWidth);
+	motorForward(robotWidth);
 	encoderPointLeft();
 }
 
 void sweepRoomTurnRight() {
 	oneSweep();
 	encoderPointRight();
-	moveForward(robotWidth);
+	motorForward(robotWidth);
 	encoderPointRight();
 }
 
-void sweepRoomFromLeft(){
+void sweepRoomFromLeft(){ //when wall is in the left
 	encoderPointLeft();
 	sleep(500);
 	if(SensorValue[S4] <=10) {
 		 encoderPointRight();
 		 encoderPointRight();
-		 for(int i=0; i<turnturnNumberInRoom; i++){
+		 for(int i=0; i<turnNumberInRoom; i++){
 		 	  if(i%2 == 0) sweepRoomTurnLeft();
 		 	  else sweepRoomTurnRight();
 		 }
 	}
+	doneLeft = true;
 }
+
+void sweepRoomFromRight(){ //when the wall is in the right
+	sleep(500);
+	if(doneLeft){
+		for(int i=0; i<turnNumberInRoom; i++){
+			 	  if(i%2 == 0) sweepRoomTurnLeft();
+			 	  else sweepRoomTurnRight();
+		}
+  }
+}
+
 
 void executeRescueRoom(){
 	setBoxDimensions(120, 90, 5); //I don't know about the bocMargin (in this case, it's 5) means
 	resetMotorEncoder(motorB);
 	resetMotorEncoder(motorC);
-	encoderBackward(robotLength);
+	encoderForward(robotLength);
 	sweepRoomFromLeft();
+	sweepRoomFromRight();
 }
 
 task main()
