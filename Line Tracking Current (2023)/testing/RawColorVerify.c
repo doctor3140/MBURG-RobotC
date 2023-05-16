@@ -50,10 +50,10 @@ task main()
 {
 	clearSounds();
 	clearTimer(T1);
-	colorMarginBlack(20);
+	//colorMarginBlack(20);
 	//colorMarginGreen(15);
-	colorMarginRed(30);
-	colorMarginWhite(10);
+	//colorMarginRed(30);
+	//colorMarginWhite(10);
 	startTask(display);
 	repeat(forever)
 	{
@@ -68,6 +68,9 @@ task main()
 		}
 		else if((rightEqualsBlack())&&(leftEqualsBlack())){
 		colorName = 5;
+		}
+		else if((rightEqualsSilver())&&(leftEqualsSilver())){
+		colorName = 6;
 		}
 		else{
 			colorName = 1;
