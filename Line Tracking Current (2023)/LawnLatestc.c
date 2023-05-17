@@ -70,7 +70,9 @@ task displayPos(){
 }
 
 void oneSweep(){ //this is one sweep from left to right
-	encoderForward(boxWidth-robotWidth);// I am gonna change cuz the robot has to push toward the wall
+	while(SensorValue[S4]>1){
+		motorForward();
+	}
 }
 
 void sweepRoomTurnLeft(){
@@ -103,7 +105,7 @@ void sweepRoomFromLeft(){ //when wall is in the left
 
 void sweepRoomFromRight(){ //when the wall is in the right
 	sleep(500);
-	if(doneLeft){
+	if(!doneLeft){
 		for(int i=0; i<turnNumberInRoom; i++){
 			 	  if(i%2 == 0) sweepRoomTurnLeft();
 			 	  else sweepRoomTurnRight();
@@ -111,6 +113,18 @@ void sweepRoomFromRight(){ //when the wall is in the right
   }
 }
 
+void properties(){
+		//setMotorDirection('f');
+		setWheelDiameterCM(9.7);
+		setUTURN(308);
+		setPoint(154);
+		setSpeed(5);
+		setLeanSpeed(4);
+		setSearchSpeed(3);
+		setDist(3);
+		setTapeThreasholdCM(2.0);//original value=2.5
+		setSearchTime(4); //was 500
+}
 
 void executeRescueRoom(){
 	setBoxDimensions(120, 90, 5); //I don't know about the bocMargin (in this case, it's 5) means
@@ -123,7 +137,7 @@ void executeRescueRoom(){
 
 task main()
 {
+	properties();
+	startTask(displayPos);
 	executeRescueRoom();
-
-
 }
