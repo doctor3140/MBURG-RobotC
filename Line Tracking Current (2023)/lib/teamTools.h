@@ -13,7 +13,7 @@ float armSpeed = 20;
 float leanSpeed = 6; //the speed for double sensor lean line tracking
 float searchSpeed = 3; //the search speed for when the black line is lost
 
-int searchTime = 4000; //Time for SLT & SRT (was 1k)Ft
+float searchTime = 4000; //Time for SLT & SRT (was 1k)Ft
 float tapeThreasholdCM = 2.5; //Width of Green tape (how far it needs to move forward to detect the black line in lilup. Consider making an array with a low and high distance as well as making a blackTape var.
 int uTurnValue = 680; //for uturns when two greens are detected //OG 185 //newscrap 155
 float dist  = 2.5;
@@ -58,7 +58,7 @@ void setSearchSpeed(float spd){
 	searchSpeed=spd;
 }
 
-void setSearchTime(int sec){
+void setSearchTime(float sec){
 	searchTime=(sec*1000);
 }
 
@@ -100,7 +100,7 @@ float getSearchSpeed(){
 	return searchSpeed;
 }
 
-int getSearchTime(){
+float getSearchTime(){
 	return searchTime;
 }
 

@@ -82,14 +82,14 @@ void findLineLeft(bool bothWheels)
 	{
 		if ((getColorName(rightS)==colorWhite)) //was right
 		{
-			
+
 			motorSearchLeft();
 		}
 		else if(getColorName(rightS)==colorBlack)
 		{
 			STP();
 			sleep(200);
-		}	
+		}
 	}
 	while ((getColorName(leftS)!=colorBlack)) //change to ==white if no work (most likely redundent remove cmt after testing)
 	{
@@ -107,24 +107,25 @@ if ((getColorName(rightS)==colorWhite)) //was right
 			STP();
 			sleep(200);
 		}
-	}	
+	}
 }
 
 
 void findLineRight(bool bothWheels){
+	clearTimer(T1);
 if(bothWheels){
 	while (time1[T1] < searchTime) //need to find better timing method/boot-out. Consult WindSprints for better bootout
 	{
 		if ((getColorName(leftS)==colorWhite)) //was right
 		{
-			
+
 			motorSearchRight();
 		}
 		else if(getColorName(leftS)==colorBlack)
 		{
 			STP();
 			sleep(200);
-		}	
+		}
 	}
 	while ((getColorName(rightS)!=colorBlack)) //change to ==white if no work (most likely redundent remove cmt after testing)
 	{
@@ -142,7 +143,7 @@ if ((getColorName(leftS)==colorWhite)) //was right
 			STP();
 			sleep(200);
 		}
-	}	
+	}
 }
 
 	//this is awful, please fix
@@ -357,12 +358,12 @@ void properties(){
 		setWheelDiameterCM(9.7);
 		setUTURN(308);
 		setPoint(154);
-		setSpeed(5);
-		setLeanSpeed(4);
-		setSearchSpeed(3);
+		setSpeed(10);
+		setLeanSpeed(8);
+		setSearchSpeed(6);
 		setDist(3);
 		setTapeThreasholdCM(2.0);//original value=2.5
-		setSearchTime(4); //was 500
+		setSearchTime(2.75); //was 500
 }
 
 //TASK MAIN//
