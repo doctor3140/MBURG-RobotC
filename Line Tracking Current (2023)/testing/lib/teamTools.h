@@ -277,7 +277,21 @@ void motorArmUp(){
 void motorArmDown(){
 	motor[armMotor]=(-armSpeed*a);
 }
-
+void encoderArmDown(int x)
+{
+	resetMotorEncoder(armMotor);
+	setMotorTarget(armMotor, -x, speed);
+	waitUntilMotorStop(armMotor);
+	sleep(500);
+}
+void encoderArmUp(int x)
+{
+	resetMotorEncoder(armMotor);
+	setMotorTarget(armMotor, x, speed);
+	waitUntilMotorStop(armMotor);
+	sleep(500);
+}
+/*
 void encoderArmDown()
 {
 	resetMotorEncoder(armMotor);
@@ -292,6 +306,8 @@ void encoderArmUp()
 	waitUntilMotorStop(armMotor);
 	sleep(500);
 }
+*/
+
 
 
 //make above encoder functions work better

@@ -43,7 +43,7 @@ bool hasObstacle = false;
 //features
 bool checkGreen = true; //to enable/disable lilCheck function
 bool checkTurnFurther = false; //to enable/disable turning further when line not found
-bool checkSonar = false; //to enable/disable checkObstacle function
+bool checkSonar = true; //to enable/disable checkObstacle function
 
 void checkObstacle(int x)
 {
@@ -373,11 +373,14 @@ task main()
 	clearSounds();
 	clearTimer(T1);
 	properties();
+	encoderArmUp(135);
 	startTask(display);
 	repeat(forever)
 	{
+		if(checkSonar){
+		avoidObstacle();
+		}
 		lineTracking();//basically the entire program
-		//avoidObstacle();
 		//sweepRoom();
 	}
 }
