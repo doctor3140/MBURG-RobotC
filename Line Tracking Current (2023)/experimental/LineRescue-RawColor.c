@@ -228,7 +228,6 @@ if(checkGreen){
 void lineTracking()
 {
 	//startTask(display); //to aid in refresh rate of display
-
 	if ((leftEqualsRed())&&(rightEqualsRed())) // both red -> stop at finish line
 	{
 		STP();
@@ -260,8 +259,9 @@ void lineTracking()
 				rightTurn();
 			}
 		}
-		else if ((leftEqualsSilver()) && (rightEqualsSilver())) //both silver -> rescue room
+		else if (bothEqualsSilver()) //both silver -> rescue room
 		{
+			playTone(2500;
 			//sweepRoom();
 		}
 		else
@@ -282,7 +282,7 @@ if ((rightEqualsBlack())&&(leftEqualsBlack()))//Zig and Intersection //Adddition
 
 		if ((rightEqualsBlack())&&(leftEqualsBlack()))//Zig and Intersection
 		{
-			encoderForward(130);//OG 70
+			encoderForward(getTapeThreasholdCM());//OG 70
 			findLineRight();
 		}
 	}
@@ -293,7 +293,7 @@ if ((rightEqualsBlack())&&(leftEqualsBlack()))//Zig and Intersection //Adddition
 
 		if ((rightEqualsBlack())&&(leftEqualsBlack()))//Zig and Intersection for LT
 		{
-			encoderForward(70);
+			encoderForward(getTapeThreasholdCM());
 			findLineLeft();
 		}
 	}
@@ -315,17 +315,15 @@ if ((rightEqualsBlack())&&(leftEqualsBlack()))//Zig and Intersection //Adddition
 
 void properties(){
 		//setMotorDirection('f');
-		setWheelDiameterCM(10.5);
-		setUTURN(660);
-		setPoint(139);
-		setSpeed(20);
-		setLeanSpeed(6);
-		setSearchSpeed(3);
-		setDist(2.5);
-		setTapeThreasholdCM(2.5);
-		setSearchSpeed(3);
-		setSearchTime(4000);
-		setRawColorSensing(false);
+		setWheelDiameterCM(9.7);
+		setUTURN(308);
+		setPoint(154);
+		setSpeed(10);
+		setLeanSpeed(8);
+		setSearchSpeed(6);
+		setDist(3);
+		setTapeThreasholdCM(2.0);//original value=2.5
+		setSearchTime(2.7); //was 500
 }
 
 //TASK MAIN//

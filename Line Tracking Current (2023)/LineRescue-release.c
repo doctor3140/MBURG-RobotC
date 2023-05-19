@@ -251,6 +251,7 @@ void lineTracking()
 {
 	//startTask(display); //to aid in refresh rate of display
 
+  //new code goes here
 	if ((getColorName(leftS)==colorRed)&&(getColorName(rightS)==colorRed)) // both red -> stop at finish line
 	{
 		STP();
@@ -363,7 +364,7 @@ void properties(){
 		setSearchSpeed(6);
 		setDist(3);
 		setTapeThreasholdCM(2.0);//original value=2.5
-		setSearchTime(2.75); //was 500
+		setSearchTime(2.7); //was 500
 }
 
 //TASK MAIN//

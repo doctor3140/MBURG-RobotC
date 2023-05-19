@@ -38,41 +38,41 @@ int redLeftBase[3]= {
 //Values for fine tweaking otherwise
 //Black fixed by Masa 3/29/2023
 int blackRight[2][3]= {
-		{13, 19, 4},
-	  {25, 44, 14}
+		{15, 39, 12},
+	  {50, 69, 42} //+20ED
 };
 
 int whiteRight[2][3]= {
-		{202, 260, 115},
-	  {265, 270, 150}
+		{257, 259, 157},
+	  {327, 329, 227}
 };
 //green changed by Masa 3/29/2023
 int greenRight[2][3]= {
-		{34, 117, 17},
-	  {55, 142, 31}
+		{38, 121, 11},
+	  {78, 161, 51}
 };
 //Red fixed by Masa 3/29/2023
 int redRight[2][3]= {
-		{165, 28, 8},
-	  {195, 60, 21}
+		{191, 39, 15},
+	  {261, 49, 25}
 };
 
 
 int blackLeft[2][3]= {
-		{20, 35, 13},
-	  {30, 45, 23}
+		{10, 32, 8},
+	  {60, 62, 38}//+20ED
 };
 int whiteLeft[2][3]= {
-		{230, 268, 187},
-	  {240, 278, 198}
+		{248, 256, 115},
+	  {318, 326, 195}
 };
 int greenLeft[2][3]= {
-		{18, 90, 28},
-	  {54, 138, 33}
+		{30, 110, 0},
+	  {74, 150, 40}
 };
 int redLeft[2][3]= {
-		{215, 46, 19},
-	  {225, 56, 29}
+		{177, 35, 9},
+	  {247, 45, 19}
 };
 //The methods, silverLeft and siverRight, are temporary cuz I've not measured the silver value yet.
 int silverLeft[2][3] = {
@@ -241,6 +241,15 @@ bool rightEqualsSilver(){
 	}
 //}
 //need to figure out how to switch to reflect on the fly
+}
+
+bool bothEqualsSilver(){
+	float sumCurrentColorValue = currentRight[0]+currentRight[1]+currentRight[2]+currentLeft[0]+currentLeft[1]+currentLeft[2];
+	float silverThreshold = 995;
+	if(sumCurrentColorValue > silverThreshold) return true;
+	else return false;
+
+
 }
 
 void colorMarginBlack(int margin){
