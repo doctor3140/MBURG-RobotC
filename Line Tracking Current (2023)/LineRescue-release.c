@@ -1,5 +1,5 @@
-#pragma config(Sensor, S1,     rightS,          sensorEV3_Color, modeEV3Color_Color)
-#pragma config(Sensor, S2,     leftS,         sensorEV3_Color, modeEV3Color_Color)
+#pragma config(Sensor, S1,     rightS,         sensorEV3_Color, modeEV3Color_Color)
+#pragma config(Sensor, S2,     leftS,          sensorEV3_Color, modeEV3Color_Color)
 #pragma config(Sensor, S3,     reflect,        sensorEV3_Color)
 #pragma config(Sensor, S4,     sonarSensor,    sensorEV3_Ultrasonic)
 #pragma config(Motor,  motorA,          armMotor,      tmotorEV3_Medium, PIDControl, encoder)
@@ -60,14 +60,14 @@ void findLineLeft(bool bothWheels)
 	{
 		if ((getColorName(rightS)==colorWhite)) //was right
 		{
-			
+
 			motorSearchLeft();
 		}
 		else if(getColorName(rightS)==colorBlack)
 		{
 			STP();
 			sleep(200);
-		}	
+		}
 	}
 	while ((getColorName(leftS)!=colorBlack)) //change to ==white if no work (most likely redundent remove cmt after testing)
 	{
@@ -85,7 +85,7 @@ if ((getColorName(rightS)==colorWhite)) //was right
 			STP();
 			sleep(200);
 		}
-	}	
+	}
 }
 
 
@@ -95,14 +95,14 @@ if(bothWheels){
 	{
 		if ((getColorName(leftS)==colorWhite)) //was right
 		{
-			
+
 			motorSearchRight();
 		}
 		else if(getColorName(leftS)==colorBlack)
 		{
 			STP();
 			sleep(200);
-		}	
+		}
 	}
 	while ((getColorName(rightS)!=colorBlack)) //change to ==white if no work (most likely redundent remove cmt after testing)
 	{
@@ -120,7 +120,7 @@ if ((getColorName(leftS)==colorWhite)) //was right
 			STP();
 			sleep(200);
 		}
-	}	
+	}
 }
 
 	//this is awful, please fix
@@ -342,6 +342,7 @@ void properties(){
 		setTapeThreasholdCM(2.0);//original value=2.5
 		setSearchTime(4); //was 500
 		checkSonar = true;
+		encoderArmUp(-135);
 }
 
 //TASK MAIN//
