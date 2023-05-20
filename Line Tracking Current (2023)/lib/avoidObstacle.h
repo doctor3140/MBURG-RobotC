@@ -11,7 +11,7 @@
 #include "teamTools.h"
 float maxObstacleSize = 14;
 bool hasObstacle = false;
-float obstacleDistance = 3; //the distance when it will see the obstacle in cm (confirm this)
+float obstacleDistance = 5; //the distance when it will see the obstacle in cm (confirm this)
 float turnDistance= robotWidth/2;  // 1 is margin error
 
 
@@ -46,6 +46,7 @@ void avoidObstacle()
 
 	if (hasObstacle == true)
 	{
+		encoderArmUp(-135);
 		resetMotorEncoder(motorB);
 		resetMotorEncoder(motorC);
 		encoderBackward(turnDistance-obstacleDistance);
@@ -56,7 +57,7 @@ void avoidObstacle()
 		//segment 1 (left - move - right) (face forward)
 
 		encoderPointLeft();
-		encoderForward(robotWidth);
+		encoderForward(1.5*robotWidth);
 		 // distance go left (to be determined depend on how big the obstacles are)
 		encoderPointRight();
 		checkObstacle(obstacleDistance);
@@ -68,7 +69,7 @@ void avoidObstacle()
 		resetMotorEncoder(motorB);
 		resetMotorEncoder(motorC);
 
-		encoderForward((obstacleDistance+robotLength)+(2*turnDistance));
+		encoderForward(((obstacleDistance+robotLength)+(2*turnDistance)));
 
 	// go forward, when it see doule black, turn left, and return to lineTracking; if not, go for the set distance.
 
@@ -89,4 +90,8 @@ void avoidObstacle()
 			STP();
 			sleep(500);
 		}
+}
+
+void setObstacleDistance(float x){
+	obstacleDistance=x;
 }
