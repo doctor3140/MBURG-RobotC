@@ -1,8 +1,8 @@
-#pragma config(Sensor, S1,     rightS,          sensorEV3_Color, modeEV3Color_Color)
-#pragma config(Sensor, S2,     leftS,         sensorEV3_Color, modeEV3Color_Color)
+#pragma config(Sensor, S1,     rightS,         sensorEV3_Color, modeEV3Color_Color)
+#pragma config(Sensor, S2,     leftS,          sensorEV3_Color, modeEV3Color_Color)
 #pragma config(Sensor, S3,     reflect,        sensorEV3_Color)
 #pragma config(Sensor, S4,     sonarSensor,    sensorEV3_Ultrasonic)
-#pragma config(Motor,  motorA,          armMotor,      tmotorEV3_Medium, PIDControl, encoder)
+#pragma config(Motor,  motorA,          armMotor,      tmotorEV3_Medium, PIDControl, reversed, encoder)
 #pragma config(Motor,  motorB,          leftMotor,     tmotorEV3_Large, PIDControl, driveLeft, encoder)
 #pragma config(Motor,  motorC,          rightMotor,    tmotorEV3_Large, PIDControl, driveRight, encoder)
 #pragma config(Motor,  motorD,          Other,         tmotorEV3_Medium, PIDControl, encoder)
@@ -11,7 +11,7 @@
 #include "\lib\teamTools.h"
 #include "\lib\avoidObstacle.h"
 
-#define FINDDIST 1
+#define FINDDIST 0.75
 #define TURNDIST 1
 /*
 rightS is right;
@@ -52,22 +52,22 @@ task display() //Display for Error Log
 
 void findLineLeft(bool bothWheels)
 {
+	encoderForward(FINDDIST);
 	clearTimer(T1);
 	//playSound(soundBlip);
-	//encoderForward(FINDDIST);
 	if(bothWheels){
 	while (time1[T1] < searchTime) //need to find better timing method/boot-out. Consult WindSprints for better bootout
 	{
 		if ((getColorName(rightS)==colorWhite)) //was right
 		{
-			
+
 			motorSearchLeft();
 		}
 		else if(getColorName(rightS)==colorBlack)
 		{
 			STP();
 			sleep(200);
-		}	
+		}
 	}
 	while ((getColorName(leftS)!=colorBlack)) //change to ==white if no work (most likely redundent remove cmt after testing)
 	{
@@ -85,25 +85,30 @@ if ((getColorName(rightS)==colorWhite)) //was right
 			STP();
 			sleep(200);
 		}
-	}	
+	}
 }
 
 
 void findLineRight(bool bothWheels){
+<<<<<<< HEAD
 clearTimer(T1);
+=======
+	encoderForward(FINDDIST);
+	clearTimer(T1);
+>>>>>>> refs/remotes/origin/rtesting
 if(bothWheels){
 	while (time1[T1] < searchTime) //need to find better timing method/boot-out. Consult WindSprints for better bootout
 	{
 		if ((getColorName(leftS)==colorWhite)) //was right
 		{
-			
+
 			motorSearchRight();
 		}
 		else if(getColorName(leftS)==colorBlack)
 		{
 			STP();
 			sleep(200);
-		}	
+		}
 	}
 	while ((getColorName(rightS)!=colorBlack)) //change to ==white if no work (most likely redundent remove cmt after testing)
 	{
@@ -121,7 +126,7 @@ if ((getColorName(leftS)==colorWhite)) //was right
 			STP();
 			sleep(200);
 		}
-	}	
+	}
 }
 
 	//this is awful, please fix
@@ -341,8 +346,13 @@ void properties(){
 		setSearchSpeed(6);
 		setDist(3);
 		setTapeThreasholdCM(2.0);//original value=2.5
+<<<<<<< HEAD
 		setSearchTime(2.75); //was 500
+=======
+		setSearchTime(2.5); //was 500
+>>>>>>> refs/remotes/origin/rtesting
 		checkSonar = true;
+		setObstacleDistance(5.5);
 }
 
 //TASK MAIN//
@@ -351,6 +361,7 @@ task main()
 	clearSounds();
 	clearTimer(T1);
 	properties();
+	encoderArmUp(-135);
 	startTask(display);
 	encoderArmUp(135);
 	repeat(forever)

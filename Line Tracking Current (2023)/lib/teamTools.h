@@ -26,11 +26,11 @@ int point = 323; // for leftPointTurn & rightPointTurn //OG is m*320 (-760 for b
 // Setter methods should be called at the beggining of your main proram in order to set values of variables used in other functions.
 
 float getRobotWidth(){
-	return robotWidth;	
+	return robotWidth;
 }
 
 float getRobotLenght(){
-	return robotLength;	
+	return robotLength;
 }
 
 void setRobotWidth(float rw){
@@ -318,14 +318,14 @@ void encoderArmUp(int x)
 
 void encoderArmDown()
 {
-	resetMotorEncoder(armMotor);
+	//resetMotorEncoder(armMotor);
 	setMotorTarget(armMotor, -70, speed);
 	waitUntilMotorStop(armMotor);
 	sleep(500);
 }
 void encoderArmUp()
 {
-	resetMotorEncoder(armMotor);
+	//resetMotorEncoder(armMotor);
 	setMotorTarget(armMotor, 70, speed);
 	waitUntilMotorStop(armMotor);
 	sleep(500);
