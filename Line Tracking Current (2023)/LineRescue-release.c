@@ -1,8 +1,8 @@
-#pragma config(Sensor, S1,     rightS,         sensorEV3_Color, modeEV3Color_Color)
-#pragma config(Sensor, S2,     leftS,          sensorEV3_Color, modeEV3Color_Color)
+#pragma config(Sensor, S1,     rightS,          sensorEV3_Color, modeEV3Color_Color)
+#pragma config(Sensor, S2,     leftS,         sensorEV3_Color, modeEV3Color_Color)
 #pragma config(Sensor, S3,     reflect,        sensorEV3_Color)
 #pragma config(Sensor, S4,     sonarSensor,    sensorEV3_Ultrasonic)
-#pragma config(Motor,  motorA,          armMotor,      tmotorEV3_Medium, PIDControl, reversed, encoder)
+#pragma config(Motor,  motorA,          armMotor,      tmotorEV3_Medium, PIDControl, encoder)
 #pragma config(Motor,  motorB,          leftMotor,     tmotorEV3_Large, PIDControl, driveLeft, encoder)
 #pragma config(Motor,  motorC,          rightMotor,    tmotorEV3_Large, PIDControl, driveRight, encoder)
 #pragma config(Motor,  motorD,          Other,         tmotorEV3_Medium, PIDControl, encoder)
@@ -10,8 +10,7 @@
 
 #include "\lib\teamTools.h"
 #include "\lib\avoidObstacle.h"
-
-#define FINDDIST 0.75
+#define FINDDIST 1
 #define TURNDIST 1
 /*
 rightS is right;
@@ -24,7 +23,13 @@ Errors:
 1 - Unknown color
 2 - Error in leanDetect while change = 0
 3 - Error in leanDetect while change does not = 0
+*/
 
+//drives backwards right now 1/23/2023
+
+
+
+/*
 
 CHANGELOG!! 2/13/23
 
@@ -33,10 +38,14 @@ Rewrote #pragma code to syntax
 */
 
 
+//variables for obstacle
+
 //features
 bool checkGreen = true; //to enable/disable lilCheck function
 bool checkTurnFurther = false; //to enable/disable turning further when line not found
 bool checkSonar = false; //to enable/disable checkObstacle function
+
+
 
 task display() //Display for Error Log
 {
@@ -52,59 +61,53 @@ task display() //Display for Error Log
 
 void findLineLeft(bool bothWheels)
 {
-	encoderForward(FINDDIST);
 	clearTimer(T1);
 	//playSound(soundBlip);
-	if(bothWheels){
+	//encoderForward(FINDDIST);
 	while (time1[T1] < searchTime) //need to find better timing method/boot-out. Consult WindSprints for better bootout
 	{
 		if ((getColorName(rightS)==colorWhite)) //was right
 		{
-
+			if(bothWheels){
 			motorSearchLeft();
+			}
+			else{
+			motor[rightMotor] = getSearchSpeed();
+			}
 		}
 		else if(getColorName(rightS)==colorBlack)
 		{
 			STP();
 			sleep(200);
+
 		}
 	}
+
 	while ((getColorName(leftS)!=colorBlack)) //change to ==white if no work (most likely redundent remove cmt after testing)
 	{
 		motorSearchRight();
 	}
 	STP();
-	}
-	else{
-if ((getColorName(rightS)==colorWhite)) //was right
-		{
-		motor[rightMotor] = getSearchSpeed();
-		}
-		else if(getColorName(rightS)==colorBlack)
-		{
-			STP();
-			sleep(200);
-		}
-	}
 }
 
 
-void findLineRight(bool bothWheels){
-<<<<<<< HEAD
-clearTimer(T1);
-=======
-	encoderForward(FINDDIST);
+void findLineRight(bool bothWheels)
+{
 	clearTimer(T1);
->>>>>>> refs/remotes/origin/rtesting
-if(bothWheels){
+	//encoderForward(FINDDIST);
 	while (time1[T1] < searchTime) //need to find better timing method/boot-out. Consult WindSprints for better bootout
 	{
-		if ((getColorName(leftS)==colorWhite)) //was right
+		if ((getColorName(leftS)==colorWhite)) //was left
 		{
-
+			if(bothWheels){
 			motorSearchRight();
+			}
+			else{
+			motor[leftMotor] = getSearchSpeed();
+			}
+			//startTask(display);
 		}
-		else if(getColorName(leftS)==colorBlack)
+		else if (getColorName(leftS)==colorBlack)
 		{
 			STP();
 			sleep(200);
@@ -113,20 +116,9 @@ if(bothWheels){
 	while ((getColorName(rightS)!=colorBlack)) //change to ==white if no work (most likely redundent remove cmt after testing)
 	{
 		motorSearchLeft();
+		//startTask(display);
 	}
 	STP();
-	}
-	else{
-if ((getColorName(leftS)==colorWhite)) //was right
-		{
-		motor[leftMotor] = getSearchSpeed();
-		}
-		else if(getColorName(leftS)==colorBlack)
-		{
-			STP();
-			sleep(200);
-		}
-	}
 }
 
 	//this is awful, please fix
@@ -240,7 +232,6 @@ void lineTracking()
 		playTone(1300, 100);
 		sleep(6000);
 	}
-
 	else if((getColorName(leftS)==colorGreen) || (getColorName(rightS)==colorGreen)) // find green -> identifyGreen -> make turn
 	{
 		STP();
@@ -333,7 +324,6 @@ if ((getColorName(rightS)==colorBlack)&&(getColorName(leftS)==colorBlack))//Zig 
 		//dumbError = 1;
 		//Unknown Color
 	}
-	checkObstacle(5);
 }
 
 void properties(){
@@ -341,18 +331,12 @@ void properties(){
 		setWheelDiameterCM(9.7);
 		setUTURN(308);
 		setPoint(154);
-		setSpeed(10);
-		setLeanSpeed(8);
-		setSearchSpeed(6);
+		setSpeed(5.3);
+		setLeanSpeed(7.15);
+		setSearchSpeed(3);
 		setDist(3);
-		setTapeThreasholdCM(2.0);//original value=2.5
-<<<<<<< HEAD
-		setSearchTime(2.75); //was 500
-=======
-		setSearchTime(2.5); //was 500
->>>>>>> refs/remotes/origin/rtesting
-		checkSonar = true;
-		setObstacleDistance(5.5);
+		setTapeThreasholdCM(2.7);//original value=2.5
+		setSearchTime(3); //was 500
 }
 
 //TASK MAIN//
@@ -361,15 +345,11 @@ task main()
 	clearSounds();
 	clearTimer(T1);
 	properties();
-	encoderArmUp(-135);
 	startTask(display);
-	encoderArmUp(135);
 	repeat(forever)
 	{
-		if(checkSonar){
-		avoidObstacle();
-		}
-		lineTracking();//basically the entire program
+		if(SensorValue[S4] <= 5) avoidObstacle();//basically the entire program
+		lineTracking();
 		//sweepRoom();
 	}
 }
