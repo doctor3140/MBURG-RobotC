@@ -90,3 +90,7 @@ void avoidObstacle()
 			sleep(500);
 		}
 }
+
+void setObstacleDistance(float x){
+	obstacleDistance=x;
+}

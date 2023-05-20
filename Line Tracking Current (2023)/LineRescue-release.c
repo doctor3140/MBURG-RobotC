@@ -343,6 +343,7 @@ void properties(){
 		setTapeThreasholdCM(2.0);//original value=2.5
 		setSearchTime(3.7); //was 500
 		checkSonar = true;
+		setObstacleDistance(5.5);
 }
 
 //TASK MAIN//
